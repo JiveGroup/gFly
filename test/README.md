@@ -2,6 +2,10 @@
 
 This directory contains all test files for the application.
 
+```bash
+go test -v -coverprofile=cover.out -coverpkg=gfly/app/utils ./test/transform_utils_test.go && go tool cover -func=cover.out | grep transform
+ ```
+
 ## Purpose
 
 The test directory is used for:
