@@ -1,9 +1,10 @@
 package user
 
 import (
+	"gfly/app/constants"
 	"gfly/app/domain/models"
+	"gfly/app/http/response"
 	"gfly/app/http/transformers"
-	"gfly/app/modules/jwt"
 	"github.com/gflydev/core"
 )
 
@@ -28,7 +29,14 @@ type GetUserProfileApi struct {
 // @Security ApiKeyAuth
 // @Router /users/profile [get]
 func (h *GetUserProfileApi) Handle(c *core.Ctx) error {
-	user := c.GetData(jwt.User).(models.User)
+	if c.GetData(constants.User) == nil {
+		return c.Error(response.Error{
+			Code:    core.StatusUnauthorized,
+			Message: "Unauthorized",
+		}, core.StatusUnauthorized)
+	}
+
+	user := c.GetData(constants.User).(models.User)
 
 	// ==================== Transformer ====================
 	// Transform to response data

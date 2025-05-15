@@ -1,6 +1,7 @@
-package jwt
+package service
 
 import (
+	"gfly/app/modules/auth"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/utils"
 	"github.com/golang-jwt/jwt/v5"
@@ -65,6 +66,6 @@ func verifyToken(tokenString string) (*jwt.Token, error) {
 
 // jwtKeyFunc will receive the parsed token and should return the cryptographic key
 // for verifying the signature
-func jwtKeyFunc(token *jwt.Token) (interface{}, error) {
-	return []byte(os.Getenv(SecretKey)), nil
+func jwtKeyFunc(_ *jwt.Token) (interface{}, error) {
+	return []byte(os.Getenv(auth.SecretKey)), nil
 }

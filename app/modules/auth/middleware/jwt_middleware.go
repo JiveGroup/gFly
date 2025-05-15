@@ -1,8 +1,10 @@
-package jwt
+package middleware
 
 import (
+	"gfly/app/constants"
 	"gfly/app/domain/models"
 	"gfly/app/http/response"
+	"gfly/app/modules/auth/service"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
 	mb "github.com/gflydev/db"
@@ -31,8 +33,8 @@ func New(excludes ...string) core.MiddlewareHandler {
 		// Forge status code 401 (Unauthorized) instead of 500 (internal error)
 		c.Status(core.StatusUnauthorized)
 
-		jwtToken := ExtractToken(c)
-		isBlocked, err := IsBlockedToken(jwtToken)
+		jwtToken := service.ExtractToken(c)
+		isBlocked, err := service.IsBlockedToken(jwtToken)
 		if err != nil {
 			log.Errorf("Check JWT error '%v'", err)
 
@@ -50,7 +52,7 @@ func New(excludes ...string) core.MiddlewareHandler {
 		}
 
 		// Get claims from JWT.
-		claims, err := ExtractTokenMetadata(jwtToken)
+		claims, err := service.ExtractTokenMetadata(jwtToken)
 		if err != nil {
 			log.Errorf("Parse JWT error '%v'", err)
 
@@ -81,7 +83,7 @@ func New(excludes ...string) core.MiddlewareHandler {
 		}
 
 		c.Status(core.StatusOK)
-		c.SetData(User, *user)
+		c.SetData(constants.User, *user)
 
 		return nil
 	}

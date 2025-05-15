@@ -2,10 +2,10 @@ package api
 
 import (
 	"gfly/app/http/response"
-	"gfly/app/modules/jwt"
-	"gfly/app/modules/jwt/dto"
-	"gfly/app/modules/jwt/request"
-	jwtResponse "gfly/app/modules/jwt/response"
+	"gfly/app/modules/auth/dto"
+	"gfly/app/modules/auth/request"
+	authResponse "gfly/app/modules/auth/response"
+	"gfly/app/modules/auth/service"
 	"github.com/gflydev/core"
 	"github.com/gflydev/validation"
 )
@@ -54,16 +54,16 @@ func (h *RefreshTokenApi) Validate(c *core.Ctx) error {
 func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
 	refreshToken := c.GetData(data).(dto.RefreshToken)
 	// Check valid refresh token
-	if !jwt.IsValidRefreshToken(refreshToken.Token) {
+	if !service.IsValidRefreshToken(refreshToken.Token) {
 		return c.Error(response.Error{
 			Code:    core.StatusUnauthorized,
 			Message: "Invalid JWT token",
 		}, core.StatusUnauthorized)
 	}
 
-	jwtToken := jwt.ExtractToken(c)
+	jwtToken := service.ExtractToken(c)
 	// Refresh new pairs of access token & refresh token
-	tokens, err := jwt.RefreshToken(jwtToken, refreshToken.Token)
+	tokens, err := service.RefreshToken(jwtToken, refreshToken.Token)
 	if err != nil {
 		return c.Error(response.Error{
 			Code:    core.StatusUnauthorized,
@@ -72,7 +72,7 @@ func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
 	}
 
 	// Return response.SignIn struct
-	return c.JSON(jwtResponse.SignIn{
+	return c.JSON(authResponse.SignIn{
 		Access:  tokens.Access,
 		Refresh: tokens.Refresh,
 	})

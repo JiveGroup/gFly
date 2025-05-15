@@ -1,7 +1,8 @@
-package jwt
+package service
 
 import (
 	"fmt"
+	"gfly/app/modules/auth"
 	"github.com/gflydev/core/log"
 	"github.com/gflydev/core/utils"
 	"github.com/golang-jwt/jwt/v5"
@@ -10,14 +11,8 @@ import (
 	"time"
 )
 
-// Tokens struct to describe tokens object.
-type Tokens struct {
-	Access  string
-	Refresh string
-}
-
 // GenerateTokens func for generate a new Access & Refresh tokens.
-func GenerateTokens(id string, credentials []string) (*Tokens, error) {
+func GenerateTokens(id string, credentials []string) (*auth.Tokens, error) {
 	// Generate JWT Access token.
 	accessToken, err := generateAccessToken(id, credentials)
 	if err != nil {
@@ -32,7 +27,7 @@ func GenerateTokens(id string, credentials []string) (*Tokens, error) {
 		return nil, err
 	}
 
-	return &Tokens{
+	return &auth.Tokens{
 		Access:  accessToken,
 		Refresh: refreshToken,
 	}, nil
@@ -40,10 +35,10 @@ func GenerateTokens(id string, credentials []string) (*Tokens, error) {
 
 func generateAccessToken(id string, credentials []string) (string, error) {
 	// Get secret key from .env file.
-	secret := utils.Getenv(SecretKey, "")
+	secret := utils.Getenv(auth.SecretKey, "")
 
 	// Set expired minutes count for a secret key from .env file.
-	ttlMinutes := utils.Getenv(TtlMinutes, 0)
+	ttlMinutes := utils.Getenv(auth.TtlMinutes, 0)
 
 	// Create a new claims.
 	claims := jwt.MapClaims{}
@@ -71,10 +66,10 @@ func generateAccessToken(id string, credentials []string) (string, error) {
 }
 
 func generateRefreshToken() (string, error) {
-	hash := utils.Sha256(utils.Getenv(RefreshKey, "") + time.Now().String())
+	hash := utils.Sha256(utils.Getenv(auth.RefreshKey, "") + time.Now().String())
 
 	// Get expired days for refresh key from .env file.
-	overDays := utils.Getenv(TtlOverDays, 0)
+	overDays := utils.Getenv(auth.TtlOverDays, 0)
 
 	// Create expiration time.
 	expireTime := fmt.Sprint(time.Now().Add(time.Hour * time.Duration(overDays*24)).Unix())

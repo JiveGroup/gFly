@@ -2,9 +2,9 @@ package api
 
 import (
 	"gfly/app/http/transformers"
-	"gfly/app/modules/jwt"
-	"gfly/app/modules/jwt/dto"
-	"gfly/app/modules/jwt/request"
+	"gfly/app/modules/auth/dto"
+	"gfly/app/modules/auth/request"
+	"gfly/app/modules/auth/service"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/errors"
 	"github.com/gflydev/validation"
@@ -52,7 +52,7 @@ func (h *SignUp) Validate(c *core.Ctx) error {
 func (h *SignUp) Handle(c *core.Ctx) error {
 	signUpDto := c.GetData(data).(dto.SignUp)
 
-	user, err := jwt.SignUp(&signUpDto)
+	user, err := service.SignUp(&signUpDto)
 	if err != nil {
 		return c.Error(errors.New("Error %v", err))
 	}

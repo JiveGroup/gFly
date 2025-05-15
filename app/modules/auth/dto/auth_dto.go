@@ -12,11 +12,11 @@ type SignUp struct {
 
 // SignIn struct to describe sign in user
 type SignIn struct {
-	Username string `json:"username" validate:"required,email,max=255" doc:"The email address or username used for signing in, must be a valid email and is required"`
-	Password string `json:"password" validate:"required,max=255" doc:"The password for the user account, up to 255 characters and is required"`
+	Username string `json:"username" example:"admin@gfly.dev" validate:"required,email,max=255" doc:"The email address or username used for signing in, must be a valid email and is required"`
+	Password string `json:"password" example:"P@seWor9" validate:"required,max=255" doc:"The password for the user account, up to 255 characters and is required"`
 }
 
 // RefreshToken struct to refresh JWT token.
 type RefreshToken struct {
-	Token string `json:"token" validate:"required,max=255" doc:"The refresh token for obtaining a new access token, up to 255 characters and is required"`
+	Token string `json:"token" example:"d1a4216a226cbf75eaefc9107c2c64b6b2c0f18cd8634e3a6f495146c38e1324.1747914602" validate:"required,max=255" doc:"The refresh token for obtaining a new access token, up to 255 characters and is required"`
 }

@@ -1,12 +1,12 @@
 package transformers
 
 import (
-	"gfly/app/modules/jwt"
-	"gfly/app/modules/jwt/response"
+	"gfly/app/modules/auth"
+	"gfly/app/modules/auth/response"
 )
 
 // ToSignInResponse function JWTTokens struct to SignIn response object.
-func ToSignInResponse(tokens *jwt.Tokens) response.SignIn {
+func ToSignInResponse(tokens *auth.Tokens) response.SignIn {
 	return response.SignIn{
 		Access:  tokens.Access,
 		Refresh: tokens.Refresh,

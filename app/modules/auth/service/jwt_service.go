@@ -1,11 +1,12 @@
-package jwt
+package service
 
 import (
 	"fmt"
 	"gfly/app/domain/models"
 	"gfly/app/domain/models/types"
 	"gfly/app/domain/repository"
-	"gfly/app/modules/jwt/dto"
+	"gfly/app/modules/auth"
+	"gfly/app/modules/auth/dto"
 	"github.com/gflydev/cache"
 	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
@@ -18,7 +19,7 @@ import (
 )
 
 // SignIn login app.
-func SignIn(signIn *dto.SignIn) (*Tokens, error) {
+func SignIn(signIn *dto.SignIn) (*auth.Tokens, error) {
 	// Get user by email.
 	user := repository.Pool.GetUserByEmail(signIn.Username)
 	if user == nil {
@@ -39,7 +40,7 @@ func SignIn(signIn *dto.SignIn) (*Tokens, error) {
 	}
 
 	// Set expired days from .env file
-	ttlDays := utils.Getenv(TtlOverDays, 0) // 7 days by default
+	ttlDays := utils.Getenv(auth.TtlOverDays, 0) // 7 days by default
 
 	// Save refresh token to Redis.
 	expiredTime := time.Duration(ttlDays*24*3600) * time.Second // 604 800 seconds = 7 days
@@ -111,7 +112,7 @@ func SignOut(jwtToken string) error {
 }
 
 // RefreshToken function to refresh JWT token from user.
-func RefreshToken(jwtToken, refreshToken string) (*Tokens, error) {
+func RefreshToken(jwtToken, refreshToken string) (*auth.Tokens, error) {
 	// Get claims from JWT.
 	claims, err := ExtractTokenMetadata(jwtToken)
 	if err != nil {
@@ -141,7 +142,7 @@ func RefreshToken(jwtToken, refreshToken string) (*Tokens, error) {
 	}
 
 	// Set expired days from .env file.
-	ttlDays := utils.Getenv(TtlOverDays, 0)
+	ttlDays := utils.Getenv(auth.TtlOverDays, 0)
 	duration := time.Duration(ttlDays*7*24*3600) * time.Second
 
 	// Update refresh token to Redis.
@@ -157,42 +158,12 @@ func RefreshToken(jwtToken, refreshToken string) (*Tokens, error) {
 	return tokens, nil
 }
 
-// GetUserByToken returns User by JWT token
-func GetUserByToken(jwtToken string) *models.User {
-	// Get claims from JWT.
-	claims, err := ExtractTokenMetadata(jwtToken)
-	if err != nil {
-		log.Errorf("Get user from JWT token error '%v'", err)
-
-		return nil
-	}
-
-	// Define user ID.
-	userID := claims.UserID
-	userIDStr := strconv.Itoa(userID)
-
-	// Get refresh token to Redis.
-	if _, err = cache.Get(userIDStr); err != nil {
-		log.Errorf("Get user from JWT token error '%v'", err)
-
-		return nil
-	}
-
-	// Get user by ID.
-	user, err := mb.GetModelByID[models.User](userID)
-	if err != nil || user == nil {
-		log.Errorf("Get user from JWT token error '%v'", err)
-	}
-
-	return user
-}
-
 // DeleteToken add jwtToken to blacklist
 func DeleteToken(jwtToken string) bool {
-	key := fmt.Sprintf("%s:%s", utils.Getenv(Blacklist, ""), jwtToken)
+	key := fmt.Sprintf("%s:%s", utils.Getenv(auth.Blacklist, ""), jwtToken)
 
 	// Set expired minutes count for a secret key from .env file.
-	ttlMinutes := utils.Getenv(TtlMinutes, 0)
+	ttlMinutes := utils.Getenv(auth.TtlMinutes, 0)
 	expiresTime := time.Duration(ttlMinutes*60) * time.Second
 
 	// Update refresh token to Redis.
@@ -207,12 +178,12 @@ func DeleteToken(jwtToken string) bool {
 
 // IsBlockedToken Check if jwtToken is locked or not
 func IsBlockedToken(jwtToken string) (bool, error) {
-	isCheckBlacklist := utils.Getenv(CheckBlacklist, false)
+	isCheckBlacklist := utils.Getenv(auth.CheckBlacklist, false)
 	if !isCheckBlacklist {
 		return false, nil
 	}
 
-	key := fmt.Sprintf("%s:%s", utils.Getenv(Blacklist, ""), jwtToken)
+	key := fmt.Sprintf("%s:%s", utils.Getenv(auth.Blacklist, ""), jwtToken)
 
 	// Get blocked JWT in Redis.
 	val, err := cache.Get(key)

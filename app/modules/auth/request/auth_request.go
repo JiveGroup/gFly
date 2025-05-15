@@ -1,7 +1,7 @@
 package request
 
 import (
-	"gfly/app/modules/jwt/dto"
+	"gfly/app/modules/auth/dto"
 )
 
 type SignIn struct {

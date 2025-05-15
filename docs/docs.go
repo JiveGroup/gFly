@@ -654,7 +654,8 @@ const docTemplate = `{
             "properties": {
                 "token": {
                     "type": "string",
-                    "maxLength": 255
+                    "maxLength": 255,
+                    "example": "d1a4216a226cbf75eaefc9107c2c64b6b2c0f18cd8634e3a6f495146c38e1324.1747914602"
                 }
             }
         },
@@ -667,11 +668,13 @@ const docTemplate = `{
             "properties": {
                 "password": {
                     "type": "string",
-                    "maxLength": 255
+                    "maxLength": 255,
+                    "example": "P@seWor9"
                 },
                 "username": {
                     "type": "string",
-                    "maxLength": 255
+                    "maxLength": 255,
+                    "example": "admin@gfly.dev"
                 }
             }
         },

@@ -1,10 +1,10 @@
 package middleware
 
 import (
+	"gfly/app/constants"
 	"gfly/app/domain/models"
 	"gfly/app/domain/models/types"
 	"gfly/app/http/response"
-	"gfly/app/modules/jwt"
 	"gfly/app/services"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
@@ -31,8 +31,15 @@ func CheckRolesMiddleware(roles []types.Role, excludes ...string) core.Middlewar
 			return nil
 		}
 
+		if c.GetData(constants.User) == nil {
+			return c.Error(response.Error{
+				Code:    core.StatusUnauthorized,
+				Message: "Unauthorized",
+			}, core.StatusUnauthorized)
+		}
+
 		// Retrieve user data from the context
-		user := c.GetData(jwt.User).(models.User)
+		user := c.GetData(constants.User).(models.User)
 
 		// Check if user has any of the required roles
 		if !services.UserHasRole(user.ID, roles) {

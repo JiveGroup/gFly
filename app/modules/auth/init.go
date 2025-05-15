@@ -1,8 +1,6 @@
-package jwt
+package auth
 
 const (
-	User string = "__jwt_user__"
-
 	// ========== JWT configurations ==========
 
 	TtlOverDays    = "JWT_TTL_OVER_DAYS"
@@ -12,3 +10,9 @@ const (
 	SecretKey      = "JWT_SECRET_KEY"
 	RefreshKey     = "JWT_REFRESH_KEY"
 )
+
+// Tokens struct to describe tokens object.
+type Tokens struct {
+	Access  string
+	Refresh string
+}

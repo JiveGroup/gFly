@@ -6,8 +6,8 @@ import (
 	"gfly/app/http/controllers/api"
 	"gfly/app/http/controllers/api/user"
 	"gfly/app/http/middleware"
-	"gfly/app/modules/jwt"
-	jwtApi "gfly/app/modules/jwt/api"
+	authRoute "gfly/app/modules/auth/routes"
+
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/utils"
 )
@@ -25,22 +25,8 @@ func ApiRoutes(r core.IFly) {
 		// curl -v -X GET http://localhost:7789/api/v1/info | jq
 		apiRouter.GET("/info", api.NewDefaultApi())
 
-		/* ============================ Auth Middleware ============================ */
-		apiRouter.Use(jwt.New(
-			prefixAPI+"/auth/signin",
-			prefixAPI+"/auth/signup",
-			prefixAPI+"/auth/refresh",
-			prefixAPI+"/forgot-password/request",
-			prefixAPI+"/forgot-password/reset",
-		))
-
 		/* ============================ Auth Group ============================ */
-		apiRouter.Group("/auth", func(authGroup *core.Group) {
-			authGroup.POST("/signin", jwtApi.NewSignInApi())
-			authGroup.DELETE("/signout", jwtApi.NewSignOutApi())
-			authGroup.POST("/signup", jwtApi.NewSignUpApi())
-			authGroup.PUT("/refresh", jwtApi.NewRefreshTokenApi())
-		})
+		authRoute.Register(apiRouter)
 
 		/* ============================ User Group ============================ */
 		apiRouter.Group("/users", func(userRouter *core.Group) {

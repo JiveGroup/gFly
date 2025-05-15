@@ -1,7 +1,7 @@
 package api
 
 import (
-	"gfly/app/modules/jwt"
+	"gfly/app/modules/auth/service"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/errors"
 )
@@ -28,9 +28,9 @@ type SignOutApi struct {
 // @Security ApiKeyAuth
 // @Router /auth/signout [delete]
 func (h *SignOutApi) Handle(c *core.Ctx) error {
-	jwtToken := jwt.ExtractToken(c)
+	jwtToken := service.ExtractToken(c)
 
-	err := jwt.SignOut(jwtToken)
+	err := service.SignOut(jwtToken)
 	if err != nil {
 		return c.Error(errors.New("Error %v", err))
 	}

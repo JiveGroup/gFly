@@ -1,10 +1,10 @@
 package api
 
 import (
-	"gfly/app/modules/jwt"
-	"gfly/app/modules/jwt/dto"
-	"gfly/app/modules/jwt/request"
-	"gfly/app/modules/jwt/transformers"
+	"gfly/app/modules/auth/dto"
+	"gfly/app/modules/auth/request"
+	"gfly/app/modules/auth/service"
+	"gfly/app/modules/auth/transformers"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/errors"
 	"github.com/gflydev/validation"
@@ -55,7 +55,7 @@ func (h *SignInApi) Handle(c *core.Ctx) error {
 	// Get valid data from context
 	signInDto := c.GetData(data).(dto.SignIn)
 
-	tokens, err := jwt.SignIn(&signInDto)
+	tokens, err := service.SignIn(&signInDto)
 	if err != nil {
 		return c.Error(errors.New("Error %v", err))
 	}
