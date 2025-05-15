@@ -57,7 +57,7 @@ clean:
 	go clean -testcache
 
 doc:
-	swag init
+	swag init --parseDependency --parseInternal --parseDepth 1
 	cp ./docs/swagger.json ./public/docs/
 
 docker.run:
