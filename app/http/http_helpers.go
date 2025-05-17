@@ -5,8 +5,8 @@ import (
 	"gfly/app/constants"
 	"gfly/app/dto"
 	"gfly/app/http/response"
-	"gfly/app/utils"
 	"github.com/gflydev/core"
+	"github.com/gflydev/validation"
 	"strconv"
 )
 
@@ -76,12 +76,28 @@ func FilterData(c *core.Ctx) dto.Filter {
 
 // ---------------------- Validations ------------------------
 
+// Validate perform data input checking.
+func Validate(structData any, msgForTagFunc ...validation.MsgForTagFunc) *response.Error {
+	errorData, err := validation.Check(structData, msgForTagFunc...)
+
+	if err != nil {
+		// Response validation error
+		return &response.Error{
+			Code:    core.StatusBadRequest,
+			Message: "Invalid input",
+			Data:    errorData,
+		}
+	}
+
+	return nil
+}
+
 // ValidateFilter Verify data from request.
 func ValidateFilter(c *core.Ctx) error {
 	filterDto := FilterData(c)
 
 	// Validate DTO
-	if errData := utils.Validate(filterDto); errData != nil {
+	if errData := Validate(filterDto); errData != nil {
 		return c.Error(errData)
 	}
 

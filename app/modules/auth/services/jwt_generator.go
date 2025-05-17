@@ -1,4 +1,4 @@
-package service
+package services
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ import (
 )
 
 // GenerateTokens func for generate a new Access & Refresh tokens.
-func GenerateTokens(id string, credentials []string) (*auth.Tokens, error) {
+func GenerateTokens(id string, credentials []string) (*auth.Token, error) {
 	// Generate JWT Access token.
 	accessToken, err := generateAccessToken(id, credentials)
 	if err != nil {
@@ -27,7 +27,7 @@ func GenerateTokens(id string, credentials []string) (*auth.Tokens, error) {
 		return nil, err
 	}
 
-	return &auth.Tokens{
+	return &auth.Token{
 		Access:  accessToken,
 		Refresh: refreshToken,
 	}, nil

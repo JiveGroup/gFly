@@ -1,19 +1,31 @@
 package api
 
 import (
-	"gfly/app/modules/auth/service"
+	"gfly/app/http/response"
+	"gfly/app/modules/auth"
+	"gfly/app/modules/auth/services"
 	"github.com/gflydev/core"
-	"github.com/gflydev/core/errors"
 )
 
+// ====================================================================
+// ======================== Controller Creation =======================
+// ====================================================================
+
 // NewSignOutApi As a constructor to create new API.
-func NewSignOutApi() *SignOutApi {
-	return &SignOutApi{}
+func NewSignOutApi(authType auth.Type) *SignOutApi {
+	return &SignOutApi{
+		Type: authType,
+	}
 }
 
 type SignOutApi struct {
+	Type auth.Type
 	core.Api
 }
+
+// ====================================================================
+// ========================= Request Handling =========================
+// ====================================================================
 
 // Handle method to invalidate users access token by adding them to a blacklist in Redis
 // and delete refresh token from the Redis
@@ -28,11 +40,17 @@ type SignOutApi struct {
 // @Security ApiKeyAuth
 // @Router /auth/signout [delete]
 func (h *SignOutApi) Handle(c *core.Ctx) error {
-	jwtToken := service.ExtractToken(c)
+	if h.Type == auth.TypeAPI {
+		jwtToken := services.ExtractToken(c)
 
-	err := service.SignOut(jwtToken)
-	if err != nil {
-		return c.Error(errors.New("Error %v", err))
+		if err := services.SignOut(jwtToken); err != nil {
+			return c.Error(response.Error{
+				Code:    core.StatusBadRequest,
+				Message: err.Error(),
+			})
+		}
+	} else {
+		c.SetSession(auth.SessionUsername, "")
 	}
 
 	return c.NoContent()

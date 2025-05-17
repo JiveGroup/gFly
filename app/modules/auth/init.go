@@ -1,6 +1,15 @@
 package auth
 
+type Type string
+
 const (
+	SessionUsername = "username"
+
+	// ========== Auth Type ==========
+
+	TypeAPI Type = "api"
+	TypeWeb Type = "web"
+
 	// ========== JWT configurations ==========
 
 	TtlOverDays    = "JWT_TTL_OVER_DAYS"
@@ -11,8 +20,8 @@ const (
 	RefreshKey     = "JWT_REFRESH_KEY"
 )
 
-// Tokens struct to describe tokens object.
-type Tokens struct {
+// Token struct to describe tokens object.
+type Token struct {
 	Access  string
 	Refresh string
 }

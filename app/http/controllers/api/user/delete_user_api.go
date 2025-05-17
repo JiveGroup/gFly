@@ -8,6 +8,10 @@ import (
 	"github.com/gflydev/core"
 )
 
+// ====================================================================
+// ======================== Controller Creation =======================
+// ====================================================================
+
 type DeleteUserApi struct {
 	core.Api
 }
@@ -16,18 +20,17 @@ func NewDeleteUserApi() *DeleteUserApi {
 	return &DeleteUserApi{}
 }
 
+// ====================================================================
+// ======================== Request Validation ========================
+// ====================================================================
+
 func (h *DeleteUserApi) Validate(c *core.Ctx) error {
-	// Receive path parameter ID
-	itemID, errData := http.PathID(c)
-	if errData != nil {
-		return c.Error(errData)
-	}
-
-	// Store data into context.
-	c.SetData(constants.Data, itemID)
-
-	return nil
+	return http.ProcessPathID(c)
 }
+
+// ====================================================================
+// ========================= Request Handling =========================
+// ====================================================================
 
 // Handle function hard-delete user with its roles by given userID.
 // @Description Function hard-delete user with its roles by given userID.

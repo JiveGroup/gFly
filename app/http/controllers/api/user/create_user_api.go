@@ -8,9 +8,12 @@ import (
 	"gfly/app/http/response"
 	"gfly/app/http/transformers"
 	"gfly/app/services"
-	"gfly/app/utils"
 	"github.com/gflydev/core"
 )
+
+// ====================================================================
+// ======================== Controller Creation =======================
+// ====================================================================
 
 type CreateUserApi struct {
 	core.Api
@@ -20,26 +23,17 @@ func NewCreateUserApi() *CreateUserApi {
 	return &CreateUserApi{}
 }
 
+// ====================================================================
+// ======================== Request Validation ========================
+// ====================================================================
+
 func (h *CreateUserApi) Validate(c *core.Ctx) error {
-	// Receive request data.
-	var requestBody request.CreateUser
-	if errData := http.Parse(c, &requestBody); errData != nil {
-		return c.Error(errData)
-	}
-
-	// Convert to DTO
-	requestDto := requestBody.ToDto()
-
-	// Validate DTO
-	if errData := utils.Validate(requestDto); errData != nil {
-		return c.Error(errData)
-	}
-
-	// Store data into context.
-	c.SetData(constants.Data, requestDto)
-
-	return nil
+	return http.ProcessRequest[request.CreateUser, dto.CreateUser](c)
 }
+
+// ====================================================================
+// ========================= Request Handling =========================
+// ====================================================================
 
 // Handle function allows Administrator create a new user with specific roles
 // @Description Function allows Administrator create a new user with specific roles

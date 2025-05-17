@@ -3,24 +3,28 @@ package user
 import (
 	"gfly/app/constants"
 	"gfly/app/dto"
-	"gfly/app/http"
+	"gfly/app/http/controllers/api"
 	"gfly/app/http/response"
 	"gfly/app/http/transformers"
 	"gfly/app/services"
 	"github.com/gflydev/core"
 )
 
+// ====================================================================
+// ======================== Controller Creation =======================
+// ====================================================================
+
 type GetUsersApi struct {
-	core.Api
+	api.ListApi
 }
 
 func NewGetUsersApi() *GetUsersApi {
 	return &GetUsersApi{}
 }
 
-func (h *GetUsersApi) Validate(c *core.Ctx) error {
-	return http.ValidateFilter(c)
-}
+// ====================================================================
+// ========================= Request Handling =========================
+// ====================================================================
 
 // Handle Process main logic for API.
 // @Summary Function list all users data

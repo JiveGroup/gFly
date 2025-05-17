@@ -11,6 +11,10 @@ import (
 	mb "github.com/gflydev/db"
 )
 
+// ====================================================================
+// ======================== Controller Creation =======================
+// ====================================================================
+
 type GetUserByIdApi struct {
 	core.Api
 }
@@ -19,18 +23,17 @@ func NewGetUserByIdApi() *GetUserByIdApi {
 	return &GetUserByIdApi{}
 }
 
+// ====================================================================
+// ======================== Request Validation ========================
+// ====================================================================
+
 func (h *GetUserByIdApi) Validate(c *core.Ctx) error {
-	// Receive path parameter ID
-	itemID, errData := http.PathID(c)
-	if errData != nil {
-		return c.Error(errData)
-	}
-
-	// Store data into context.
-	c.SetData(constants.Data, itemID)
-
-	return nil
+	return http.ProcessPathID(c)
 }
+
+// ====================================================================
+// ========================= Request Handling =========================
+// ====================================================================
 
 // Handle function get user by given id. If user not exists, return not found status.
 // @Description Function get user by given id. If user not exists, return not found status.

@@ -221,7 +221,7 @@ func UpdateUser(updateUserDto dto.UpdateUser) (*models.User, error) {
 //   - "User not found": Returned when no user is found for the provided ID.
 //   - "Error occurs while updating user's status": Returned when the provided status is invalid or the update process fails.
 func UpdateUserStatus(updateUserStatusDto dto.UpdateUserStatus) (*models.User, error) {
-	user, err := mb.GetModelBy[models.User]("id", updateUserStatusDto.ID)
+	user, err := mb.GetModelByID[models.User](updateUserStatusDto.ID)
 	if err != nil {
 		return nil, errors.New("User not found")
 	}

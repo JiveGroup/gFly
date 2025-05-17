@@ -12,7 +12,7 @@ func NewHomePage() *HomePage {
 }
 
 type HomePage struct {
-	core.Page
+	BasePage
 }
 
 // ====================================================================
@@ -20,5 +20,7 @@ type HomePage struct {
 // ====================================================================
 
 func (m *HomePage) Handle(c *core.Ctx) error {
-	return c.Redirect("/index.html")
+	return m.View(c, "home", core.Data{
+		"hero_text": "gFly - Laravel inspired web framework written in Go",
+	})
 }

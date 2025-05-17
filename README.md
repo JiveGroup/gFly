@@ -338,15 +338,15 @@ type MailCommand struct {
 // Handle Process command.
 func (c *MailCommand) Handle() {
     // ============== Send mail ==============
-    resetPassword := notifications.ResetPassword{
+    sendMail := notifications.SendMail{
         Email: "admin@gfly.dev",
     }
 
-    if err := notification.Send(resetPassword); err != nil {
+    if err := notification.Send(sendMail); err != nil {
         log.Error(err)
     }
   
-    log.Infof("RedisCommand :: Run at %s", time.Now().Format("2006-01-02 15:04:05"))
+    log.Infof("MailCommand :: Run at %s", time.Now().Format("2006-01-02 15:04:05"))
 }
 ```
 

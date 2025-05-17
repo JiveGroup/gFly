@@ -14,7 +14,7 @@ require (
 	github.com/gflydev/session/redis v1.0.2
 	github.com/gflydev/storage v1.1.4
 	github.com/gflydev/storage/local v1.1.4
-	github.com/gflydev/validation v1.0.2
+	github.com/gflydev/validation v1.0.3
 	github.com/gflydev/view/pongo v1.0.3
 	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/hibiken/asynq v0.25.1

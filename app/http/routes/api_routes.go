@@ -26,7 +26,7 @@ func ApiRoutes(r core.IFly) {
 		apiRouter.GET("/info", api.NewDefaultApi())
 
 		/* ============================ Auth Group ============================ */
-		authRoute.Register(apiRouter)
+		authRoute.RegisterApi(apiRouter)
 
 		/* ============================ User Group ============================ */
 		apiRouter.Group("/users", func(userRouter *core.Group) {

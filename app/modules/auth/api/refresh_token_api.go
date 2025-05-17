@@ -1,14 +1,19 @@
 package api
 
 import (
+	"gfly/app/constants"
+	"gfly/app/http"
 	"gfly/app/http/response"
 	"gfly/app/modules/auth/dto"
 	"gfly/app/modules/auth/request"
 	authResponse "gfly/app/modules/auth/response"
-	"gfly/app/modules/auth/service"
+	"gfly/app/modules/auth/services"
 	"github.com/gflydev/core"
-	"github.com/gflydev/validation"
 )
+
+// ====================================================================
+// ======================== Controller Creation =======================
+// ====================================================================
 
 // NewRefreshTokenApi As a constructor to create new API.
 func NewRefreshTokenApi() *RefreshTokenApi {
@@ -19,25 +24,18 @@ type RefreshTokenApi struct {
 	core.Api
 }
 
+// ====================================================================
+// ======================== Request Validation ========================
+// ====================================================================
+
 // Validate validates request refresh token
 func (h *RefreshTokenApi) Validate(c *core.Ctx) error {
-	var refreshToken request.RefreshToken
-	err := c.ParseBody(&refreshToken)
-	if err != nil {
-		c.Status(core.StatusBadRequest)
-		return err
-	}
-
-	refreshTokenDto := refreshToken.ToDto()
-	errorData, err := validation.Check(refreshTokenDto)
-	if err != nil {
-		_ = c.Error(errorData)
-		return err
-	}
-
-	c.SetData(data, refreshTokenDto)
-	return nil
+	return http.ProcessRequest[request.RefreshToken, dto.RefreshToken](c)
 }
+
+// ====================================================================
+// ========================= Request Handling =========================
+// ====================================================================
 
 // Handle method to refresh user token.
 // @Description Refresh user token
@@ -52,18 +50,18 @@ func (h *RefreshTokenApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /auth/refresh [put]
 func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
-	refreshToken := c.GetData(data).(dto.RefreshToken)
+	refreshToken := c.GetData(constants.Data).(dto.RefreshToken)
 	// Check valid refresh token
-	if !service.IsValidRefreshToken(refreshToken.Token) {
+	if !services.IsValidRefreshToken(refreshToken.Token) {
 		return c.Error(response.Error{
 			Code:    core.StatusUnauthorized,
 			Message: "Invalid JWT token",
 		}, core.StatusUnauthorized)
 	}
 
-	jwtToken := service.ExtractToken(c)
+	jwtToken := services.ExtractToken(c)
 	// Refresh new pairs of access token & refresh token
-	tokens, err := service.RefreshToken(jwtToken, refreshToken.Token)
+	tokens, err := services.RefreshToken(jwtToken, refreshToken.Token)
 	if err != nil {
 		return c.Error(response.Error{
 			Code:    core.StatusUnauthorized,

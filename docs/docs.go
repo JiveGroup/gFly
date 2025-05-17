@@ -214,6 +214,80 @@ const docTemplate = `{
                 }
             }
         },
+        "/password/forgot": {
+            "post": {
+                "description": "Forgot password.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Password"
+                ],
+                "summary": "Forgot password",
+                "parameters": [
+                    {
+                        "description": "Forgot password payload",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ForgotPassword"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/response.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/password/reset": {
+            "post": {
+                "description": "Reset password.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Password"
+                ],
+                "summary": "Reset password",
+                "parameters": [
+                    {
+                        "description": "Reset password payload",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ResetPassword"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/response.Error"
+                        }
+                    }
+                }
+            }
+        },
         "/users": {
             "get": {
                 "security": [
@@ -646,6 +720,19 @@ const docTemplate = `{
                 }
             }
         },
+        "request.ForgotPassword": {
+            "type": "object",
+            "required": [
+                "username"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "john@jivecode.com"
+                }
+            }
+        },
         "request.RefreshToken": {
             "type": "object",
             "required": [
@@ -656,6 +743,25 @@ const docTemplate = `{
                     "type": "string",
                     "maxLength": 255,
                     "example": "d1a4216a226cbf75eaefc9107c2c64b6b2c0f18cd8634e3a6f495146c38e1324.1747914602"
+                }
+            }
+        },
+        "request.ResetPassword": {
+            "type": "object",
+            "required": [
+                "password",
+                "token"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "minLength": 6,
+                    "example": "M1PassW@s"
+                },
+                "token": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "293r823or832eioj2eo9282o423"
                 }
             }
         },
@@ -954,7 +1060,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
 	Title:            "API",
-	Description:      "This is an auto-generated API Docs.",
+	Description:      "gFly API. <b>Note: Authorize value `Bearer <ACCESS_TOKEN>`</b>.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

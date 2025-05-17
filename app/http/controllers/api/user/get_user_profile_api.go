@@ -8,6 +8,10 @@ import (
 	"github.com/gflydev/core"
 )
 
+// ====================================================================
+// ======================== Controller Creation =======================
+// ====================================================================
+
 // NewGetUserProfileApi As a constructor to get user profile API.
 func NewGetUserProfileApi() *GetUserProfileApi {
 	return &GetUserProfileApi{}
@@ -17,6 +21,10 @@ func NewGetUserProfileApi() *GetUserProfileApi {
 type GetUserProfileApi struct {
 	core.Api
 }
+
+// ====================================================================
+// ========================= Request Handling =========================
+// ====================================================================
 
 // Handle Process main logic for API.
 // @Summary Get user profile
@@ -38,10 +46,8 @@ func (h *GetUserProfileApi) Handle(c *core.Ctx) error {
 
 	user := c.GetData(constants.User).(models.User)
 
-	// ==================== Transformer ====================
 	// Transform to response data
 	var userRes = transformers.ToUserResponse(user)
 
-	// ==================== Response data ====================
 	return c.Success(userRes)
 }

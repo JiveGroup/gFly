@@ -8,9 +8,12 @@ import (
 	"gfly/app/http/response"
 	"gfly/app/http/transformers"
 	"gfly/app/services"
-	"gfly/app/utils"
 	"github.com/gflydev/core"
 )
+
+// ====================================================================
+// ======================== Controller Creation =======================
+// ====================================================================
 
 type UpdateUserApi struct {
 	core.Api
@@ -20,34 +23,17 @@ func NewUpdateUserApi() *UpdateUserApi {
 	return &UpdateUserApi{}
 }
 
+// ====================================================================
+// ======================== Request Validation ========================
+// ====================================================================
+
 func (h *UpdateUserApi) Validate(c *core.Ctx) error {
-	// Receive path parameter ID
-	itemID, errData := http.PathID(c)
-	if errData != nil {
-		return c.Error(errData)
-	}
-
-	// Receive request data.
-	var requestBody request.UpdateUser
-	if errData := http.Parse(c, &requestBody); errData != nil {
-		return c.Error(errData)
-	}
-
-	requestBody.ID = itemID
-
-	// Convert to DTO
-	requestDto := requestBody.ToDto()
-
-	// Validate DTO
-	if errData := utils.Validate(requestDto); errData != nil {
-		return c.Error(errData)
-	}
-
-	// Store data into context.
-	c.SetData(constants.Data, requestDto)
-
-	return nil
+	return http.ProcessUpdateRequest[request.UpdateUser, dto.UpdateUser](c)
 }
+
+// ====================================================================
+// ========================= Request Handling =========================
+// ====================================================================
 
 // Handle function allows Administrator update users table or authorize user roles.
 // @Description Function allows Administrator update users table or authorize user roles.

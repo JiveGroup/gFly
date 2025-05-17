@@ -1,37 +1,12 @@
 package utils
 
 import (
-	"gfly/app/http/response"
-	"github.com/gflydev/core"
-	"github.com/gflydev/validation"
 	"net/mail"
 	"net/url"
 	"regexp"
 	"strconv"
 	"strings"
 )
-
-// Validate perform data input checking.
-func Validate(structData any, msgForTagFunc ...validation.MsgForTagFunc) *response.Error {
-	errorData, err := validation.Check(structData, msgForTagFunc...)
-
-	if err != nil {
-		// Convert validation data to core.Data
-		data := make(core.Data)
-		for attr := range errorData {
-			data[attr] = errorData[attr]
-		}
-
-		// Response validation error
-		return &response.Error{
-			Code:    core.StatusBadRequest,
-			Message: "Invalid input",
-			Data:    data,
-		}
-	}
-
-	return nil
-}
 
 // IsValidEmail checks if a string is a valid email address
 func IsValidEmail(email string) bool {

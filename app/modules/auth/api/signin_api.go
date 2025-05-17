@@ -1,45 +1,45 @@
 package api
 
 import (
+	"gfly/app/constants"
+	"gfly/app/http"
+	"gfly/app/http/response"
+	"gfly/app/modules/auth"
 	"gfly/app/modules/auth/dto"
 	"gfly/app/modules/auth/request"
-	"gfly/app/modules/auth/service"
+	"gfly/app/modules/auth/services"
 	"gfly/app/modules/auth/transformers"
 	"github.com/gflydev/core"
-	"github.com/gflydev/core/errors"
-	"github.com/gflydev/validation"
 )
 
+// ====================================================================
+// ======================== Controller Creation =======================
+// ====================================================================
+
 type SignInApi struct {
+	Type auth.Type
 	core.Api
 }
 
 // NewSignInApi is a constructor
-func NewSignInApi() *SignInApi {
-	return &SignInApi{}
+func NewSignInApi(authType auth.Type) *SignInApi {
+	return &SignInApi{
+		Type: authType,
+	}
 }
+
+// ====================================================================
+// ======================== Request Validation ========================
+// ====================================================================
 
 // Validate data from request
 func (h *SignInApi) Validate(c *core.Ctx) error {
-	// Parse login form
-	var signIn request.SignIn
-	err := c.ParseBody(&signIn)
-	if err != nil {
-		c.Status(core.StatusBadRequest)
-		return err
-	}
-
-	signInDto := signIn.ToDto()
-	// Validate login form.
-	errorData, err := validation.Check(signInDto)
-	if err != nil {
-		_ = c.Error(errorData)
-		return err
-	}
-
-	c.SetData(data, signInDto)
-	return nil
+	return http.ProcessRequest[request.SignIn, dto.SignIn](c)
 }
+
+// ====================================================================
+// ========================= Request Handling =========================
+// ====================================================================
 
 // Handle func handle sign in user then returns access token and refresh token
 // @Description Authenticating user's credentials then return access and refresh token if valid. Otherwise, return an error message.
@@ -53,11 +53,20 @@ func (h *SignInApi) Validate(c *core.Ctx) error {
 // @Router /auth/signin [post]
 func (h *SignInApi) Handle(c *core.Ctx) error {
 	// Get valid data from context
-	signInDto := c.GetData(data).(dto.SignIn)
+	signInDto := c.GetData(constants.Data).(dto.SignIn)
 
-	tokens, err := service.SignIn(&signInDto)
+	tokens, err := services.SignIn(&signInDto)
 	if err != nil {
-		return c.Error(errors.New("Error %v", err))
+		return c.Error(response.Error{
+			Code:    core.StatusBadRequest,
+			Message: err.Error(),
+		})
+	}
+
+	if h.Type == auth.TypeWeb {
+		c.SetSession(auth.SessionUsername, signInDto.Username)
+
+		return c.NoContent()
 	}
 
 	// Transform to response object.

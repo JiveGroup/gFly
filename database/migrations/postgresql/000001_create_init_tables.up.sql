@@ -35,15 +35,6 @@ CREATE TABLE roles (
                        updated_at TIMESTAMP NULL
 );
 
--- Insert data
-INSERT INTO roles (name, slug) VALUES('Admin', 'admin');
-INSERT INTO roles (name, slug) VALUES('Moderator', 'moderator');
-INSERT INTO roles (name, slug) VALUES('Member', 'member');
-INSERT INTO roles (name, slug) VALUES('Guest', 'guest');
-
--- Get latest sequence
--- SELECT last_value FROM roles_id_seq;
-
 -- -----------------------------------------------------
 -- Table user_roles
 -- -----------------------------------------------------
@@ -91,9 +82,20 @@ CREATE TABLE address (
 -- --------------------------------------------------------------------------------------
 -- ------------------------------------ Initial data ------------------------------------
 -- --------------------------------------------------------------------------------------
+
+-- Insert data
+INSERT INTO roles (name, slug) VALUES('Admin', 'admin');
+INSERT INTO roles (name, slug) VALUES('Moderator', 'moderator');
+INSERT INTO roles (name, slug) VALUES('Member', 'member');
+INSERT INTO roles (name, slug) VALUES('Guest', 'guest');
+
 -- P@seWor9  ===>  $2a$04$9QD944312deeQjnxF.zNauGx7NQ0GtS.xJhLy.zWqWxOE8B/XCN9i
 INSERT INTO users (email, password, fullname, phone, token, status, avatar, created_at, updated_at)
 VALUES ('admin@gfly.dev', '$2a$04$9QD944312deeQjnxF.zNauGx7NQ0GtS.xJhLy.zWqWxOE8B/XCN9i', 'Admin', '0989831911', null, 'active', 'https://www.gfly.dev/assets/avatar.png', '2024-05-15 13:07:48.888668 +07:00', '2024-05-15 13:07:48.888668 +07:00');
 
 insert into user_roles (role_id, user_id, created_at)
 values (1, 1, '2024-05-15 13:07:48.888668 +07:00');
+
+-- Check latest sequence
+-- SELECT last_value FROM roles_id_seq;
+-- SELECT last_value FROM users_id_seq;

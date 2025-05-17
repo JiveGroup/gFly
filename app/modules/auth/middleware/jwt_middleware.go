@@ -4,7 +4,7 @@ import (
 	"gfly/app/constants"
 	"gfly/app/domain/models"
 	"gfly/app/http/response"
-	"gfly/app/modules/auth/service"
+	"gfly/app/modules/auth/services"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
 	mb "github.com/gflydev/db"
@@ -12,20 +12,20 @@ import (
 	"time"
 )
 
-// New an HTTP middleware that process login via JWT token.
+// JWTAuth an HTTP middleware that process login via JWT token.
 //
 // Use:
 //
-//	app.Use(jwt.New(
+//	app.Use(middleware.JWTAuth(
 //		prefixAPI+"/info",
 //		prefixAPI+"/auth/signin",
 //		prefixAPI+"/auth/refresh",
 //	))
-func New(excludes ...string) core.MiddlewareHandler {
+func JWTAuth(excludes ...string) core.MiddlewareHandler {
 	return func(c *core.Ctx) error {
 		path := c.Path()
 		if slices.Contains(excludes, path) {
-			log.Debugf("Skip JWTAuth checking for '%v'", path)
+			log.Tracef("Skip JWTAuth checking for '%v'", path)
 
 			return nil
 		}
@@ -33,8 +33,8 @@ func New(excludes ...string) core.MiddlewareHandler {
 		// Forge status code 401 (Unauthorized) instead of 500 (internal error)
 		c.Status(core.StatusUnauthorized)
 
-		jwtToken := service.ExtractToken(c)
-		isBlocked, err := service.IsBlockedToken(jwtToken)
+		jwtToken := services.ExtractToken(c)
+		isBlocked, err := services.IsBlockedToken(jwtToken)
 		if err != nil {
 			log.Errorf("Check JWT error '%v'", err)
 
@@ -52,7 +52,7 @@ func New(excludes ...string) core.MiddlewareHandler {
 		}
 
 		// Get claims from JWT.
-		claims, err := service.ExtractTokenMetadata(jwtToken)
+		claims, err := services.ExtractTokenMetadata(jwtToken)
 		if err != nil {
 			log.Errorf("Parse JWT error '%v'", err)
 

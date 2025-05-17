@@ -21,13 +21,16 @@ import (
 //
 // Returns:
 //   - core.MiddlewareHandler: A middleware handler function.
+//
+// @Throws response.Error with code 401 when user is not authenticated
+// @Throws response.Error with code 403 when user lacks required role permissions
 func CheckRolesMiddleware(roles []types.Role, excludes ...string) core.MiddlewareHandler {
 	return func(c *core.Ctx) error {
 		path := c.Path()
 
 		// Skip role checks for excluded paths
 		if slices.Contains(excludes, path) {
-			log.Debugf("skip check roles for %v", path)
+			log.Tracef("skip check roles for %v", path)
 			return nil
 		}
 

@@ -30,11 +30,11 @@ type MailCommand struct {
 // Handle Process command.
 func (c *MailCommand) Handle() {
 	// ============== Send mail ==============
-	resetPassword := notifications.ResetPassword{
+	sendMail := notifications.SendMail{
 		Email: "admin@gfly.dev",
 	}
 
-	if err := notification.Send(resetPassword); err != nil {
+	if err := notification.Send(sendMail); err != nil {
 		log.Error(err)
 	}
 

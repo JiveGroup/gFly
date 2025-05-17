@@ -21,7 +21,7 @@ import (
 // Main function
 // @title API
 // @version 1.0
-// @description This is an auto-generated API Docs.
+// @description gFly API. <b>Note: Authorize value `Bearer <ACCESS_TOKEN>`</b>.
 // @termsOfService https://swagger.io/terms/
 // @contact.name API Support
 // @contact.email admin@jivecode.com

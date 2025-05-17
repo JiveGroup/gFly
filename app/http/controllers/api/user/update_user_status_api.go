@@ -7,7 +7,6 @@ import (
 	"gfly/app/http/request"
 	"gfly/app/http/transformers"
 	"gfly/app/services"
-	"gfly/app/utils"
 	"github.com/gflydev/core"
 )
 
@@ -28,33 +27,7 @@ func NewUpdateUserStatusApi() *UpdateUserStatusApi {
 // ====================================================================
 
 func (h UpdateUserStatusApi) Validate(c *core.Ctx) error {
-	// Receive path parameter ID
-	itemID, errData := http.PathID(c)
-	if errData != nil {
-		return c.Error(errData)
-	}
-
-	// Receive request data.
-	var requestBody request.UpdateUserStatus
-	if errData := http.Parse(c, &requestBody); errData != nil {
-		return c.Error(errData)
-	}
-
-	// Update updateUserStatus struct with the given userID
-	requestBody.ID = itemID
-
-	// Convert to DTO
-	requestDto := requestBody.ToDto()
-
-	// Validate DTO
-	if errData := utils.Validate(requestDto); errData != nil {
-		return c.Error(errData)
-	}
-
-	// Store data into context.
-	c.SetData(constants.Data, requestDto)
-
-	return nil
+	return http.ProcessUpdateRequest[request.UpdateUserStatus, dto.UpdateUserStatus](c)
 }
 
 // ====================================================================
