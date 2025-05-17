@@ -65,6 +65,9 @@ go version
 ```
 
 ### 3. Install `Swag`, `Air`, `Migrage`, `Lint`, `GoSec`, `GoVulncheck`, and `GoCritic`
+
+In Go programming. In addition to having an IDE that suits you. Other supporting tools will help control code quality better. Therefore, we recommend that you install and use the following tools as an indispensable part of the application development process with Go.
+
 ```bash
 # ----- Install swag -----
 go install github.com/swaggo/swag/cmd/swag@latest
@@ -114,7 +117,7 @@ Make sure don't have any services ran at ports `6379`, `1025`, `8025`, and `5432
 
 ### 1. Start docker services
 ```bash
-# Start
+# Docker run (Create DB, Redis, Mail services)
 make docker.run
 ```
 ### 2. Check services
@@ -131,12 +134,6 @@ make docker.run
 ```bash
 # Doc
 make doc
-
-# Build (Build CLI and Web)
-make build
-
-# Docker run (Create DB, Redis, Mail services)
-make docker.run
 
 # Run
 make dev
@@ -157,19 +154,41 @@ API doc [http://localhost:7789/docs/](http://localhost:7789/docs/)
 
 ### 5. CLI Actions
 
+Run below commands in 3 different terminals
+
+#### 5.1 Schedule 
 ```bash
-# Run command `hello-world`
-./build/artisan cmd:run hello-world
-
-# Run schedule 
+# Run schedule (Terminal 1)
 ./build/artisan schedule:run
-
-# Run queue 
-./build/artisan queue:run
 ```
 
-Note: You can check more detail about [command](https://doc.gfly.dev/docs/03-digging-deeper/03-01-02.command/), [schedule](https://doc.gfly.dev/docs/03-digging-deeper/03-01-03.schedule/), and [queue](https://doc.gfly.dev/docs/03-digging-deeper/03-01-04.queue/) at link [https://doc.gfly.dev/](https://doc.gfly.dev/)
+Note: Will get the message of `Schedule Job` file `hello_job.go` every 2 seconds
 
+#### 5.2 Queue 
+```bash
+# Run queue (Terminal 2)
+./build/artisan queue:run
+```
+Note: Nothing happens because don't have any job was queued!
+
+#### 5.3 Command
+```bash
+# Run command `hello-world` (Terminal 3)
+./build/artisan cmd:run hello-world
+```
+
+Note: Check the output of `Terminal 2` and `Terminal 3`. The `Terminal 2` have some message because get the `Task` file `hello_task.go` was queued from `Command` file `hello_command.go` from `Terminal 3`
+
+You can check more detail about [command](https://doc.gfly.dev/docs/03-digging-deeper/03-01-02.command/), [schedule](https://doc.gfly.dev/docs/03-digging-deeper/03-01-03.schedule/), and [queue](https://doc.gfly.dev/docs/03-digging-deeper/03-01-04.queue/) at link [https://doc.gfly.dev/](https://doc.gfly.dev/)
+
+**Important! Should run 2 commands `make schedule` and `make queue` to get full deployment environment.**
+
+### 6. Build CLI and Web
+```bash
+make build
+```
+
+Check some binary files in folder build/
 
 ## III. Service connection
 
@@ -206,7 +225,7 @@ import (
 
 // Auto-register command.
 func init() {
-    console.RegisterCommand(&DBCommand{}, "db-test")
+    console.RegisterCommand(&dbCommand{}, "db-test")
 }
 
 // ---------------------------------------------------------------
@@ -214,12 +233,12 @@ func init() {
 // ---------------------------------------------------------------
 
 // DBCommand struct for hello command.
-type DBCommand struct {
+type dbCommand struct {
     console.Command
 }
 
 // Handle Process command.
-func (c *DBCommand) Handle() {
+func (c *dbCommand) Handle() {
     user, err := mb.GetModelBy[models.User]("email", "admin@gfly.dev")
     if err != nil || user == nil {
         log.Panic(err)
@@ -237,7 +256,7 @@ func (c *DBCommand) Handle() {
 make build
 
 # Run command `db-test`
- ./build/artisan cmd:run db-test
+./build/artisan cmd:run db-test
 ```
 
 ### 2. Connect `Redis` service
@@ -261,7 +280,7 @@ import (
 
 // Auto-register command.
 func init() {
-    console.RegisterCommand(&RedisCommand{}, "redis-test")
+    console.RegisterCommand(&redisCommand{}, "redis-test")
 }
 
 // ---------------------------------------------------------------
@@ -269,12 +288,12 @@ func init() {
 // ---------------------------------------------------------------
 
 // RedisCommand struct for hello command.
-type RedisCommand struct {
+type redisCommand struct {
     console.Command
 }
 
 // Handle Process command.
-func (c *RedisCommand) Handle() {
+func (c *redisCommand) Handle() {
     // Add new key
     if err := cache.Set("foo", "Hello world", time.Duration(15*24*3600)*time.Second); err != nil {
         log.Error(err)
@@ -299,7 +318,7 @@ func (c *RedisCommand) Handle() {
 make build
 
 # Run command `redis-test`
- ./build/artisan cmd:run redis-test
+./build/artisan cmd:run redis-test
 ```
 
 ### 3. Connect `Mail` service
@@ -323,7 +342,7 @@ import (
 
 // Auto-register command.
 func init() {
-    console.RegisterCommand(&RedisCommand{}, "mail-test")
+    console.RegisterCommand(&mailCommand{}, "mail-test")
 }
 
 // ---------------------------------------------------------------
@@ -331,12 +350,12 @@ func init() {
 // ---------------------------------------------------------------
 
 // MailCommand struct for hello command.
-type MailCommand struct {
+type mailCommand struct {
     console.Command
 }
 
 // Handle Process command.
-func (c *MailCommand) Handle() {
+func (c *mailCommand) Handle() {
     // ============== Send mail ==============
     sendMail := notifications.SendMail{
         Email: "admin@gfly.dev",
@@ -357,15 +376,7 @@ func (c *MailCommand) Handle() {
 make build
 
 # Run command `mail-test`
- ./build/artisan cmd:run mail-test
+./build/artisan cmd:run mail-test
 ```
 
 Check mail at http://localhost:8025/
-
-### 4. Run command and check Log
-
-```bash
-curl -X 'GET' http://localhost:7789/api/v1/info
-```
-
-Check email at `http://localhost:8025/`

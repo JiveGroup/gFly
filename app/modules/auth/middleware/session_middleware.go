@@ -16,8 +16,6 @@ func processSession(c *core.Ctx) (err error) {
 		// Just get session to trigger updating value TTL.
 		username := c.GetSession(auth.SessionUsername)
 
-		log.Errorf("processSession username '%v'", username)
-
 		// Check Logged-in data
 		if username == nil || username.(string) == "" {
 			try.Throw("no username in session")
@@ -27,7 +25,7 @@ func processSession(c *core.Ctx) (err error) {
 		user := repository.Pool.GetUserByEmail(username.(string))
 		c.SetData(constants.User, *user)
 	}).Catch(func(e try.E) {
-		log.Errorf("processSession error '%v'", e)
+		log.Debugf("processSession error '%v'", e)
 
 		err = fmt.Errorf("error %v", e)
 	})

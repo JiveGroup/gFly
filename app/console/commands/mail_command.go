@@ -15,7 +15,7 @@ import (
 
 // Auto-register command.
 func init() {
-	console.RegisterCommand(&MailCommand{}, "mail-test")
+	console.RegisterCommand(&mailCommand{}, "mail-test")
 }
 
 // ---------------------------------------------------------------
@@ -23,12 +23,12 @@ func init() {
 // ---------------------------------------------------------------
 
 // MailCommand struct for hello command.
-type MailCommand struct {
+type mailCommand struct {
 	console.Command
 }
 
 // Handle Process command.
-func (c *MailCommand) Handle() {
+func (c *mailCommand) Handle() {
 	// ============== Send mail ==============
 	sendMail := notifications.SendMail{
 		Email: "admin@gfly.dev",

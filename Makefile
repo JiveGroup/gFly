@@ -42,6 +42,12 @@ run: lint test doc build
 
 start: run
 
+schedule: build
+	./build/artisan schedule:run
+
+queue: build
+	./build/artisan queue:run
+
 migrate.up:
 	migrate -path $(MIGRATION_FOLDER) -database "$(DATABASE_URL)" up
 

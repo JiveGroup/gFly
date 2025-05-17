@@ -12,22 +12,22 @@ import (
 
 // Auto-register job into scheduler.
 func init() {
-	console.RegisterJob(&HelloJob{})
+	console.RegisterJob(&helloJob{})
 }
 
 // ---------------------------------------------------------------
 // 					HelloJob struct.
 // ---------------------------------------------------------------
 
-// HelloJob struct for hello job.
-type HelloJob struct{}
+// helloJob struct for hello job.
+type helloJob struct{}
 
 // GetTime Get time format.
-func (c *HelloJob) GetTime() string {
+func (c *helloJob) GetTime() string {
 	return "0/2 * * * * *"
 }
 
 // Handle Process the job.
-func (c *HelloJob) Handle() {
+func (c *helloJob) Handle() {
 	log.Infof("HelloJob :: Run at %s", time.Now().Format("2006-01-02 15:04:05"))
 }

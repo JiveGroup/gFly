@@ -14,7 +14,7 @@ import (
 
 // Auto-register command.
 func init() {
-	console.RegisterCommand(&RedisCommand{}, "redis-test")
+	console.RegisterCommand(&redisCommand{}, "redis-test")
 }
 
 // ---------------------------------------------------------------
@@ -22,12 +22,12 @@ func init() {
 // ---------------------------------------------------------------
 
 // RedisCommand struct for hello command.
-type RedisCommand struct {
+type redisCommand struct {
 	console.Command
 }
 
 // Handle Process command.
-func (c *RedisCommand) Handle() {
+func (c *redisCommand) Handle() {
 	// Add new key
 	if err := cache.Set("foo", "Hello world", time.Duration(15*24*3600)*time.Second); err != nil {
 		log.Error(err)

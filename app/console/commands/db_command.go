@@ -15,7 +15,7 @@ import (
 
 // Auto-register command.
 func init() {
-	console.RegisterCommand(&DBCommand{}, "db-test")
+	console.RegisterCommand(&dbCommand{}, "db-test")
 }
 
 // ---------------------------------------------------------------
@@ -23,12 +23,12 @@ func init() {
 // ---------------------------------------------------------------
 
 // DBCommand struct for hello command.
-type DBCommand struct {
+type dbCommand struct {
 	console.Command
 }
 
 // Handle Process command.
-func (c *DBCommand) Handle() {
+func (c *dbCommand) Handle() {
 	user, err := mb.GetModelBy[models.User]("email", "admin@gfly.dev")
 	if err != nil || user == nil {
 		log.Panic(err)

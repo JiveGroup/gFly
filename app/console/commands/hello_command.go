@@ -14,7 +14,7 @@ import (
 
 // Auto-register command.
 func init() {
-	console.RegisterCommand(&HelloCommand{}, "hello-world")
+	console.RegisterCommand(&helloCommand{}, "hello-world")
 }
 
 // ---------------------------------------------------------------
@@ -22,12 +22,12 @@ func init() {
 // ---------------------------------------------------------------
 
 // HelloCommand struct for hello command.
-type HelloCommand struct {
+type helloCommand struct {
 	console.Command
 }
 
 // Handle Process command.
-func (c *HelloCommand) Handle() {
+func (c *helloCommand) Handle() {
 	// Dispatch a task into Queue.
 	console.DispatchTask(queues.NewHelloTask("Hello"))
 
