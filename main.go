@@ -6,7 +6,6 @@ import (
 	"github.com/gflydev/cache"
 	cacheRedis "github.com/gflydev/cache/redis"
 	"github.com/gflydev/core"
-	"github.com/gflydev/core/log"
 	mb "github.com/gflydev/db"
 	dbPSQL "github.com/gflydev/db/psql"
 	notificationMail "github.com/gflydev/notification/mail"
@@ -15,7 +14,7 @@ import (
 	"github.com/gflydev/storage"
 	storageLocal "github.com/gflydev/storage/local"
 	"github.com/gflydev/view/pongo"
-	"github.com/joho/godotenv"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 // Main function
@@ -39,11 +38,6 @@ func main() {
 	docs.SwaggerInfo.Host = "gFly.dev"
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
-
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("Error loading .env file %v", err)
-	}
 
 	// Register view
 	core.RegisterView(pongo.New())
