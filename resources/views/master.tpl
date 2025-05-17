@@ -67,5 +67,35 @@
 
 <script src="/vendors/alpinejs/dist/cdn.min.js"></script><!-- core js -->
 
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        const logoutBtn = document.getElementById('logout-btn');
+
+        if (logoutBtn != null) {
+            logoutBtn.addEventListener('click', function() {
+                fetch('/api/v1/frontend/auth/signout', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = '/login';
+                            return;
+                        }
+
+                        return response.json().then(data => {
+                            alert(data.message || 'Logout failed');
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Logout failed. Please try again.');
+                    });
+            });
+        }
+    });
+</script>
 </body>
 </html>
