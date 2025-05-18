@@ -31,20 +31,6 @@ func processSession(c *core.Ctx) (err error) {
 	return
 }
 
-// SessionAuthPage an HTTP middleware that process login via Session/Cookie token.
-//
-// Use:
-//
-//	groupUsers.GET("/profile", f.Middleware(middleware.SessionAuthPage)(user.NewAccountPage()))
-func SessionAuthPage(c *core.Ctx) (err error) {
-	if err = processSession(c); err != nil {
-		// Check from `app/http/routes/web_routes.go`
-		_ = c.Redirect("/login?redirect_url=" + c.OriginalURL())
-	}
-
-	return
-}
-
 // SessionAuth an HTTP middleware that process login via Session/Cookie token for API or Page requests.
 //
 // Use:
@@ -59,24 +45,54 @@ func SessionAuth(excludes ...string) core.MiddlewareHandler {
 		if slices.Contains(excludes, path) {
 			log.Tracef("Skip SessionAuth checking for '%v'", path)
 
-			return nil
+			return
 		}
 
-		return processSession(c)
+		if err = processSession(c); err != nil {
+			// Check from `app/http/routes/web_routes.go`
+			_ = c.Redirect("/login?redirect_url=" + c.OriginalURL())
+		}
+
+		return
 	}
 }
 
-// SessionManipulation an HTTP middleware that process updating Session/Cookie's TTL for each Page request.
+// SessionAuthPage an HTTP middleware that process login via Session/Cookie token.
+//
+// Note:
+//
+//   - SessionAuthPage and SessionManipulation are used together
+//     if you want to have a full manual control user's session for a specific Handler.
 //
 // Use:
 //
-//	f.Use(middleware.SessionManipulation)
+//	groupUsers.GET("/profile", f.Apply(middleware.SessionAuthPage)(user.NewAccountPage()))
+func SessionAuthPage(c *core.Ctx) (err error) {
+	if c.GetData(constants.User) == nil {
+		// Check from `app/http/routes/web_routes.go`
+		_ = c.Redirect("/login?redirect_url=" + c.OriginalURL())
+	}
+
+	return
+}
+
+// SessionManipulation an HTTP middleware that tries to process Session.
+//
+// Note:
+//
+//   - Place first and before the webpage routers declarations
+//   - SessionAuthPage and SessionManipulation are used together
+//     if you want to have a full manual control user's session for a specific Handler.
+//
+// Use:
+//
+//	webRouter.Use(middleware.SessionManipulation)
 func SessionManipulation(c *core.Ctx) (err error) {
 	try.Perform(func() {
 		_ = processSession(c)
 	}).Catch(func(e try.E) {
-		err = fmt.Errorf("error %v", e)
+		log.Errorf("error %v", e)
 	})
 
-	return err
+	return
 }

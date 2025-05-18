@@ -36,11 +36,11 @@ func ApiRoutes(r core.IFly) {
 				prefixAPI+"/users/profile",
 			))
 
-			userRouter.GET("", user.NewGetUsersApi())
+			userRouter.GET("", user.NewListUsersApi())
 			userRouter.POST("", user.NewCreateUserApi())
-			userRouter.PUT("/{id}/status", r.Middleware(middleware.PreventUpdateYourSelf)(user.NewUpdateUserStatusApi()))
-			userRouter.PUT("/{id}", r.Middleware(middleware.PreventUpdateYourSelf)(user.NewUpdateUserApi()))
-			userRouter.DELETE("/{id}", r.Middleware(middleware.PreventUpdateYourSelf)(user.NewDeleteUserApi()))
+			userRouter.PUT("/{id}/status", r.Apply(middleware.PreventUpdateYourSelf)(user.NewUpdateUserStatusApi()))
+			userRouter.PUT("/{id}", r.Apply(middleware.PreventUpdateYourSelf)(user.NewUpdateUserApi()))
+			userRouter.DELETE("/{id}", r.Apply(middleware.PreventUpdateYourSelf)(user.NewDeleteUserApi()))
 			userRouter.GET("/{id}", user.NewGetUserByIdApi())
 			userRouter.GET("/profile", user.NewGetUserProfileApi())
 		})

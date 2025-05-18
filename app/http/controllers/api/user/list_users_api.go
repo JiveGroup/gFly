@@ -14,12 +14,12 @@ import (
 // ======================== Controller Creation =======================
 // ====================================================================
 
-type GetUsersApi struct {
+type ListUsersApi struct {
 	api.ListApi
 }
 
-func NewGetUsersApi() *GetUsersApi {
-	return &GetUsersApi{}
+func NewListUsersApi() *ListUsersApi {
+	return &ListUsersApi{}
 }
 
 // ====================================================================
@@ -43,7 +43,7 @@ func NewGetUsersApi() *GetUsersApi {
 // @Success 200 {object} response.ListUser
 // @Security ApiKeyAuth
 // @Router /users [get]
-func (h *GetUsersApi) Handle(c *core.Ctx) error {
+func (h *ListUsersApi) Handle(c *core.Ctx) error {
 	filterDto := c.GetData(constants.Filter).(dto.Filter)
 	users, total, err := services.FindUsers(filterDto)
 	if err != nil {

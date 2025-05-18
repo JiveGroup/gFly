@@ -17,27 +17,27 @@ func RegisterApi(apiRouter *core.Group) {
 		utils.Getenv("API_VERSION", "v1"),
 	)
 
-	// Frontend APIs
-	apiRouter.Group("/frontend", func(frontendRouter *core.Group) {
-		frontendRouter.Use(middleware.SessionAuth(
-			prefixAPI+"/frontend/auth/signin",
-			prefixAPI+"/frontend/auth/signout",
-		))
-
-		// Auth APIs
-		frontendRouter.Group("/auth", func(authGroup *core.Group) {
-			authGroup.POST("/signin", api.NewSignInApi(auth.TypeWeb))
-			authGroup.DELETE("/signout", api.NewSignOutApi(auth.TypeWeb))
-		})
-	})
-
 	apiRouter.Use(middleware.JWTAuth(
+		// Frontend APIs
+		prefixAPI+"/frontend/auth/signin",
+		prefixAPI+"/frontend/auth/signout",
+
+		// Backend APIs
 		prefixAPI+"/auth/signin",
 		prefixAPI+"/auth/signup",
 		prefixAPI+"/auth/refresh",
 		prefixAPI+"/password/forgot",
 		prefixAPI+"/password/reset",
 	))
+
+	// Frontend APIs
+	apiRouter.Group("/frontend", func(frontendRouter *core.Group) {
+		// Auth APIs
+		frontendRouter.Group("/auth", func(authGroup *core.Group) {
+			authGroup.POST("/signin", api.NewSignInApi(auth.TypeWeb))
+			authGroup.DELETE("/signout", api.NewSignOutApi(auth.TypeWeb))
+		})
+	})
 
 	/* ============================ Auth Group ============================ */
 	apiRouter.Group("/auth", func(authGroup *core.Group) {
