@@ -63,5 +63,5 @@ func (h *CreateUserApi) Handle(c *core.Ctx) error {
 
 	return c.
 		Status(core.StatusCreated).
-		JSONAny(userResponse)
+		JSON(userResponse)
 }

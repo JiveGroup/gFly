@@ -6,8 +6,8 @@ import (
 	"gfly/app/http/response"
 	"gfly/app/modules/auth/dto"
 	"gfly/app/modules/auth/request"
-	authResponse "gfly/app/modules/auth/response"
 	"gfly/app/modules/auth/services"
+	"gfly/app/modules/auth/transformers"
 	"github.com/gflydev/core"
 )
 
@@ -69,9 +69,5 @@ func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
 		}, core.StatusUnauthorized)
 	}
 
-	// Return response.SignIn struct
-	return c.JSONAny(authResponse.SignIn{
-		Access:  tokens.Access,
-		Refresh: tokens.Refresh,
-	})
+	return c.JSON(transformers.ToSignInResponse(tokens))
 }

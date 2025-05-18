@@ -51,7 +51,7 @@ import (
 //		Password: "secret123"
 //	 }
 //	 tokens, err := SignIn(credentials)
-func SignIn(signIn *dto.SignIn) (*auth.Token, error) {
+func SignIn(signIn dto.SignIn) (*auth.Token, error) {
 	// Get user by email.
 	user := repository.Pool.GetUserByEmail(signIn.Username)
 	if user == nil {

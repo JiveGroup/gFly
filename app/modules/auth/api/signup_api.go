@@ -56,5 +56,5 @@ func (h *SignUp) Handle(c *core.Ctx) error {
 		})
 	}
 
-	return c.JSONAny(transformers.ToSignUpResponse(*user))
+	return c.JSON(transformers.ToSignUpResponse(*user))
 }
