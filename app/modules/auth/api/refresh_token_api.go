@@ -70,7 +70,7 @@ func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
 	}
 
 	// Return response.SignIn struct
-	return c.JSON(authResponse.SignIn{
+	return c.JSONAny(authResponse.SignIn{
 		Access:  tokens.Access,
 		Refresh: tokens.Refresh,
 	})

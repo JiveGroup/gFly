@@ -70,11 +70,13 @@ docker.run:
 	docker-compose -f docker/docker-compose.yml -p gfly up -d db
 	docker-compose -f docker/docker-compose.yml -p gfly up -d mail
 	docker-compose -f docker/docker-compose.yml -p gfly up -d redis
+	#docker-compose -f docker/docker-compose.yml -p gfly up -d minio
 
 docker.logs:
 	docker-compose -f docker/docker-compose.yml -p gfly logs -f db &
 	docker-compose -f docker/docker-compose.yml -p gfly logs -f mail &
 	docker-compose -f docker/docker-compose.yml -p gfly logs -f redis &
+	#docker-compose -f docker/docker-compose.yml -p gfly logs -f minio &
 
 docker.stop:
 	docker-compose -f docker/docker-compose.yml -p gfly kill

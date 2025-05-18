@@ -52,3 +52,19 @@ services:
     env_file:
       - redis/redis.env
     command: /bin/sh -c "redis-server --requirepass $$REDIS_HOST_PASSWORD"
+
+  minio:
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    hostname: gfly-minio
+    container_name: gfly-minio
+    labels:
+      SERVICE_NAME: gfly-minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - .local/storage:/data
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: gfl1secret
+    command: server --address ":9000" --console-address ":9001" /data

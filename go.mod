@@ -5,15 +5,15 @@ go 1.24.0
 require (
 	github.com/gflydev/cache v1.0.5
 	github.com/gflydev/console v1.0.2
-	github.com/gflydev/core v1.13.6
+	github.com/gflydev/core v1.15.1
 	github.com/gflydev/db v1.6.2
 	github.com/gflydev/db/psql v1.4.5
 	github.com/gflydev/notification v1.0.2
 	github.com/gflydev/notification/mail v1.0.2
 	github.com/gflydev/session v1.0.2
 	github.com/gflydev/session/redis v1.0.2
-	github.com/gflydev/storage v1.1.4
-	github.com/gflydev/storage/local v1.1.4
+	github.com/gflydev/storage v1.1.5
+	github.com/gflydev/storage/local v1.1.5
 	github.com/gflydev/validation v1.0.3
 	github.com/gflydev/view/pongo v1.0.3
 	github.com/golang-jwt/jwt/v5 v5.2.2
@@ -42,7 +42,7 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
-	github.com/jackc/pgx/v5 v5.7.4 // indirect
+	github.com/jackc/pgx/v5 v5.7.5 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/jmoiron/sqlx v1.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
