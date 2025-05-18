@@ -40,15 +40,17 @@ func processSession(c *core.Ctx) (err error) {
 //	))
 func SessionAuth(excludes ...string) core.MiddlewareHandler {
 	return func(c *core.Ctx) (err error) {
+		err = processSession(c)
 		path := c.Path()
 
 		if slices.Contains(excludes, path) {
 			log.Tracef("Skip SessionAuth checking for '%v'", path)
+			err = nil
 
 			return
 		}
 
-		if err = processSession(c); err != nil {
+		if err != nil {
 			// Check from `app/http/routes/web_routes.go`
 			_ = c.Redirect("/login?redirect_url=" + c.OriginalURL())
 		}
