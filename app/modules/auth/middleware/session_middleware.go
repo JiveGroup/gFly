@@ -25,8 +25,6 @@ func processSession(c *core.Ctx) (err error) {
 		user := repository.Pool.GetUserByEmail(username.(string))
 		c.SetData(constants.User, *user)
 	}).Catch(func(e try.E) {
-		log.Debugf("processSession error '%v'", e)
-
 		err = fmt.Errorf("error %v", e)
 	})
 

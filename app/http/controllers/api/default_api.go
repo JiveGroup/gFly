@@ -44,5 +44,5 @@ func (h *DefaultApi) Handle(c *core.Ctx) error {
 		Server: utils.Getenv("APP_URL", "http://localhost:7789"),
 	}
 
-	return c.JSON(obj)
+	return c.JSONAny(obj)
 }

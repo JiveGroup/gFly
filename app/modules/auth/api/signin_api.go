@@ -72,5 +72,5 @@ func (h *SignInApi) Handle(c *core.Ctx) error {
 	// Transform to response object.
 	signInResponse := transformers.ToSignInResponse(tokens)
 
-	return c.JSON(signInResponse)
+	return c.JSONAny(signInResponse)
 }

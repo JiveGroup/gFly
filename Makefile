@@ -6,10 +6,7 @@ BUILD_DIR = $(PWD)/build
 MIGRATION_FOLDER = database/migrations/postgresql
 DATABASE_URL = postgres://user:secret@localhost:5432/gfly?sslmode=disable
 
-mod:
-	go list -m --versions
-
-all: critic security vulncheck lint test doc build
+all: check test doc build ## - Check code style, secure, lint, test, doc and build
 
 check: critic security vulncheck lint ## - Check code style, secure, lint,...
 

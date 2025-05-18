@@ -59,9 +59,9 @@ func (h *CreateUserApi) Handle(c *core.Ctx) error {
 	}
 
 	// Transform to response data
-	userTransformer := transformers.ToUserResponse(*user)
+	userResponse := transformers.ToUserResponse(*user)
 
 	return c.
 		Status(core.StatusCreated).
-		JSON(userTransformer)
+		JSONAny(userResponse)
 }
