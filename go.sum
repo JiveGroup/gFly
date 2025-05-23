@@ -29,6 +29,8 @@ github.com/gflydev/console v1.0.2 h1:aGBvhHE/oGU9OGPsixrEeihoMFwXsPUsEvWWNOGrX9I
 github.com/gflydev/console v1.0.2/go.mod h1:bIL1QOE5QBdqDvKrctyR/jqoqztdDeq/kBESwtk/14Y=
 github.com/gflydev/core v1.15.4 h1:E17JmgFwKTLCvgTTpryVJBypIPPrIdpKtOUC4dzRolM=
 github.com/gflydev/core v1.15.4/go.mod h1:PXw2qZiDCTbu7ms87g0inJYrrHuoceDbL+4G2xomPNE=
+github.com/gflydev/core v1.15.5 h1:id9oP7WG5mihTE8861SahyunQAMsnedTz2tLRsdGAYQ=
+github.com/gflydev/core v1.15.5/go.mod h1:PXw2qZiDCTbu7ms87g0inJYrrHuoceDbL+4G2xomPNE=
 github.com/gflydev/db v1.6.2 h1:vqxZ7m2sEAwb8RAh7LxAiePIEznfdW1g1FzLv8iL4Dw=
 github.com/gflydev/db v1.6.2/go.mod h1:T/ju9gToqBmLNfFshDWwYbTjSxB03UHwL7AizDf+qko=
 github.com/gflydev/db/psql v1.4.5 h1:w1Lv0XY3ymAI9NHRa5bL0pPiXbgXagC3j8G5HzsWZ18=

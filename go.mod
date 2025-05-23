@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/gflydev/cache v1.0.5
 	github.com/gflydev/console v1.0.2
-	github.com/gflydev/core v1.15.4
+	github.com/gflydev/core v1.15.5
 	github.com/gflydev/db v1.6.2
 	github.com/gflydev/db/psql v1.4.5
 	github.com/gflydev/notification v1.0.2
