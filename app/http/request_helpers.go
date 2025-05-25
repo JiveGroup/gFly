@@ -9,8 +9,20 @@ import (
 // ======================== Other Request Helpers =====================
 // ====================================================================
 
-// ProcessPathID is a generic function that extracts a path ID parameter and stores it in the context
-// It handles the common pattern of validating a path ID parameter for API endpoints
+// ProcessPathID is a generic function that extracts a path ID parameter and stores it in the context.
+// It handles the common pattern of validating a path ID parameter for API endpoints and putting it in Ctx's Data.
+//
+// Parameters:
+//   - c: The context object containing the HTTP request/response data
+//
+// Returns:
+//   - error: Returns nil if successful, otherwise returns an error response
+//
+// Example Usage:
+//
+//	func (h DeleteUserApi) Validate(c *core.Ctx) error {
+//		return http.ProcessPathID(c)
+//	}
 func ProcessPathID(c *core.Ctx) error {
 	// Receive path parameter ID
 	itemID, errData := PathID(c)
@@ -19,7 +31,35 @@ func ProcessPathID(c *core.Ctx) error {
 	}
 
 	// Store data into context
-	c.SetData(constants.Data, itemID)
+	c.SetData(constants.PathID, itemID)
+
+	return nil
+}
+
+// ProcessFilter validates and processes filter requests
+// It handles parsing the query parameters, converting to DTO, and validation and put to Ctx's Data
+//
+// Parameters:
+//   - c: The context object containing the HTTP request/response data
+//
+// Returns:
+//   - error: Returns nil if successful, otherwise returns an error response
+//
+// Example Usage:
+//
+//	func (h ListUserApi) Validate(c *core.Ctx) error {
+//		return http.ProcessFilter(c)
+//	}
+func ProcessFilter(c *core.Ctx) error {
+	filterDto := FilterData(c)
+
+	// Validate DTO
+	if errData := Validate(filterDto); errData != nil {
+		return c.Error(errData)
+	}
+
+	// Store data into context.
+	c.SetData(constants.Filter, filterDto)
 
 	return nil
 }
@@ -43,7 +83,7 @@ type UpdateRequest[D any] interface {
 }
 
 // ProcessUpdateRequest validates and processes update requests that require a path ID parameter
-// It handles parsing the request body, setting the ID, converting to DTO, and validation
+// It handles parsing the request body, setting the ID, converting to DTO, and validation and put to Ctx's Data
 //
 // Type Parameters:
 //   - T: Request type that implements UpdateRequest interface
@@ -85,7 +125,7 @@ func ProcessUpdateRequest[T UpdateRequest[D], D any](c *core.Ctx) error {
 	}
 
 	// Store data into context
-	c.SetData(constants.Data, requestDto)
+	c.SetData(constants.Request, requestDto)
 
 	return nil
 }
@@ -104,7 +144,7 @@ type Request[D any] interface {
 }
 
 // ProcessRequest validates and processes create/add requests
-// It handles parsing the request body, converting to DTO, and validation
+// It handles parsing the request body, converting to DTO, and validation and put to Ctx's Data
 //
 // Type Parameters:
 //   - T: Request type that implements Request interface
@@ -137,7 +177,7 @@ func ProcessRequest[T Request[D], D any](c *core.Ctx) error {
 	}
 
 	// Store data into context
-	c.SetData(constants.Data, requestDto)
+	c.SetData(constants.Request, requestDto)
 
 	return nil
 }

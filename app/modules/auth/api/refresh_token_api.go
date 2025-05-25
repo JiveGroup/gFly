@@ -50,7 +50,7 @@ func (h *RefreshTokenApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /auth/refresh [put]
 func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
-	refreshToken := c.GetData(constants.Data).(dto.RefreshToken)
+	refreshToken := c.GetData(constants.Request).(dto.RefreshToken)
 	// Check valid refresh token
 	if !services.IsValidRefreshToken(refreshToken.Token) {
 		return c.Error(response.Error{

@@ -53,7 +53,7 @@ func (h *SignInApi) Validate(c *core.Ctx) error {
 // @Router /auth/signin [post]
 func (h *SignInApi) Handle(c *core.Ctx) error {
 	// Get valid data from context
-	signInDto := c.GetData(constants.Data).(dto.SignIn)
+	signInDto := c.GetData(constants.Request).(dto.SignIn)
 
 	tokens, err := services.SignIn(signInDto)
 	if err != nil {

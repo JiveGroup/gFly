@@ -46,7 +46,7 @@ func (h *SignUp) Validate(c *core.Ctx) error {
 // @Success 200 {object} response.User
 // @Router /auth/signup [post]
 func (h *SignUp) Handle(c *core.Ctx) error {
-	signUpDto := c.GetData(constants.Data).(dto.SignUp)
+	signUpDto := c.GetData(constants.Request).(dto.SignUp)
 
 	user, err := services.SignUp(&signUpDto)
 	if err != nil {

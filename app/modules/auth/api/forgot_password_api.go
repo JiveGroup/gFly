@@ -49,7 +49,7 @@ func (h *ForgotPWApi) Validate(c *core.Ctx) error {
 // @Failure 400 {object} response.Error
 // @Router /password/forgot [post]
 func (h *ForgotPWApi) Handle(c *core.Ctx) error {
-	data := c.GetData(constants.Data).(dto.ForgotPassword)
+	data := c.GetData(constants.Request).(dto.ForgotPassword)
 
 	err := services.ForgotPassword(data)
 	if err != nil {

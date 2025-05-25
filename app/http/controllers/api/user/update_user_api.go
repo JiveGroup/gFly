@@ -49,7 +49,7 @@ func (h *UpdateUserApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /users/{id} [put]
 func (h *UpdateUserApi) Handle(c *core.Ctx) error {
-	updateUserDto := c.GetData(constants.Data).(dto.UpdateUser)
+	updateUserDto := c.GetData(constants.Request).(dto.UpdateUser)
 
 	user, err := services.UpdateUser(updateUserDto)
 	if err != nil {

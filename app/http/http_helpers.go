@@ -2,7 +2,6 @@ package http
 
 import (
 	"fmt"
-	"gfly/app/constants"
 	"gfly/app/dto"
 	"gfly/app/http/response"
 	"github.com/gflydev/core"
@@ -88,21 +87,6 @@ func Validate(structData any, msgForTagFunc ...validation.MsgForTagFunc) *respon
 			Data:    errorData,
 		}
 	}
-
-	return nil
-}
-
-// ValidateFilter Verify data from request.
-func ValidateFilter(c *core.Ctx) error {
-	filterDto := FilterData(c)
-
-	// Validate DTO
-	if errData := Validate(filterDto); errData != nil {
-		return c.Error(errData)
-	}
-
-	// Store data into context.
-	c.SetData(constants.Filter, filterDto)
 
 	return nil
 }

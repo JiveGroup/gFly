@@ -48,7 +48,7 @@ func (h UpdateUserStatusApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /users/{id}/status [put]
 func (h UpdateUserStatusApi) Handle(c *core.Ctx) error {
-	updateUserStatusDto := c.GetData(constants.Data).(dto.UpdateUserStatus)
+	updateUserStatusDto := c.GetData(constants.Request).(dto.UpdateUserStatus)
 
 	// Bind data to service
 	user, err := services.UpdateUserStatus(updateUserStatusDto)

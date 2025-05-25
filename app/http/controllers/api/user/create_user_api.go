@@ -48,7 +48,7 @@ func (h *CreateUserApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /users [post]
 func (h *CreateUserApi) Handle(c *core.Ctx) error {
-	createUserDto := c.GetData(constants.Data).(dto.CreateUser)
+	createUserDto := c.GetData(constants.Request).(dto.CreateUser)
 
 	user, err := services.CreateUser(createUserDto)
 	if err != nil {

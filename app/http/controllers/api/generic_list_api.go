@@ -19,7 +19,7 @@ type ListApi struct {
 // ====================================================================
 
 func (h *ListApi) Validate(c *core.Ctx) error {
-	return http.ValidateFilter(c)
+	return http.ProcessFilter(c)
 }
 
 // ====================================================================

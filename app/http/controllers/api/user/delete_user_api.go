@@ -45,7 +45,7 @@ func (h *DeleteUserApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /users/{id} [delete]
 func (h *DeleteUserApi) Handle(c *core.Ctx) error {
-	userId := c.GetData(constants.Data).(int)
+	userId := c.GetData(constants.PathID).(int)
 
 	err := services.DeleteUserByID(userId)
 	if err != nil {

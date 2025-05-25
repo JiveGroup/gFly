@@ -49,7 +49,7 @@ func (h *ResetPWApi) Validate(c *core.Ctx) error {
 // @Failure 400 {object} response.Error
 // @Router /password/reset [post]
 func (h *ResetPWApi) Handle(c *core.Ctx) error {
-	data := c.GetData(constants.Data).(dto.ResetPassword)
+	data := c.GetData(constants.Request).(dto.ResetPassword)
 
 	err := services.ChangePassword(data)
 	if err != nil {

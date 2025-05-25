@@ -48,7 +48,7 @@ func (h *GetUserByIdApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /users/{id} [get]
 func (h *GetUserByIdApi) Handle(c *core.Ctx) error {
-	userID := c.GetData(constants.Data).(int)
+	userID := c.GetData(constants.PathID).(int)
 
 	user, err := mb.GetModelByID[models.User](userID)
 	if err != nil {
