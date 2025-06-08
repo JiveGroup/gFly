@@ -83,3 +83,6 @@ docker.delete:
 
 upgrade:
 	go get -u all
+
+api.scripts: ## - Generate API shell scripts from Swagger file
+	./scripts/generate_api_scripts.sh
