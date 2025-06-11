@@ -1,5 +1,9 @@
 package dto
 
+// ====================================================================
+// ============================== Common ==============================
+// ====================================================================
+
 type Filter struct {
 	Page    int    `json:"page" example:"1" validate:"number" doc:"Current page number"`
 	PerPage int    `json:"per_page" example:"10" validate:"number" doc:"Number of items per page"`
@@ -12,3 +16,7 @@ type Meta struct {
 	PerPage int `json:"per_page,omitempty" example:"10" doc:"Number of items per page"`
 	Total   int `json:"total" example:"1354" doc:"Total number of records"`
 }
+
+// ====================================================================
+// =========================== Specific DTO ===========================
+// ====================================================================
