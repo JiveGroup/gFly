@@ -32,6 +32,7 @@ require (
 	github.com/flosch/pongo2/v6 v6.0.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
 	github.com/gflydev/mail v1.0.3 // indirect
+	github.com/gflydev/utils v1.0.2 // indirect
 	github.com/go-openapi/jsonpointer v0.21.1 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
 	github.com/go-openapi/spec v0.21.0 // indirect
