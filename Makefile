@@ -64,22 +64,22 @@ doc:
 	cp ./docs/swagger.json ./public/docs/
 
 docker.run:
-	docker-compose -f docker/docker-compose.yml -p gfly up -d db
-	docker-compose -f docker/docker-compose.yml -p gfly up -d mail
-	docker-compose -f docker/docker-compose.yml -p gfly up -d redis
-	#docker-compose -f docker/docker-compose.yml -p gfly up -d minio
+	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly up -d db
+	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly up -d mail
+	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly up -d redis
+	#docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly up -d minio
 
 docker.logs:
-	docker-compose -f docker/docker-compose.yml -p gfly logs -f db &
-	docker-compose -f docker/docker-compose.yml -p gfly logs -f mail &
-	docker-compose -f docker/docker-compose.yml -p gfly logs -f redis &
-	#docker-compose -f docker/docker-compose.yml -p gfly logs -f minio &
+	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly logs -f db &
+	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly logs -f mail &
+	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly logs -f redis &
+	#docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly logs -f minio &
 
 docker.stop:
-	docker-compose -f docker/docker-compose.yml -p gfly kill
+	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly kill
 
 docker.delete:
-	docker-compose -f docker/docker-compose.yml -p gfly down
+	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly down
 
 upgrade:
 	go get -u all
