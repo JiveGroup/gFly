@@ -65,7 +65,7 @@
     {% block body %}{% endblock %}
 </main><!-- end main -->
 
-<script src="/vendors/alpinejs/dist/cdn.min.js"></script><!-- core js -->
+<script src="/js/alpine.min.js"></script><!-- core js -->
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {

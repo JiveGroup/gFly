@@ -28,11 +28,10 @@ func (m *BasePage) View(c *core.Ctx, template string, data core.Data) error {
 		data["title_page"] = "gFly | Laravel inspired web framework written in Go"
 	}
 
-	if c.GetData(constants.User) != nil {
-		// Auto-load login user session
-		user := c.GetData(constants.User).(models.User)
-
-		data["account"] = user
+	// Auto-load login user session
+	user := c.GetData(constants.User)
+	if user != nil {
+		data["account"] = user.(models.User)
 	}
 
 	// -------------- Append functions --------------
