@@ -47,13 +47,13 @@ The Docker Compose configuration includes the following services:
 To start all services:
 
 ```bash
-make docker.run
+make container.run
 ```
 
 To stop all services:
 
 ```bash
-make docker.stop
+make container.stop
 ```
 
 To view logs:
@@ -62,6 +62,32 @@ To view logs:
 docker logs gfly-db    # Database logs
 docker logs gfly-mail  # Mail logs
 docker logs gfly-redis # Redis logs
+
+# via Makefile command
+make container.logs
+```
+
+## Problem Solving
+
+Originally, the command to use this tool was `docker-compose`, but recent versions of Docker have integrated it as a subcommand of the main docker command, becoming `docker compose`.
+While `docker-compose` is still supported for backward compatibility, `docker compose` is the recommended approach for new projects and is actively maintained.
+
+So, you need to modify the Makefile to replace `docker compose` with `docker-compose` in `Makefile`:
+
+1. Open the `Makefile` in your preferred text editor
+2. Find all occurrences of `docker compose` in the `container.run`, `container.logs`, `container.stop`, and `container.delete` targets
+3. Replace each occurrence of `docker compose` with `docker-compose`
+
+For example, change:
+
+```bash
+docker compose --env-file deployments/docker/container.env -f deployments/docker/docker-compose.yml -p gfly up -d db
+```
+
+To:
+
+```bash
+docker-compose --env-file deployments/docker/container.env -f deployments/docker/docker-compose.yml -p gfly up -d db
 ```
 
 ## Best Practices

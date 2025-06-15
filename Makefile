@@ -63,23 +63,23 @@ doc:
 	swag init --parseDependency --parseInternal --parseDepth 1
 	cp ./docs/swagger.json ./public/docs/
 
-docker.run:
-	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly up -d db
-	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly up -d mail
-	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly up -d redis
-	#docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly up -d minio
+container.run:
+	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d db
+	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d mail
+	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d redis
+	#docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d minio
 
-docker.logs:
-	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly logs -f db &
-	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly logs -f mail &
-	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly logs -f redis &
-	#docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly logs -f minio &
+container.logs:
+	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly logs -f db &
+	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly logs -f mail &
+	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly logs -f redis &
+	#docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly logs -f minio &
 
-docker.stop:
-	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly kill
+container.stop:
+	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly kill
 
-docker.delete:
-	docker-compose --env-file docker/docker.env -f docker/docker-compose.yml -p gfly down
+container.delete:
+	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly down
 
 upgrade:
 	go get -u all

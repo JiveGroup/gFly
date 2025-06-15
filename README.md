@@ -21,7 +21,8 @@ tar -xvzf go1.24.2.linux-amd64.tar.gz
 ```
 Add bottom of file `~/.profile` or `~/.zshrc`
 ```bash
-vi ~/.profile
+# Edit .zshrc
+❯ vi ~/.zshrc
 
 # ----------- Golang -----------
 export GOROOT=/home/$USER/Apps/go
@@ -30,9 +31,9 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ```
 Check
 ```bash
-source ~/.profile
+❯ source ~/.profile
 # Or
-source ~/.zshrc
+❯ source ~/.zshrc
 
 # Check Go
 go version
@@ -47,7 +48,8 @@ tar -xvzf go1.24.3.darwin-arm64.tar.gz
 ```
 Add bottom of file `~/.profile` or `~/.zshrc`
 ```bash
-vi ~/.profile
+# Edit .profile
+❯ vi ~/.profile
 
 # ----------- Golang -----------
 export GOROOT=/Users/$USER/Apps/go
@@ -56,9 +58,9 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ```
 Check
 ```bash
-source ~/.profile
+❯ source ~/.profile
 # Or
-source ~/.zshrc
+❯ source ~/.zshrc
 
 # Check Go
 go version
@@ -118,11 +120,18 @@ Make sure don't have any services ran at ports `6379`, `1025`, `8025`, and `5432
 ### 1. Start docker services
 ```bash
 # Docker run (Create DB, Redis, Mail services)
-make docker.run
+make container.run
 ```
+
+Note: If you get any problems with `Docker`, let review this tutorial [README.md](deployments/docker/README.md). 
+Or you can check document [Podman.md](deployments/Podman.md) if you are using `Podman` in your machine
 ### 2. Check services
 ```bash
+# Docker
 ❯ docker ps
+
+# Podman
+❯ podman ps
 
 >>> CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS                   PORTS                                                                                            NAMES
 >>> 38fb5bd004df   redis:7.4.0-alpine     "docker-entrypoint.s…"   9 minutes ago   Up 9 minutes             0.0.0.0:6379->6379/tcp, :::6379->6379/tcp                                                        gfly-redis

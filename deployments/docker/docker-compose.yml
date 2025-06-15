@@ -13,7 +13,7 @@ services:
       SERVICE_5432_NAME: gfly-db
       SERVICE_54320_NAME: gfly-db
     ports:
-      - "${DOCKER_DB_PORT:-5432}:5432"
+      - "${CONTAINER_DB_PORT:-5432}:5432"
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U user -d gfly" ]
       interval: 3s
@@ -27,8 +27,8 @@ services:
     labels:
       SERVICE_NAME: gfly-mail
     ports:
-      - "${DOCKER_MAIL_UI_PORT:-8025}:8025"
-      - "${DOCKER_MAIL_SMTP_PORT:-1025}:1025"
+      - "${CONTAINER_MAIL_UI_PORT:-8025}:8025"
+      - "${CONTAINER_MAIL_SMTP_PORT:-1025}:1025"
     environment:
       MP_MAX_MESSAGES: 5000
       # No TLS
@@ -48,7 +48,7 @@ services:
     labels:
       SERVICE_NAME: gfly-redis
     ports:
-      - "${DOCKER_REDIS_PORT:-6379}:6379"
+      - "${CONTAINER_REDIS_PORT:-6379}:6379"
     env_file:
       - redis/redis.env
     command: /bin/sh -c "redis-server --requirepass $$REDIS_HOST_PASSWORD"
@@ -60,8 +60,8 @@ services:
     labels:
       SERVICE_NAME: gfly-minio
     ports:
-      - "${DOCKER_MINIO_API_PORT:-9000}:9000"
-      - "${DOCKER_MINIO_CONSOLE_PORT:-9001}:9001"
+      - "${CONTAINER_MINIO_API_PORT:-9000}:9000"
+      - "${CONTAINER_MINIO_CONSOLE_PORT:-9001}:9001"
     volumes:
       - .local/storage:/data
     environment:
