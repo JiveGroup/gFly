@@ -66,7 +66,7 @@ Check
 go version
 ```
 
-### 3. Install `Swag`, `Air`, `Migrage`, `Lint`, `GoSec`, `GoVulncheck`, and `GoCritic`
+### 3. Install `Swag`, `Air`, `Migrate`, `Lint`, `GoSec`, `GoVulncheck`, and `GoCritic`
 
 In Go programming. In addition to having an IDE that suits you. Other supporting tools will help control code quality better. Therefore, we recommend that you install and use the following tools as an indispensable part of the application development process with Go.
 
