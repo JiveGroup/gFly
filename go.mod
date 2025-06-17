@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/gflydev/cache v1.0.5
 	github.com/gflydev/console v1.0.2
-	github.com/gflydev/core v1.15.5
+	github.com/gflydev/core v1.15.6
 	github.com/gflydev/db v1.6.4
 	github.com/gflydev/db/psql v1.4.5
 	github.com/gflydev/notification v1.0.2
@@ -15,7 +15,7 @@ require (
 	github.com/gflydev/storage v1.1.5
 	github.com/gflydev/storage/local v1.1.5
 	github.com/gflydev/utils v1.1.0
-	github.com/gflydev/validation v1.0.3
+	github.com/gflydev/validation v1.2.0
 	github.com/gflydev/view/pongo v1.0.3
 	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/hibiken/asynq v0.25.1

@@ -7,7 +7,7 @@
 SWAGGER_FILE="docs/swagger.json"
 OUTPUT_DIR="scripts"
 BASE_URL="http://localhost:7889/api/v1"
-AUTH_USERNAME="admin@thietngon.com"
+AUTH_USERNAME="admin@gfly.dev"
 AUTH_PASSWORD="P@seWor9"
 
 # Create output directory if it doesn't exist
