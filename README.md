@@ -19,7 +19,7 @@ mkdir -p /home/$USER/Apps
 wget https://go.dev/dl/go1.24.2.linux-amd64.tar.gz
 tar -xvzf go1.24.2.linux-amd64.tar.gz
 ```
-Add bottom of file `~/.profile` or `~/.zshrc`
+Add `~/.profile` or `~/.zshrc` to the bottom of the file 
 ```bash
 # Edit .zshrc
 ❯ vi ~/.zshrc
@@ -46,7 +46,7 @@ mkdir -p /Users/$USER/Apps
 wget https://go.dev/dl/go1.24.3.darwin-arm64.tar.gz
 tar -xvzf go1.24.3.darwin-arm64.tar.gz
 ```
-Add bottom of file `~/.profile` or `~/.zshrc`
+Add `~/.profile` or `~/.zshrc` to the bottom of the file 
 ```bash
 # Edit .profile
 ❯ vi ~/.profile
@@ -68,7 +68,7 @@ go version
 
 ### 3. Install `Swag`, `Air`, `Migrate`, `Lint`, `GoSec`, `GoVulncheck`, and `GoCritic`
 
-In Go programming. In addition to having an IDE that suits you. Other supporting tools will help control code quality better. Therefore, we recommend that you install and use the following tools as an indispensable part of the application development process with Go.
+In Go programming, In addition to having an IDE that suits you, Other supporting tools will help control code quality better. Therefore, we recommend that you install and use the following tools as an indispensable part of the application development process with Go.
 
 ```bash
 # ----- Install swag -----
@@ -115,7 +115,7 @@ rm -rf .git* && cp .env.example .env
 
 ## II. Start `redis`, `mail`, and `db` services and `application`
 
-Make sure don't have any services ran at ports `6379`, `1025`, `8025`, and `5432` on local. 
+Make sure that you don't have any services running on localhost ports `6379`, `1025`, `8025`, and `5432` . 
 
 ### 1. Start docker services
 ```bash
@@ -123,8 +123,8 @@ Make sure don't have any services ran at ports `6379`, `1025`, `8025`, and `5432
 make container.run
 ```
 
-Note: If you get any problems with `Docker`, let review this tutorial [README.md](deployments/docker/README.md). 
-Or you can check document [Podman.md](deployments/Podman.md) if you are using `Podman` in your machine
+Note: If you get any problems with `Docker`, review this tutorial [README.md](deployments/docker/README.md). 
+Or you can check this document [Podman.md](deployments/Podman.md) if you are using `Podman` in your machine
 ### 2. Check services
 ```bash
 # Docker
@@ -178,7 +178,7 @@ Note: Will get the message of `Schedule Job` file `hello_job.go` every 2 seconds
 # Run queue (Terminal 2)
 ./build/artisan queue:run
 ```
-Note: Nothing happens because don't have any job was queued!
+Note: Nothing happens because we don't have any job that was queued!
 
 #### 5.3 Command
 ```bash
@@ -186,9 +186,9 @@ Note: Nothing happens because don't have any job was queued!
 ./build/artisan cmd:run hello-world
 ```
 
-Note: Check the output of `Terminal 2` and `Terminal 3`. The `Terminal 2` have some message because get the `Task` file `hello_task.go` was queued from `Command` file `hello_command.go` from `Terminal 3`
+Note: Check the output of `Terminal 2` and `Terminal 3`. The `Terminal 2` has some output because the `Task` file `hello_task.go` was queued from `Command` file `hello_command.go` in `Terminal 3`
 
-You can check more detail about [command](https://doc.gfly.dev/docs/03-digging-deeper/03-01-02.command/), [schedule](https://doc.gfly.dev/docs/03-digging-deeper/03-01-03.schedule/), and [queue](https://doc.gfly.dev/docs/03-digging-deeper/03-01-04.queue/) at link [https://doc.gfly.dev/](https://doc.gfly.dev/)
+You can check more details about [command](https://doc.gfly.dev/docs/03-digging-deeper/03-01-02.command/), [schedule](https://doc.gfly.dev/docs/03-digging-deeper/03-01-03.schedule/), and [queue](https://doc.gfly.dev/docs/03-digging-deeper/03-01-04.queue/) at link [https://doc.gfly.dev/](https://doc.gfly.dev/)
 
 **Important! Should run 2 commands `make schedule` and `make queue` to get full deployment environment.**
 
