@@ -1,4 +1,4 @@
-# gFly v1.15.1
+# gFly v1.16.0
 
 **Laravel inspired web framework written in Go**
 
@@ -18,8 +18,8 @@ Note: You can find [documentation](https://doc.gfly.dev/) about [gFly](https://g
 ```bash
 # Install go at folder /home/$USER/Apps
 mkdir -p /home/$USER/Apps
-wget https://go.dev/dl/go1.24.2.linux-amd64.tar.gz
-tar -xvzf go1.24.2.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.24.4.linux-amd64.tar.gz
+tar -xvzf go1.24.4.linux-amd64.tar.gz
 ```
 Add bottom of file `~/.profile` or `~/.zshrc`
 ```bash
@@ -45,8 +45,8 @@ go version
 ```bash
 # Install go at folder /Users/$USER/Apps
 mkdir -p /Users/$USER/Apps
-wget https://go.dev/dl/go1.24.3.darwin-arm64.tar.gz
-tar -xvzf go1.24.3.darwin-arm64.tar.gz
+wget https://go.dev/dl/go1.24.4.darwin-arm64.tar.gz
+tar -xvzf go1.24.4.darwin-arm64.tar.gz
 ```
 Add bottom of file `~/.profile` or `~/.zshrc`
 ```bash
@@ -143,10 +143,13 @@ Or you can check document [Podman.md](deployments/Podman.md) if you are using `P
 
 ### 3. Start app
 ```bash
-# Doc
+# Migrate DB
+make migrate.up
+
+# Generate Doc
 make doc
 
-# Run
+# Run App
 make dev
 ```
 
@@ -207,10 +210,7 @@ Add some code to check `application` connect to services `redis`, `mail`, and `d
 
 ### 1. Connect `Database` service
 
-#### Import initial tables
-```bash
-make migrate.up
-```
+Make sure run successfully `make migrate.up` to initial tables
 
 Note: Check DB connection and see 4 tables: `users`, `roles`, `user_roles`, and `address`.
 
