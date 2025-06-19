@@ -4,11 +4,13 @@
 
 Built on top of [FastHttp - the fastest HTTP engine](https://github.com/valyala/fasthttp), [FluentSQL - flexible and powerful SQL builder](https://github.com/jivegroup/fluentsql). Quick development with zero memory allocation and high performance. Very simple and easy to use.
 
+Note: You can find [documentation](https://doc.gfly.dev/) about [gFly](https://gfly.dev/)
+
 # Tour of gFly
 
 ## I. Install environment
 
-### 1. Install Docker [Docker Desktop](https://www.docker.com/products/docker-desktop/) or [OrbStack](https://orbstack.dev/)
+### 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/), [Podman Desktop](https://podman-desktop.io/) or [OrbStack](https://orbstack.dev/)
 
 ### 2. Install Golang
 
@@ -373,7 +375,7 @@ func (c *mailCommand) Handle() {
     if err := notification.Send(sendMail); err != nil {
         log.Error(err)
     }
-  
+
     log.Infof("MailCommand :: Run at %s", time.Now().Format("2006-01-02 15:04:05"))
 }
 ```

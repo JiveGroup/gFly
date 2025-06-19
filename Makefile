@@ -1,16 +1,26 @@
-.PHONY: lint test build run dev check
+.PHONY: lint test build run dev check help stop
 
+help: ## Show this help.
+	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
+
+# Build
 APP_NAME = app
 CLI_NAME = artisan
 BUILD_DIR = $(PWD)/build
+
+# Database migration (Check file .env)
+DB_NAME=gfly
+DB_USERNAME=user
+DB_PASSWORD=secret
+DB_SSL_MODE=disable
 MIGRATION_FOLDER = database/migrations/postgresql
-DATABASE_URL = postgres://user:secret@localhost:5432/gfly?sslmode=disable
+DATABASE_URL = postgres://${DB_USERNAME}:${DB_PASSWORD}@localhost:5432/${DB_NAME}?sslmode=${DB_SSL_MODE}
 
 all: check test doc build ## - Check code style, secure, lint, test, doc and build
 
 check: critic security vulncheck lint ## - Check code style, secure, lint,...
 
-lint:
+lint: ## - Run golangci-lint to check code quality
 	golangci-lint run ./...
 
 critic: ## - Check go critic
@@ -22,66 +32,69 @@ security: ## - Check go secure
 vulncheck: ## - Check go vuln
 	govulncheck ./...
 
-test:
+test: ## - Run tests with coverage report
 	go test -v -timeout 30s -coverprofile=cover.out -cover ./...
 	go tool cover -func=cover.out
 
-test.coverage:
+test.coverage: ## - Open HTML coverage report in browser
 	go tool cover -html=cover.out
 
-build: lint test
+build: lint test ## - Build the application and CLI tool
 	CGO_ENABLED=0 go build -ldflags="-w -s" -o $(BUILD_DIR)/$(APP_NAME) main.go
 	CGO_ENABLED=0 go build -ldflags="-w -s" -o $(BUILD_DIR)/$(CLI_NAME) app/console/cli.go
 	cp .env build/
 
-run: lint test doc build
+run: lint test doc build ## - Run the application after building
 	$(BUILD_DIR)/$(APP_NAME)
 
-start: run
+start: run ## - Alias for run command
 
-schedule: build
+stop: ## - Stop server process on port 7889
+	bash scripts/stop.sh
+
+schedule: build ## - Run scheduled tasks
 	./build/artisan schedule:run
 
-queue: build
+queue: build ## - Run queue workers
 	./build/artisan queue:run
 
-migrate.up:
+migrate.up: ## - Run database migrations up
 	migrate -path $(MIGRATION_FOLDER) -database "$(DATABASE_URL)" up
 
-migrate.down:
+migrate.down: ## - Revert the last database migration
 	migrate -path $(MIGRATION_FOLDER) -database "$(DATABASE_URL)" down
 
-dev:
+dev: ## - Run application in development mode with hot reloading
 	air -build.exclude_dir=node_modules,public,resources,Dev,bin,build,dist,docker,storage,tmp,database,docs main.go
 
-clean:
+clean: ## - Clean up Go modules, cache, and test cache
 	go mod tidy
 	go clean -cache
 	go clean -testcache
 
-doc:
+doc: ## - Generate API documentation using Swag
 	swag init --parseDependency --parseInternal --parseDepth 1
 	cp ./docs/swagger.json ./public/docs/
 
-container.run:
+container.run: ## - Start required Docker containers (PostgreSQL, Mail, Redis)
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d db
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d mail
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d redis
 	#docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d minio
 
-container.logs:
+container.logs: ## - Show logs from all Docker containers
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly logs -f db &
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly logs -f mail &
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly logs -f redis &
 	#docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly logs -f minio &
 
-container.stop:
+container.stop: ## - Stop all Docker containers
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly kill
 
-container.delete:
+container.delete: ## - Stop and remove all Docker containers
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly down
 
-upgrade:
+upgrade: ## - Upgrade all Go dependencies to their latest versions
 	go get -u all
 
 api.scripts: ## - Generate API shell scripts from Swagger file
