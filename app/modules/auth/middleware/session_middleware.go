@@ -4,10 +4,13 @@ import (
 	"fmt"
 	"gfly/app/constants"
 	"gfly/app/domain/repository"
+	"gfly/app/http/response"
 	"gfly/app/modules/auth"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
 	"github.com/gflydev/core/try"
+	"github.com/gflydev/core/utils"
+	"github.com/gflydev/utils/str"
 	"slices"
 )
 
@@ -18,17 +21,24 @@ func processSession(c *core.Ctx) (err error) {
 
 		// Check Logged-in data
 		if username == nil || username.(string) == "" {
-			try.Throw("no username in session")
+			try.Throw("No username in session")
 		}
 
 		// Put logged-in user to request data pool.
 		user := repository.Pool.GetUserByEmail(username.(string))
 		c.SetData(constants.User, *user)
 	}).Catch(func(e try.E) {
-		err = fmt.Errorf("error %v", e)
+		err = fmt.Errorf("%v", e)
 	})
 
 	return
+}
+
+func loginUrl(c *core.Ctx) string {
+	// Check from `app/http/routes/web_routes.go` to update .env file
+	authLoginUrl := utils.Getenv(constants.AuthLoginUri, "/login")
+
+	return authLoginUrl + "?redirect_url=" + c.OriginalURL()
 }
 
 // SessionAuth an HTTP middleware that process login via Session/Cookie token for API or Page requests.
@@ -37,6 +47,7 @@ func processSession(c *core.Ctx) (err error) {
 //
 //	apiRouter.Use(middleware.SessionAuth(
 //		prefixAPI+"/frontend/auth/signin",
+//		"/dang-nhap",
 //	))
 func SessionAuth(excludes ...string) core.MiddlewareHandler {
 	return func(c *core.Ctx) (err error) {
@@ -50,9 +61,22 @@ func SessionAuth(excludes ...string) core.MiddlewareHandler {
 			return
 		}
 
+		// Response for API request
+		prefixAPI := fmt.Sprintf(
+			"/%s/%s",
+			utils.Getenv("API_PREFIX", "api"),
+			utils.Getenv("API_VERSION", "v1"),
+		)
+		if err != nil && str.StartsWith(path, prefixAPI) {
+			return c.Error(response.Error{
+				Message: err.Error(),
+				Code:    core.StatusUnauthorized,
+			}, core.StatusUnauthorized)
+		}
+
+		// Response for Page request
 		if err != nil {
-			// Check from `app/http/routes/web_routes.go`
-			_ = c.Redirect("/login?redirect_url=" + c.OriginalURL())
+			_ = c.Redirect(loginUrl(c))
 		}
 
 		return
@@ -71,8 +95,7 @@ func SessionAuth(excludes ...string) core.MiddlewareHandler {
 //	groupUsers.GET("/profile", f.Apply(middleware.SessionAuthPage)(user.NewAccountPage()))
 func SessionAuthPage(c *core.Ctx) (err error) {
 	if c.GetData(constants.User) == nil {
-		// Check from `app/http/routes/web_routes.go`
-		_ = c.Redirect("/login?redirect_url=" + c.OriginalURL())
+		_ = c.Redirect(loginUrl(c))
 	}
 
 	return
