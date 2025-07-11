@@ -8,8 +8,8 @@ require (
 	github.com/gflydev/core v1.17.1
 	github.com/gflydev/db v1.6.5
 	github.com/gflydev/db/psql v1.4.5
-	github.com/gflydev/notification v1.0.2
-	github.com/gflydev/notification/mail v1.0.2
+	github.com/gflydev/notification v1.1.0
+	github.com/gflydev/notification/mail v1.0.3
 	github.com/gflydev/session v1.0.3
 	github.com/gflydev/session/redis v1.0.3
 	github.com/gflydev/storage v1.1.5
@@ -60,8 +60,8 @@ require (
 	github.com/tinylib/msgp v1.3.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.63.0 // indirect
-	golang.org/x/crypto v0.39.0 // indirect
-	golang.org/x/net v0.41.0 // indirect
+	golang.org/x/crypto v0.40.0 // indirect
+	golang.org/x/net v0.42.0 // indirect
 	golang.org/x/sync v0.16.0 // indirect
 	golang.org/x/sys v0.34.0 // indirect
 	golang.org/x/text v0.27.0 // indirect
