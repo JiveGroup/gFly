@@ -42,7 +42,7 @@ func (m *BasePage) View(c *core.Ctx, template string, data core.Data) error {
 		return t.Format("2006-01-02 15:04:05")
 	}
 	data["nullString"] = func(v sql.NullString) string {
-		return *dbNull.StringVal(v)
+		return *dbNull.StringNil(v)
 	}
 
 	return c.View(template, data)

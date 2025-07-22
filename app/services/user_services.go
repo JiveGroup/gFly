@@ -12,7 +12,6 @@ import (
 	coreUtils "github.com/gflydev/core/utils"
 	mb "github.com/gflydev/db"
 	dbNull "github.com/gflydev/db/null"
-	qb "github.com/jivegroup/fluentsql"
 	"slices"
 	"strings"
 	"time"
@@ -51,27 +50,27 @@ func FindUsers(filterDto dto.Filter) ([]models.User, int, error) {
 	}
 
 	builder := dbInstance.Select("DISTINCT users.id", "users.*").
-		Join(qb.LeftJoin, models.TableUserRole, qb.Condition{
+		Join(mb.LeftJoin, models.TableUserRole, mb.Condition{
 			Field: models.TableUserRole + ".user_id",
-			Opt:   qb.Eq,
-			Value: qb.ValueField(models.TableUser + ".id"),
+			Opt:   mb.Eq,
+			Value: mb.ValueField(models.TableUser + ".id"),
 		}).
-		Join(qb.LeftJoin, models.TableRole, qb.Condition{
+		Join(mb.LeftJoin, models.TableRole, mb.Condition{
 			Field: models.TableRole + ".id",
-			Opt:   qb.Eq,
-			Value: qb.ValueField(models.TableUserRole + ".role_id"),
+			Opt:   mb.Eq,
+			Value: mb.ValueField(models.TableUserRole + ".role_id"),
 		}).
-		Where(models.TableUser+".deleted_at", qb.Null, nil).
-		When(filterDto.Keyword != "", func(query qb.WhereBuilder) *qb.WhereBuilder {
-			query.WhereGroup(func(queryGroup qb.WhereBuilder) *qb.WhereBuilder {
-				queryGroup.Where(models.TableRole+".name", qb.Like, "%"+filterDto.Keyword+"%").
-					WhereOr(models.TableRole+".slug", qb.Like, "%"+filterDto.Keyword+"%").
-					WhereOr(models.TableUser+".email", qb.Like, "%"+filterDto.Keyword+"%").
-					WhereOr(models.TableUser+".fullname", qb.Like, "%"+filterDto.Keyword+"%").
-					WhereOr(models.TableUser+".phone", qb.Like, "%"+filterDto.Keyword+"%")
+		Where(models.TableUser+".deleted_at", mb.Null, nil).
+		When(filterDto.Keyword != "", func(query mb.WhereBuilder) *mb.WhereBuilder {
+			query.WhereGroup(func(queryGroup mb.WhereBuilder) *mb.WhereBuilder {
+				queryGroup.Where(models.TableRole+".name", mb.Like, "%"+filterDto.Keyword+"%").
+					WhereOr(models.TableRole+".slug", mb.Like, "%"+filterDto.Keyword+"%").
+					WhereOr(models.TableUser+".email", mb.Like, "%"+filterDto.Keyword+"%").
+					WhereOr(models.TableUser+".fullname", mb.Like, "%"+filterDto.Keyword+"%").
+					WhereOr(models.TableUser+".phone", mb.Like, "%"+filterDto.Keyword+"%")
 
 				if slices.Contains(types.UserStatusList, types.UserStatus(filterDto.Keyword)) {
-					queryGroup.WhereOr(models.TableUser+".status", qb.Eq, filterDto.Keyword)
+					queryGroup.WhereOr(models.TableUser+".status", mb.Eq, filterDto.Keyword)
 				}
 
 				return &queryGroup
@@ -83,12 +82,12 @@ func FindUsers(filterDto dto.Filter) ([]models.User, int, error) {
 
 	if filterDto.OrderBy != "" {
 		// Default order by
-		direction := qb.Asc
+		direction := mb.Asc
 		orderKey := filterDto.OrderBy
 
 		if strings.HasPrefix(filterDto.OrderBy, "-") {
 			orderKey = filterDto.OrderBy[1:]
-			direction = qb.Desc
+			direction = mb.Desc
 		}
 
 		var orderByFields = core.Data{
@@ -142,7 +141,7 @@ func CreateUser(createUserDto dto.CreateUser) (*models.User, error) {
 		Token:        dbNull.String(""),
 		CreatedAt:    time.Now(),
 		UpdatedAt:    time.Now(),
-		LastAccessAt: dbNull.NowTime(),
+		LastAccessAt: dbNull.TimeNow(),
 		Avatar:       dbNull.String(createUserDto.Avatar),
 	}
 

@@ -1,4 +1,4 @@
-# gFly v1.16.0
+# gFly v1.17.2
 
 **Laravel inspired web framework written in Go**
 

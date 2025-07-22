@@ -9,8 +9,7 @@ import (
 	"github.com/gflydev/core/try"
 	"time"
 
-	mb "github.com/gflydev/db"          // Model builder
-	qb "github.com/jivegroup/fluentsql" // Query builder
+	mb "github.com/gflydev/db" // Model builder
 )
 
 // ====================================================================
@@ -83,13 +82,13 @@ func (q *roleRepository) GetRolesByUserID(userID int) []models.Role {
 	var roles []models.Role
 
 	_, err := mb.Instance().Select(models.TableRole+".*").
-		Join(qb.InnerJoin, models.TableUserRole, qb.Condition{
+		Join(mb.InnerJoin, models.TableUserRole, mb.Condition{
 			Field: models.TableRole + ".id",
-			Opt:   qb.Eq,
-			Value: qb.ValueField(models.TableUserRole + ".role_id"),
+			Opt:   mb.Eq,
+			Value: mb.ValueField(models.TableUserRole + ".role_id"),
 		}).
-		Where(models.TableUserRole+".user_id", qb.Eq, userID).
-		OrderBy(models.TableRole+".name", qb.Asc).
+		Where(models.TableUserRole+".user_id", mb.Eq, userID).
+		OrderBy(models.TableRole+".name", mb.Asc).
 		Find(&roles)
 
 	if err != nil {
@@ -113,7 +112,7 @@ func (q *roleRepository) GetRolesBySlug(roleSlugs ...types.Role) []models.Role {
 
 	try.Perform(func() {
 		_, err = mb.Instance().
-			Where("slug", qb.In, types.RoleArrStr(roleSlugs...)).
+			Where("slug", mb.In, types.RoleArrStr(roleSlugs...)).
 			Limit(1000, 0).
 			Find(&roles)
 	}).Catch(func(e try.E) {
@@ -141,9 +140,9 @@ func Convert[T fmt.Stringer](items []T) []string {
 // AddRoleForUserID query for adding role for given user ID.
 func (q *roleRepository) AddRoleForUserID(userID int, roleSlug types.Role) error {
 	// Get a role by slug
-	role, err := mb.GetModel[models.Role](qb.Condition{
+	role, err := mb.GetModel[models.Role](mb.Condition{
 		Field: models.TableRole + ".slug",
-		Opt:   qb.Eq,
+		Opt:   mb.Eq,
 		Value: roleSlug,
 	})
 	if err != nil || role == nil {
@@ -178,7 +177,7 @@ func (q *roleRepository) SyncRolesWithUser(userID int, roleSlugs ...types.Role) 
 		db.Begin()
 
 		// Remove old Roles associated with the user.
-		if err := db.Where("user_id", qb.Eq, userID).Delete(&models.UserRole{}); err != nil {
+		if err := db.Where("user_id", mb.Eq, userID).Delete(&models.UserRole{}); err != nil {
 			try.Throw(err)
 		}
 

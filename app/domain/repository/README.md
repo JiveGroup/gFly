@@ -29,7 +29,7 @@ The `RoleRepository` implements the `IRoleRepository` interface and provides met
 
 **Implementation Details:**
 - Uses the model builder (`mb`) for database operations
-- Uses the query builder (`qb`) for constructing SQL queries
+- Uses the query builder (`qb.) for constructing SQL queries
 - Handles errors and logs them appropriately
 
 ## Repository Pool
