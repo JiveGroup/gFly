@@ -6,7 +6,7 @@ require (
 	github.com/gflydev/cache v1.0.5
 	github.com/gflydev/console v1.0.2
 	github.com/gflydev/core v1.17.2
-	github.com/gflydev/db v1.11.0
+	github.com/gflydev/db v1.11.1
 	github.com/gflydev/db/psql v1.4.9
 	github.com/gflydev/notification v1.1.1
 	github.com/gflydev/notification/mail v1.0.3
