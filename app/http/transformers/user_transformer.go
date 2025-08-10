@@ -83,10 +83,10 @@ func ToSignUpResponse(user models.User) response.User {
 		Avatar:       PublicAvatar(user.Avatar.String),
 		CreatedAt:    user.CreatedAt,
 		UpdatedAt:    user.UpdatedAt,
-		VerifiedAt:   dbNull.TimeAny(user.VerifiedAt),
-		BlockedAt:    dbNull.TimeAny(user.BlockedAt),
-		DeletedAt:    dbNull.TimeAny(user.DeletedAt),
-		LastAccessAt: dbNull.TimeAny(user.LastAccessAt),
+		VerifiedAt:   dbNull.TimeNil(user.VerifiedAt),
+		BlockedAt:    dbNull.TimeNil(user.BlockedAt),
+		DeletedAt:    dbNull.TimeNil(user.DeletedAt),
+		LastAccessAt: dbNull.TimeNil(user.LastAccessAt),
 		Roles:        roles(user.ID),
 	}
 }
@@ -110,10 +110,10 @@ func ToUserResponse(user models.User) response.User {
 		Avatar:       PublicAvatar(user.Avatar.String),
 		CreatedAt:    user.CreatedAt,
 		UpdatedAt:    user.UpdatedAt,
-		VerifiedAt:   dbNull.TimeAny(user.VerifiedAt),
-		BlockedAt:    dbNull.TimeAny(user.BlockedAt),
-		DeletedAt:    dbNull.TimeAny(user.DeletedAt),
-		LastAccessAt: dbNull.TimeAny(user.LastAccessAt),
+		VerifiedAt:   dbNull.TimeNil(user.VerifiedAt),
+		BlockedAt:    dbNull.TimeNil(user.BlockedAt),
+		DeletedAt:    dbNull.TimeNil(user.DeletedAt),
+		LastAccessAt: dbNull.TimeNil(user.LastAccessAt),
 		Roles:        roles(user.ID),
 	}
 }

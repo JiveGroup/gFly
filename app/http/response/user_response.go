@@ -17,10 +17,10 @@ type User struct {
 	Status       types.UserStatus `json:"status" doc:"The status of the user account."`
 	CreatedAt    time.Time        `json:"created_at" doc:"The timestamp of when the user was created."`
 	UpdatedAt    time.Time        `json:"updated_at" doc:"The timestamp of when the user was last updated."`
-	VerifiedAt   interface{}      `json:"verified_at" doc:"The timestamp of when the user was verified."`
-	BlockedAt    interface{}      `json:"blocked_at" doc:"The timestamp of when the user was blocked."`
-	DeletedAt    interface{}      `json:"deleted_at" doc:"The timestamp of when the user was deleted."`
-	LastAccessAt interface{}      `json:"last_access_at" doc:"The timestamp of the user's last access."`
+	VerifiedAt   *time.Time       `json:"verified_at" example:"2023-01-01T10:30:00Z" doc:"The timestamp of when the user was verified."`
+	BlockedAt    *time.Time       `json:"blocked_at" example:"null" doc:"The timestamp of when the user was blocked."`
+	DeletedAt    *time.Time       `json:"deleted_at" example:"null" doc:"The timestamp of when the user was deleted."`
+	LastAccessAt *time.Time       `json:"last_access_at" example:"2023-01-01T12:00:00Z" doc:"The timestamp of the user's last access."`
 	Avatar       *string          `json:"avatar" doc:"The URL of the user's avatar or profile picture."`
 	Roles        []Role           `json:"roles" doc:"A list of roles assigned to the user."`
 }
