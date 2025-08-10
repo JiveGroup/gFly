@@ -6,7 +6,7 @@ require (
 	github.com/gflydev/cache v1.0.5
 	github.com/gflydev/console v1.0.2
 	github.com/gflydev/core v1.17.2
-	github.com/gflydev/db v1.11.1
+	github.com/gflydev/db v1.12.2
 	github.com/gflydev/db/psql v1.4.9
 	github.com/gflydev/notification v1.1.1
 	github.com/gflydev/notification/mail v1.0.3
@@ -15,12 +15,12 @@ require (
 	github.com/gflydev/storage v1.1.5
 	github.com/gflydev/storage/local v1.1.5
 	github.com/gflydev/utils v1.1.0
-	github.com/gflydev/validation v1.2.0
+	github.com/gflydev/validation v1.2.1
 	github.com/gflydev/view/pongo v1.0.3
-	github.com/golang-jwt/jwt/v5 v5.2.3
+	github.com/golang-jwt/jwt/v5 v5.3.0
 	github.com/hibiken/asynq v0.25.1
 	github.com/joho/godotenv v1.5.1
-	github.com/swaggo/swag v1.16.5
+	github.com/swaggo/swag v1.16.6
 )
 
 require (
@@ -32,7 +32,7 @@ require (
 	github.com/flosch/pongo2/v6 v6.0.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
 	github.com/gflydev/mail v1.0.3 // indirect
-	github.com/go-openapi/jsonpointer v0.21.1 // indirect
+	github.com/go-openapi/jsonpointer v0.21.2 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
 	github.com/go-openapi/spec v0.21.0 // indirect
 	github.com/go-openapi/swag v0.23.1 // indirect
@@ -53,21 +53,21 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
-	github.com/redis/go-redis/v9 v9.11.0 // indirect
+	github.com/redis/go-redis/v9 v9.12.0 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/spf13/cast v1.9.2 // indirect
 	github.com/tinylib/msgp v1.3.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.64.0 // indirect
-	golang.org/x/crypto v0.40.0 // indirect
-	golang.org/x/mod v0.26.0 // indirect
-	golang.org/x/net v0.42.0 // indirect
+	golang.org/x/crypto v0.41.0 // indirect
+	golang.org/x/mod v0.27.0 // indirect
+	golang.org/x/net v0.43.0 // indirect
 	golang.org/x/sync v0.16.0 // indirect
-	golang.org/x/sys v0.34.0 // indirect
-	golang.org/x/text v0.27.0 // indirect
+	golang.org/x/sys v0.35.0 // indirect
+	golang.org/x/text v0.28.0 // indirect
 	golang.org/x/time v0.12.0 // indirect
-	golang.org/x/tools v0.35.0 // indirect
-	google.golang.org/protobuf v1.36.6 // indirect
+	golang.org/x/tools v0.36.0 // indirect
+	google.golang.org/protobuf v1.36.7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
