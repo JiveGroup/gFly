@@ -2,7 +2,6 @@ package response
 
 import (
 	"gfly/app/domain/models/types"
-	"gfly/app/dto"
 	"time"
 )
 
@@ -33,6 +32,6 @@ type Role struct {
 }
 
 type ListUser struct {
-	Meta dto.Meta `json:"meta" doc:"Pagination metadata for a list of users."`
-	Data []User   `json:"data" doc:"A list of users matching the query criteria."`
+	Meta Meta   `json:"meta" doc:"Pagination metadata for a list of users."`
+	Data []User `json:"data" doc:"A list of users matching the query criteria."`
 }

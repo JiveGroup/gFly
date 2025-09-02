@@ -653,23 +653,6 @@ const docTemplate = `{
             "type": "object",
             "additionalProperties": {}
         },
-        "dto.Meta": {
-            "type": "object",
-            "properties": {
-                "page": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "per_page": {
-                    "type": "integer",
-                    "example": 10
-                },
-                "total": {
-                    "type": "integer",
-                    "example": 1354
-                }
-            }
-        },
         "request.CreateUser": {
             "type": "object",
             "required": [
@@ -899,7 +882,8 @@ const docTemplate = `{
                 },
                 "message": {
                     "description": "Error message description",
-                    "type": "string"
+                    "type": "string",
+                    "example": "Bad request"
                 }
             }
         },
@@ -913,7 +897,25 @@ const docTemplate = `{
                     }
                 },
                 "meta": {
-                    "$ref": "#/definitions/dto.Meta"
+                    "$ref": "#/definitions/response.Meta"
+                }
+            }
+        },
+        "response.Meta": {
+            "description": "Contains pagination metadata including current page, items per page, and total count",
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "total": {
+                    "type": "integer",
+                    "example": 1354
                 }
             }
         },
@@ -932,16 +934,20 @@ const docTemplate = `{
             }
         },
         "response.ServerInfo": {
+            "description": "contains system metadata including name, server prefix, and server name.",
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "ThietNgon API"
                 },
                 "prefix": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "/api/v1"
                 },
                 "server": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "ThietNgon-Go Server"
                 }
             }
         },
@@ -967,7 +973,8 @@ const docTemplate = `{
                 },
                 "error": {
                     "description": "Error message description",
-                    "type": "string"
+                    "type": "string",
+                    "example": "Unauthorized access"
                 }
             }
         },
@@ -977,11 +984,17 @@ const docTemplate = `{
                 "avatar": {
                     "type": "string"
                 },
-                "blocked_at": {},
+                "blocked_at": {
+                    "type": "string",
+                    "example": "null"
+                },
                 "created_at": {
                     "type": "string"
                 },
-                "deleted_at": {},
+                "deleted_at": {
+                    "type": "string",
+                    "example": "null"
+                },
                 "email": {
                     "type": "string"
                 },
@@ -991,7 +1004,10 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "last_access_at": {},
+                "last_access_at": {
+                    "type": "string",
+                    "example": "2023-01-01T12:00:00Z"
+                },
                 "phone": {
                     "type": "string"
                 },
@@ -1010,7 +1026,10 @@ const docTemplate = `{
                 "updated_at": {
                     "type": "string"
                 },
-                "verified_at": {}
+                "verified_at": {
+                    "type": "string",
+                    "example": "2023-01-01T10:30:00Z"
+                }
             }
         },
         "types.Role": {

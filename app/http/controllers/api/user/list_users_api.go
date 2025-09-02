@@ -51,7 +51,7 @@ func (h *ListUsersApi) Handle(c *core.Ctx) error {
 	}
 
 	// Pagination metadata
-	metadata := dto.Meta{
+	metadata := response.Meta{
 		Page:    filterDto.Page,
 		PerPage: filterDto.PerPage,
 		Total:   total,
