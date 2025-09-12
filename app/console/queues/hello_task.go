@@ -3,8 +3,8 @@ package queues
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/gflydev/console"
+	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
 	"github.com/hibiken/asynq"
 )
@@ -44,7 +44,7 @@ func (t HelloTask) Dequeue(ctx context.Context, task *asynq.Task) error {
 	// Decode task payload
 	var payload HelloTaskPayload
 	if err := json.Unmarshal(task.Payload(), &payload); err != nil {
-		return fmt.Errorf("json.Unmarshal failed: %v: %w", err, asynq.SkipRetry)
+		return errors.New("json.Unmarshal failed: %v: %w", err, asynq.SkipRetry)
 	}
 
 	// Process payload

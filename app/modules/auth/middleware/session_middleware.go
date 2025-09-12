@@ -7,6 +7,7 @@ import (
 	"gfly/app/http/response"
 	"gfly/app/modules/auth"
 	"github.com/gflydev/core"
+	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
 	"github.com/gflydev/core/try"
 	"github.com/gflydev/core/utils"
@@ -28,7 +29,7 @@ func processSession(c *core.Ctx) (err error) {
 		user := repository.Pool.GetUserByEmail(username.(string))
 		c.SetData(constants.User, *user)
 	}).Catch(func(e try.E) {
-		err = fmt.Errorf("%v", e)
+		err = errors.New("%v", e)
 	})
 
 	return
