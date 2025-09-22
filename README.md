@@ -216,13 +216,13 @@ Note: Check DB connection and see 4 tables: `users`, `roles`, `user_roles`, and 
 
 #### Create command
 
-Create a new command line `db-test`. Add file `app/console/commands/db_command.go` 
+Create a new command line `db-test`. Add file `internal/console/commands/db_command.go` 
 
 ```go
 package commands
 
 import (
-    "gfly/app/domain/models"
+    "gfly/internal/domain/models"
     "github.com/gflydev/console"
     "github.com/gflydev/core/log"
     mb "github.com/gflydev/db"
@@ -272,7 +272,7 @@ make build
 
 ### 2. Connect `Redis` service
 
-Create a new command line `redis-test`. Add file `app/console/commands/redis_command.go` 
+Create a new command line `redis-test`. Add file `internal/console/commands/redis_command.go` 
 
 ```go
 package commands
@@ -334,7 +334,7 @@ make build
 
 ### 3. Connect `Mail` service
 
-Create a new command line `mail-test`. Add file `app/console/commands/mail_command.go` 
+Create a new command line `mail-test`. Add file `internal/console/commands/mail_command.go` 
 
 ```go
 package commands

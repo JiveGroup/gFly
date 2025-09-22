@@ -40,8 +40,8 @@ test.coverage: ## - Open HTML coverage report in browser
 	go tool cover -html=cover.out
 
 build: lint test ## - Build the application and CLI tool
-	CGO_ENABLED=0 go build -ldflags="-w -s" -o $(BUILD_DIR)/$(APP_NAME) main.go
-	CGO_ENABLED=0 go build -ldflags="-w -s" -o $(BUILD_DIR)/$(CLI_NAME) app/console/cli.go
+	CGO_ENABLED=0 go build -ldflags="-w -s" -o $(BUILD_DIR)/$(APP_NAME) cmd/web/main.go
+	CGO_ENABLED=0 go build -ldflags="-w -s" -o $(BUILD_DIR)/$(CLI_NAME) cmd/console/main.go
 	cp .env build/
 
 run: lint test doc build ## - Run the application after building
@@ -65,7 +65,7 @@ migrate.down: ## - Revert the last database migration
 	migrate -path $(MIGRATION_FOLDER) -database "$(DATABASE_URL)" down
 
 dev: ## - Run application in development mode with hot reloading
-	air -build.exclude_dir=node_modules,public,resources,Dev,bin,build,dist,docker,storage,tmp,database,docs main.go
+	air -build.exclude_dir=node_modules,public,resources,Dev,bin,build,dist,docker,storage,tmp,database,docs cmd/web/main.go
 
 clean: ## - Clean up Go modules, cache, and test cache
 	go mod tidy
@@ -73,7 +73,7 @@ clean: ## - Clean up Go modules, cache, and test cache
 	go clean -testcache
 
 doc: ## - Generate API documentation using Swag
-	swag init --parseDependency --parseInternal --parseDepth 1
+	swag init --parseDependency --parseInternal --parseDepth 1 -g cmd/web/main.go
 	cp ./docs/swagger.json ./public/docs/
 
 container.run: ## - Start required Docker containers (PostgreSQL, Mail, Redis)

@@ -1,0 +1,11 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+cmd = "go build -o ./tmp/app cmd/web/main.go"
+bin = "./tmp/app"
+full_bin = "./tmp/app"
+log = "air_errors.log"
+include_ext = ["go", "tpl", "tmpl", "html", "yml", "toml", "env"]
+exclude_dir = ["node_modules", "public", "resources", "Dev", "bin", "build", "dist", "docker", "storage", "tmp", "database", "docs"]
+delay = 1000

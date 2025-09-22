@@ -15,7 +15,7 @@ The resources directory is used for:
 
 ## Structure
 
-- **app/**: Application-specific resources
+- **internal/**: Application-specific resources
 - **views/**: View templates for rendering HTML
 - **tls/**: TLS certificates and keys for HTTPS
 

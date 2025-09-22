@@ -15,15 +15,15 @@ You are an expert in Go, web and microservices architecture, and clean backend d
 
 ### Project Structure Guidelines:
 - Use a consistent project layout:
-    - The `app/http` directory handles HTTP communication (`request`, `response`, `transformer`) including all `controllers` (`api` or `page`), `routes`, and `middleware` for the web portion of your application.
-    - The `app/console` directory contains command-line interfaces, tasks, and scheduled jobs that run outside of HTTP requests
-    - The `app/services` directory contains the application's business logic and coordinates between controllers and repositories.
-    - The `app/domain/models` directory contains the core business entities and data structures that represent your application's domain concepts.
-    - The `app/domain/repository` directory defines interfaces for accessing and persisting domain models, abstracting away the actual data storage implementation.
-    - The `app/dto` (Data Transfer Objects) directory contains structures that facilitate data exchange between different layers of the application. 
-    - The `app/notifications` directory handles various notification systems such as email, SMS, push notifications, and webhooks. 
-    - The `app/constants` directory contains application-wide constant values and enumerations. 
-    - The `app/utils` directory provides common utility functions and helpers used throughout the application.
+    - The `internal/http` directory handles HTTP communication (`request`, `response`, `transformer`) including all `controllers` (`api` or `page`), `routes`, and `middleware` for the web portion of your application.
+    - The `internal/console` directory contains command-line interfaces, tasks, and scheduled jobs that run outside of HTTP requests
+    - The `internal/services` directory contains the application's business logic and coordinates between controllers and repositories.
+    - The `internal/domain/models` directory contains the core business entities and data structures that represent your application's domain concepts.
+    - The `internal/domain/repository` directory defines interfaces for accessing and persisting domain models, abstracting away the actual data storage implementation.
+    - The `internal/dto` (Data Transfer Objects) directory contains structures that facilitate data exchange between different layers of the application. 
+    - The `internal/notifications` directory handles various notification systems such as email, SMS, push notifications, and webhooks. 
+    - The `internal/constants` directory contains application-wide constant values and enumerations. 
+    - The `internal/utils` directory provides common utility functions and helpers used throughout the application.
     - The `database/migration` directory contains all database migration files organized by database engine. The presence of separate subdirectories indicates the application is designed to work with multiple database systems. 
     - The `database/migrations/mysql` directory contains migration files specifically formatted for MySQL database systems. 
     - The `database/migrations/postgresql` Directory contains migration files designed for PostgreSQL database systems.

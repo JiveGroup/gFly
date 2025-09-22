@@ -1,1 +1,0 @@
-# Command `app/console/commands/`

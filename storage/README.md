@@ -14,7 +14,7 @@ The storage directory is used for:
 
 ## Structure
 
-- **app/**: Application-specific storage for uploaded files and generated content
+- **internal/**: Application-specific storage for uploaded files and generated content
 - **logs/**: Application log files
 - **tmp/**: Temporary files that can be safely deleted
 
@@ -23,7 +23,7 @@ The storage directory is used for:
 The storage directory should:
 - Be writable by the application
 - Have appropriate permissions set
-- Be backed up regularly (especially the app/ subdirectory)
+- Be backed up regularly (especially the internal/ subdirectory)
 - Be excluded from version control (except for the directory structure)
 
 ## Best Practices
