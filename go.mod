@@ -5,15 +5,15 @@ go 1.24.0
 require (
 	github.com/gflydev/cache v1.0.5
 	github.com/gflydev/console v1.0.2
-	github.com/gflydev/core v1.17.5
-	github.com/gflydev/db v1.12.3
+	github.com/gflydev/core v1.17.7
+	github.com/gflydev/db v1.12.4
 	github.com/gflydev/db/psql v1.4.9
 	github.com/gflydev/notification v1.1.1
 	github.com/gflydev/notification/mail v1.0.3
 	github.com/gflydev/session v1.0.3
 	github.com/gflydev/session/redis v1.0.3
-	github.com/gflydev/storage v1.1.5
-	github.com/gflydev/storage/local v1.1.5
+	github.com/gflydev/storage v1.1.6
+	github.com/gflydev/storage/local v1.1.6
 	github.com/gflydev/utils v1.1.0
 	github.com/gflydev/validation v1.2.1
 	github.com/gflydev/view/pongo v1.0.3
@@ -60,7 +60,7 @@ require (
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
-	github.com/mailru/easyjson v0.9.0 // indirect
+	github.com/mailru/easyjson v0.9.1 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
