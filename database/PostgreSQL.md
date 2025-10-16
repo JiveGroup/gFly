@@ -60,9 +60,9 @@ psql -U user -d gfly
 
 Re-create database
 -----------------------------------------------------
-#### Access PostgreSQL - User `vinh`
+#### Access PostgreSQL - User `user`
 ```bash
-psql -U vinh -d postgres
+psql -h localhost -U user -d postgres
 ```
 
 #### Reset current DB
