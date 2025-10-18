@@ -41,7 +41,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.RefreshToken"
+                            "$ref": "#/definitions/request.RefreshToken"
                         }
                     }
                 ],
@@ -49,19 +49,19 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_modules_auth_response.SignIn"
+                            "$ref": "#/definitions/response.SignIn"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/response.Unauthorized"
                         }
                     }
                 }
@@ -87,7 +87,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.SignIn"
+                            "$ref": "#/definitions/request.SignIn"
                         }
                     }
                 ],
@@ -95,13 +95,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_modules_auth_response.SignIn"
+                            "$ref": "#/definitions/response.SignIn"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     }
                 }
@@ -132,13 +132,13 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/response.Unauthorized"
                         }
                     }
                 }
@@ -164,7 +164,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.SignUp"
+                            "$ref": "#/definitions/request.SignUp"
                         }
                     }
                 ],
@@ -172,13 +172,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.User"
+                            "$ref": "#/definitions/response.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     }
                 }
@@ -201,7 +201,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.ServerInfo"
+                            "$ref": "#/definitions/response.ServerInfo"
                         }
                     }
                 }
@@ -227,7 +227,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.ForgotPassword"
+                            "$ref": "#/definitions/request.ForgotPassword"
                         }
                     }
                 ],
@@ -238,7 +238,7 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     }
                 }
@@ -264,7 +264,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.ResetPassword"
+                            "$ref": "#/definitions/request.ResetPassword"
                         }
                     }
                 ],
@@ -275,7 +275,7 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     }
                 }
@@ -329,19 +329,19 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.ListUser"
+                            "$ref": "#/definitions/response.ListUser"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/response.Unauthorized"
                         }
                     }
                 }
@@ -370,7 +370,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_request.CreateUser"
+                            "$ref": "#/definitions/request.CreateUser"
                         }
                     }
                 ],
@@ -378,19 +378,19 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.User"
+                            "$ref": "#/definitions/response.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/response.Unauthorized"
                         }
                     }
                 }
@@ -418,13 +418,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.User"
+                            "$ref": "#/definitions/response.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     }
                 }
@@ -461,19 +461,19 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.User"
+                            "$ref": "#/definitions/response.User"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/response.Unauthorized"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     }
                 }
@@ -509,7 +509,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_request.UpdateUser"
+                            "$ref": "#/definitions/request.UpdateUser"
                         }
                     }
                 ],
@@ -517,19 +517,19 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.User"
+                            "$ref": "#/definitions/response.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/response.Unauthorized"
                         }
                     }
                 }
@@ -564,19 +564,19 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.User"
+                            "$ref": "#/definitions/response.User"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/response.Unauthorized"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     }
                 }
@@ -614,7 +614,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_request.UpdateUserStatus"
+                            "$ref": "#/definitions/request.UpdateUserStatus"
                         }
                     }
                 ],
@@ -622,19 +622,19 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.User"
+                            "$ref": "#/definitions/response.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/response.Unauthorized"
                         }
                     }
                 }
@@ -646,37 +646,7 @@
             "type": "object",
             "additionalProperties": {}
         },
-        "gfly_internal_domain_models_types.Role": {
-            "type": "string",
-            "enum": [
-                "na",
-                "admin",
-                "moderator",
-                "member",
-                "guest"
-            ],
-            "x-enum-varnames": [
-                "RoleNA",
-                "RoleAdmin",
-                "RoleModerator",
-                "RoleMember",
-                "RoleGuest"
-            ]
-        },
-        "gfly_internal_domain_models_types.UserStatus": {
-            "type": "string",
-            "enum": [
-                "active",
-                "pending",
-                "blocked"
-            ],
-            "x-enum-varnames": [
-                "UserStatusActive",
-                "UserStatusPending",
-                "UserStatusBlocked"
-            ]
-        },
-        "gfly_internal_http_request.CreateUser": {
+        "request.CreateUser": {
             "type": "object",
             "required": [
                 "email",
@@ -713,7 +683,7 @@
                 "roles": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/gfly_internal_domain_models_types.Role"
+                        "$ref": "#/definitions/types.Role"
                     },
                     "example": [
                         "admin",
@@ -726,7 +696,111 @@
                 }
             }
         },
-        "gfly_internal_http_request.UpdateUser": {
+        "request.ForgotPassword": {
+            "type": "object",
+            "required": [
+                "username"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "john@jivecode.com"
+                }
+            }
+        },
+        "request.RefreshToken": {
+            "type": "object",
+            "required": [
+                "token"
+            ],
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "d1a4216a226cbf75eaefc9107c2c64b6b2c0f18cd8634e3a6f495146c38e1324.1747914602"
+                }
+            }
+        },
+        "request.ResetPassword": {
+            "type": "object",
+            "required": [
+                "password",
+                "token"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "minLength": 6,
+                    "example": "M1PassW@s"
+                },
+                "token": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "293r823or832eioj2eo9282o423"
+                }
+            }
+        },
+        "request.SignIn": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "P@seWor9"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "admin@gfly.dev"
+                }
+            }
+        },
+        "request.SignUp": {
+            "type": "object",
+            "required": [
+                "email",
+                "fullname",
+                "password",
+                "phone"
+            ],
+            "properties": {
+                "avatar": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "https://i.pravatar.cc/32"
+                },
+                "email": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "john@jivecode.com"
+                },
+                "fullname": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "John Doe"
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "M1PassW@s"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "0989831911"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "pending"
+                }
+            }
+        },
+        "request.UpdateUser": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -752,7 +826,7 @@
                 "roles": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/gfly_internal_domain_models_types.Role"
+                        "$ref": "#/definitions/types.Role"
                     },
                     "example": [
                         "admin",
@@ -761,7 +835,7 @@
                 }
             }
         },
-        "gfly_internal_http_request.UpdateUserStatus": {
+        "request.UpdateUserStatus": {
             "type": "object",
             "required": [
                 "status"
@@ -775,14 +849,14 @@
                     ],
                     "allOf": [
                         {
-                            "$ref": "#/definitions/gfly_internal_domain_models_types.UserStatus"
+                            "$ref": "#/definitions/types.UserStatus"
                         }
                     ],
                     "example": "active"
                 }
             }
         },
-        "gfly_internal_http_response.Error": {
+        "response.Error": {
             "description": "Generic error response structure",
             "type": "object",
             "properties": {
@@ -806,21 +880,21 @@
                 }
             }
         },
-        "gfly_internal_http_response.ListUser": {
+        "response.ListUser": {
             "type": "object",
             "properties": {
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/gfly_internal_http_response.User"
+                        "$ref": "#/definitions/response.User"
                     }
                 },
                 "meta": {
-                    "$ref": "#/definitions/gfly_internal_http_response.Meta"
+                    "$ref": "#/definitions/response.Meta"
                 }
             }
         },
-        "gfly_internal_http_response.Meta": {
+        "response.Meta": {
             "description": "Contains pagination metadata including current page, items per page, and total count",
             "type": "object",
             "properties": {
@@ -838,7 +912,7 @@
                 }
             }
         },
-        "gfly_internal_http_response.Role": {
+        "response.Role": {
             "type": "object",
             "properties": {
                 "id": {
@@ -848,11 +922,11 @@
                     "type": "string"
                 },
                 "slug": {
-                    "$ref": "#/definitions/gfly_internal_domain_models_types.Role"
+                    "$ref": "#/definitions/types.Role"
                 }
             }
         },
-        "gfly_internal_http_response.ServerInfo": {
+        "response.ServerInfo": {
             "description": "contains system metadata including name, server prefix, and server name.",
             "type": "object",
             "properties": {
@@ -870,7 +944,18 @@
                 }
             }
         },
-        "gfly_internal_http_response.Unauthorized": {
+        "response.SignIn": {
+            "type": "object",
+            "properties": {
+                "access": {
+                    "type": "string"
+                },
+                "refresh": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.Unauthorized": {
             "description": "Unauthorized error response structure",
             "type": "object",
             "properties": {
@@ -886,7 +971,7 @@
                 }
             }
         },
-        "gfly_internal_http_response.User": {
+        "response.User": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -922,11 +1007,11 @@
                 "roles": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/gfly_internal_http_response.Role"
+                        "$ref": "#/definitions/response.Role"
                     }
                 },
                 "status": {
-                    "$ref": "#/definitions/gfly_internal_domain_models_types.UserStatus"
+                    "$ref": "#/definitions/types.UserStatus"
                 },
                 "token": {
                     "type": "string"
@@ -940,120 +1025,35 @@
                 }
             }
         },
-        "gfly_pkg_modules_auth_request.ForgotPassword": {
-            "type": "object",
-            "required": [
-                "username"
+        "types.Role": {
+            "type": "string",
+            "enum": [
+                "na",
+                "admin",
+                "moderator",
+                "member",
+                "guest"
             ],
-            "properties": {
-                "username": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "john@jivecode.com"
-                }
-            }
+            "x-enum-varnames": [
+                "RoleNA",
+                "RoleAdmin",
+                "RoleModerator",
+                "RoleMember",
+                "RoleGuest"
+            ]
         },
-        "gfly_pkg_modules_auth_request.RefreshToken": {
-            "type": "object",
-            "required": [
-                "token"
+        "types.UserStatus": {
+            "type": "string",
+            "enum": [
+                "active",
+                "pending",
+                "blocked"
             ],
-            "properties": {
-                "token": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "d1a4216a226cbf75eaefc9107c2c64b6b2c0f18cd8634e3a6f495146c38e1324.1747914602"
-                }
-            }
-        },
-        "gfly_pkg_modules_auth_request.ResetPassword": {
-            "type": "object",
-            "required": [
-                "password",
-                "token"
-            ],
-            "properties": {
-                "password": {
-                    "type": "string",
-                    "minLength": 6,
-                    "example": "M1PassW@s"
-                },
-                "token": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "293r823or832eioj2eo9282o423"
-                }
-            }
-        },
-        "gfly_pkg_modules_auth_request.SignIn": {
-            "type": "object",
-            "required": [
-                "password",
-                "username"
-            ],
-            "properties": {
-                "password": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "P@seWor9"
-                },
-                "username": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "admin@gfly.dev"
-                }
-            }
-        },
-        "gfly_pkg_modules_auth_request.SignUp": {
-            "type": "object",
-            "required": [
-                "email",
-                "fullname",
-                "password",
-                "phone"
-            ],
-            "properties": {
-                "avatar": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "https://i.pravatar.cc/32"
-                },
-                "email": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "john@jivecode.com"
-                },
-                "fullname": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "John Doe"
-                },
-                "password": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "M1PassW@s"
-                },
-                "phone": {
-                    "type": "string",
-                    "maxLength": 20,
-                    "example": "0989831911"
-                },
-                "status": {
-                    "type": "string",
-                    "example": "pending"
-                }
-            }
-        },
-        "gfly_pkg_modules_auth_response.SignIn": {
-            "type": "object",
-            "properties": {
-                "access": {
-                    "type": "string"
-                },
-                "refresh": {
-                    "type": "string"
-                }
-            }
+            "x-enum-varnames": [
+                "UserStatusActive",
+                "UserStatusPending",
+                "UserStatusBlocked"
+            ]
         }
     },
     "securityDefinitions": {

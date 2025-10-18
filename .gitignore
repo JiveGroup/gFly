@@ -24,6 +24,7 @@
 
 # AI files
 .junie/
+.claude
 CLAUDE.md
 AGENT.md
 

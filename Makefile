@@ -73,7 +73,7 @@ clean: ## - Clean up Go modules, cache, and test cache
 	go clean -testcache
 
 doc: ## - Generate API documentation using Swag
-	swag init --parseDependency --parseInternal --parseDepth 1 -g cmd/web/main.go
+	swag init --parseDependency --parseDepth 1 --exclude build,database,deployments,docs,node_modules,public,resources,storage,tmp,vendor -g cmd/web/main.go
 	cp ./docs/swagger.json ./public/docs/
 
 container.run: ## - Start required Docker containers (PostgreSQL, Mail, Redis)
