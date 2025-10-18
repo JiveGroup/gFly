@@ -2,12 +2,11 @@ package user
 
 import (
 	"gfly/internal/constants"
-	"gfly/internal/dto"
-	"gfly/internal/http"
 	"gfly/internal/http/request"
 	_ "gfly/internal/http/response" // Used for Swagger documentation
 	"gfly/internal/http/transformers"
 	"gfly/internal/services"
+	"gfly/pkg/http"
 	"github.com/gflydev/core"
 )
 
@@ -28,7 +27,7 @@ func NewUpdateUserStatusApi() *UpdateUserStatusApi {
 // ====================================================================
 
 func (h UpdateUserStatusApi) Validate(c *core.Ctx) error {
-	return http.ProcessUpdateRequest[request.UpdateUserStatus, dto.UpdateUserStatus](c)
+	return http.ProcessUpdateData[request.UpdateUserStatus](c)
 }
 
 // ====================================================================
@@ -49,10 +48,10 @@ func (h UpdateUserStatusApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /users/{id}/status [put]
 func (h UpdateUserStatusApi) Handle(c *core.Ctx) error {
-	updateUserStatusDto := c.GetData(constants.Request).(dto.UpdateUserStatus)
+	requestData := c.GetData(constants.Request).(request.UpdateUserStatus)
 
 	// Bind data to service
-	user, err := services.UpdateUserStatus(updateUserStatusDto)
+	user, err := services.UpdateUserStatus(requestData.ToDto())
 	if err != nil {
 		c.Status(core.StatusBadRequest)
 		return err

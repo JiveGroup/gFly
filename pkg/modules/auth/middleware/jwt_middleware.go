@@ -4,7 +4,7 @@ import (
 	"gfly/internal/constants"
 	"gfly/internal/domain/models"
 	"gfly/internal/http/response"
-	"gfly/internal/modules/auth/services"
+	"gfly/pkg/modules/auth/services"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
 	mb "github.com/gflydev/db"

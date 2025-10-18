@@ -5,8 +5,8 @@ import (
 	"gfly/internal/domain/models"
 	"gfly/internal/domain/models/types"
 	"gfly/internal/domain/repository"
-	"gfly/internal/modules/auth"
-	"gfly/internal/modules/auth/dto"
+	"gfly/pkg/modules/auth"
+	"gfly/pkg/modules/auth/dto"
 	"github.com/gflydev/cache"
 	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
@@ -124,7 +124,7 @@ func SignIn(signIn dto.SignIn) (*auth.Token, error) {
 //		Phone: "1234567890"
 //	 }
 //	 user, err := SignUp(signup)
-func SignUp(signUp *dto.SignUp) (*models.User, error) {
+func SignUp(signUp dto.SignUp) (*models.User, error) {
 	email := strings.ToLower(signUp.Email)
 
 	userEmail := repository.Pool.GetUserByEmail(email)

@@ -1,7 +1,7 @@
 package request
 
 import (
-	"gfly/internal/modules/auth/dto"
+	"gfly/pkg/modules/auth/dto"
 )
 
 type SignIn struct {

@@ -4,7 +4,7 @@ import (
 	"gfly/internal/http/controllers/page"
 	"gfly/internal/http/controllers/page/auth"
 	"gfly/internal/http/controllers/page/user"
-	"gfly/internal/modules/auth/middleware"
+	"gfly/pkg/modules/auth/middleware"
 	"github.com/gflydev/core"
 )
 

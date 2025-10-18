@@ -2,13 +2,12 @@ package api
 
 import (
 	"gfly/internal/constants"
-	"gfly/internal/http"
 	httpResponse "gfly/internal/http/response"
-	"gfly/internal/modules/auth/dto"
-	"gfly/internal/modules/auth/request"
-	_ "gfly/internal/modules/auth/response" // Used for Swagger documentation
-	"gfly/internal/modules/auth/services"
-	"gfly/internal/modules/auth/transformers"
+	"gfly/pkg/http"
+	"gfly/pkg/modules/auth/request"
+	_ "gfly/pkg/modules/auth/response" // Used for Swagger documentation
+	"gfly/pkg/modules/auth/services"
+	"gfly/pkg/modules/auth/transformers"
 	"github.com/gflydev/core"
 )
 
@@ -31,7 +30,7 @@ type RefreshTokenApi struct {
 
 // Validate validates request refresh token
 func (h *RefreshTokenApi) Validate(c *core.Ctx) error {
-	return http.ProcessRequest[request.RefreshToken, dto.RefreshToken](c)
+	return http.ProcessData[request.RefreshToken](c)
 }
 
 // ====================================================================
@@ -51,9 +50,10 @@ func (h *RefreshTokenApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /auth/refresh [put]
 func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
-	refreshToken := c.GetData(constants.Request).(dto.RefreshToken)
+	requestData := c.GetData(constants.Request).(request.RefreshToken)
+
 	// Check valid refresh token
-	if !services.IsValidRefreshToken(refreshToken.Token) {
+	if !services.IsValidRefreshToken(requestData.ToDto().Token) {
 		return c.Error(httpResponse.Error{
 			Code:    core.StatusUnauthorized,
 			Message: "Invalid JWT token",
@@ -62,7 +62,7 @@ func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
 
 	jwtToken := services.ExtractToken(c)
 	// Refresh new pairs of access token & refresh token
-	tokens, err := services.RefreshToken(jwtToken, refreshToken.Token)
+	tokens, err := services.RefreshToken(jwtToken, requestData.ToDto().Token)
 	if err != nil {
 		return c.Error(httpResponse.Error{
 			Code:    core.StatusUnauthorized,

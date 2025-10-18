@@ -2,12 +2,11 @@ package api
 
 import (
 	"gfly/internal/constants"
-	"gfly/internal/http"
 	"gfly/internal/http/response"
 	"gfly/internal/http/transformers"
-	"gfly/internal/modules/auth/dto"
-	"gfly/internal/modules/auth/request"
-	"gfly/internal/modules/auth/services"
+	"gfly/pkg/http"
+	"gfly/pkg/modules/auth/request"
+	"gfly/pkg/modules/auth/services"
 	"github.com/gflydev/core"
 )
 
@@ -28,7 +27,7 @@ func NewSignUpApi() *SignUp {
 // ====================================================================
 
 func (h *SignUp) Validate(c *core.Ctx) error {
-	return http.ProcessRequest[request.SignUp, dto.SignUp](c)
+	return http.ProcessData[request.SignUp](c)
 }
 
 // ====================================================================
@@ -46,9 +45,9 @@ func (h *SignUp) Validate(c *core.Ctx) error {
 // @Success 200 {object} response.User
 // @Router /auth/signup [post]
 func (h *SignUp) Handle(c *core.Ctx) error {
-	signUpDto := c.GetData(constants.Request).(dto.SignUp)
+	requestData := c.GetData(constants.Request).(request.SignUp)
 
-	user, err := services.SignUp(&signUpDto)
+	user, err := services.SignUp(requestData.ToDto())
 	if err != nil {
 		return c.Error(response.Error{
 			Code:    core.StatusBadRequest,

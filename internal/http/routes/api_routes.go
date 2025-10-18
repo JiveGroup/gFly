@@ -6,7 +6,7 @@ import (
 	"gfly/internal/http/controllers/api"
 	"gfly/internal/http/controllers/api/user"
 	"gfly/internal/http/middleware"
-	authRoute "gfly/internal/modules/auth/routes"
+	authRoute "gfly/pkg/modules/auth/routes"
 
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/utils"

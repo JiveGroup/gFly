@@ -2,9 +2,9 @@ package user
 
 import (
 	"gfly/internal/constants"
-	"gfly/internal/http"
 	"gfly/internal/http/response"
 	"gfly/internal/services"
+	"gfly/pkg/http"
 	"github.com/gflydev/core"
 )
 

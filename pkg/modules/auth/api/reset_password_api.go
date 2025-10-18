@@ -2,11 +2,10 @@ package api
 
 import (
 	"gfly/internal/constants"
-	"gfly/internal/http"
 	"gfly/internal/http/response"
-	"gfly/internal/modules/auth/dto"
-	"gfly/internal/modules/auth/request"
-	"gfly/internal/modules/auth/services"
+	"gfly/pkg/http"
+	"gfly/pkg/modules/auth/request"
+	"gfly/pkg/modules/auth/services"
 	"github.com/gflydev/core"
 )
 
@@ -31,7 +30,7 @@ type ResetPWApi struct {
 
 // Validate Verify data from request.
 func (h *ResetPWApi) Validate(c *core.Ctx) error {
-	return http.ProcessRequest[request.ResetPassword, dto.ResetPassword](c)
+	return http.ProcessData[request.ResetPassword](c)
 }
 
 // ====================================================================
@@ -49,9 +48,9 @@ func (h *ResetPWApi) Validate(c *core.Ctx) error {
 // @Failure 400 {object} response.Error
 // @Router /password/reset [post]
 func (h *ResetPWApi) Handle(c *core.Ctx) error {
-	data := c.GetData(constants.Request).(dto.ResetPassword)
+	requestData := c.GetData(constants.Request).(request.ResetPassword)
 
-	err := services.ChangePassword(data)
+	err := services.ChangePassword(requestData.ToDto())
 	if err != nil {
 		return c.Error(response.Error{
 			Message: err.Error(),

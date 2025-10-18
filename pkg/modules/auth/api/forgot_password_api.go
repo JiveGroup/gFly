@@ -2,11 +2,10 @@ package api
 
 import (
 	"gfly/internal/constants"
-	"gfly/internal/http"
 	"gfly/internal/http/response"
-	"gfly/internal/modules/auth/dto"
-	"gfly/internal/modules/auth/request"
-	"gfly/internal/modules/auth/services"
+	"gfly/pkg/http"
+	"gfly/pkg/modules/auth/request"
+	"gfly/pkg/modules/auth/services"
 	"github.com/gflydev/core"
 )
 
@@ -31,7 +30,7 @@ type ForgotPWApi struct {
 
 // Validate Verify data from request.
 func (h *ForgotPWApi) Validate(c *core.Ctx) error {
-	return http.ProcessRequest[request.ForgotPassword, dto.ForgotPassword](c)
+	return http.ProcessData[request.ForgotPassword](c)
 }
 
 // ====================================================================
@@ -49,9 +48,9 @@ func (h *ForgotPWApi) Validate(c *core.Ctx) error {
 // @Failure 400 {object} response.Error
 // @Router /password/forgot [post]
 func (h *ForgotPWApi) Handle(c *core.Ctx) error {
-	data := c.GetData(constants.Request).(dto.ForgotPassword)
+	requestData := c.GetData(constants.Request).(request.ForgotPassword)
 
-	err := services.ForgotPassword(data)
+	err := services.ForgotPassword(requestData.ToDto())
 	if err != nil {
 		return c.Error(response.Error{
 			Message: err.Error(),

@@ -1,6 +1,6 @@
 package request
 
-import "gfly/internal/modules/auth/dto"
+import "gfly/pkg/modules/auth/dto"
 
 // ForgotPassword struct to describe forgot password.
 type ForgotPassword struct {

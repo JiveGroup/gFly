@@ -2,12 +2,11 @@ package user
 
 import (
 	"gfly/internal/constants"
-	"gfly/internal/dto"
-	"gfly/internal/http"
 	"gfly/internal/http/request"
 	"gfly/internal/http/response"
 	"gfly/internal/http/transformers"
 	"gfly/internal/services"
+	"gfly/pkg/http"
 	"github.com/gflydev/core"
 )
 
@@ -28,7 +27,7 @@ func NewUpdateUserApi() *UpdateUserApi {
 // ====================================================================
 
 func (h *UpdateUserApi) Validate(c *core.Ctx) error {
-	return http.ProcessUpdateRequest[request.UpdateUser, dto.UpdateUser](c)
+	return http.ProcessUpdateData[request.UpdateUser](c)
 }
 
 // ====================================================================
@@ -49,9 +48,9 @@ func (h *UpdateUserApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /users/{id} [put]
 func (h *UpdateUserApi) Handle(c *core.Ctx) error {
-	updateUserDto := c.GetData(constants.Request).(dto.UpdateUser)
+	requestData := c.GetData(constants.Request).(request.UpdateUser)
 
-	user, err := services.UpdateUser(updateUserDto)
+	user, err := services.UpdateUser(requestData.ToDto())
 	if err != nil {
 		return c.Error(response.Error{
 			Code:    core.StatusBadRequest,

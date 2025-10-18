@@ -2,14 +2,13 @@ package api
 
 import (
 	"gfly/internal/constants"
-	"gfly/internal/http"
 	httpResponse "gfly/internal/http/response"
-	"gfly/internal/modules/auth"
-	"gfly/internal/modules/auth/dto"
-	"gfly/internal/modules/auth/request"
-	_ "gfly/internal/modules/auth/response" // Used for Swagger documentation
-	"gfly/internal/modules/auth/services"
-	"gfly/internal/modules/auth/transformers"
+	"gfly/pkg/http"
+	"gfly/pkg/modules/auth"
+	"gfly/pkg/modules/auth/request"
+	_ "gfly/pkg/modules/auth/response" // Used for Swagger documentation
+	"gfly/pkg/modules/auth/services"
+	"gfly/pkg/modules/auth/transformers"
 	"github.com/gflydev/core"
 )
 
@@ -35,7 +34,7 @@ func NewSignInApi(authType auth.Type) *SignInApi {
 
 // Validate data from request
 func (h *SignInApi) Validate(c *core.Ctx) error {
-	return http.ProcessRequest[request.SignIn, dto.SignIn](c)
+	return http.ProcessData[request.SignIn](c)
 }
 
 // ====================================================================
@@ -54,9 +53,9 @@ func (h *SignInApi) Validate(c *core.Ctx) error {
 // @Router /auth/signin [post]
 func (h *SignInApi) Handle(c *core.Ctx) error {
 	// Get valid data from context
-	signInDto := c.GetData(constants.Request).(dto.SignIn)
+	requestData := c.GetData(constants.Request).(request.SignIn)
 
-	tokens, err := services.SignIn(signInDto)
+	tokens, err := services.SignIn(requestData.ToDto())
 	if err != nil {
 		return c.Error(httpResponse.Error{
 			Code:    core.StatusBadRequest,
@@ -65,7 +64,7 @@ func (h *SignInApi) Handle(c *core.Ctx) error {
 	}
 
 	if h.Type == auth.TypeWeb {
-		c.SetSession(auth.SessionUsername, signInDto.Username)
+		c.SetSession(auth.SessionUsername, requestData.ToDto().Username)
 
 		return c.NoContent()
 	}

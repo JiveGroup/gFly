@@ -1,8 +1,8 @@
 package transformers
 
 import (
-	"gfly/internal/modules/auth"
-	"gfly/internal/modules/auth/response"
+	"gfly/pkg/modules/auth"
+	"gfly/pkg/modules/auth/response"
 )
 
 // ToSignInResponse function JWTTokens struct to SignIn response object.

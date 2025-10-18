@@ -2,12 +2,11 @@ package user
 
 import (
 	"gfly/internal/constants"
-	"gfly/internal/dto"
-	"gfly/internal/http"
 	"gfly/internal/http/request"
 	"gfly/internal/http/response"
 	"gfly/internal/http/transformers"
 	"gfly/internal/services"
+	"gfly/pkg/http"
 	"github.com/gflydev/core"
 )
 
@@ -28,7 +27,7 @@ func NewCreateUserApi() *CreateUserApi {
 // ====================================================================
 
 func (h *CreateUserApi) Validate(c *core.Ctx) error {
-	return http.ProcessRequest[request.CreateUser, dto.CreateUser](c)
+	return http.ProcessData[request.CreateUser](c)
 }
 
 // ====================================================================
@@ -48,9 +47,9 @@ func (h *CreateUserApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /users [post]
 func (h *CreateUserApi) Handle(c *core.Ctx) error {
-	createUserDto := c.GetData(constants.Request).(dto.CreateUser)
+	requestData := c.GetData(constants.Request).(request.CreateUser)
 
-	user, err := services.CreateUser(createUserDto)
+	user, err := services.CreateUser(requestData.ToDto())
 	if err != nil {
 		return c.Error(response.Error{
 			Code:    core.StatusBadRequest,

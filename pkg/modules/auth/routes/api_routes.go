@@ -2,9 +2,9 @@ package routes
 
 import (
 	"fmt"
-	"gfly/internal/modules/auth"
-	"gfly/internal/modules/auth/api"
-	"gfly/internal/modules/auth/middleware"
+	"gfly/pkg/modules/auth"
+	"gfly/pkg/modules/auth/api"
+	"gfly/pkg/modules/auth/middleware"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/utils"
 )

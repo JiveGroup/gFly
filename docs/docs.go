@@ -48,7 +48,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_modules_auth_request.RefreshToken"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.RefreshToken"
                         }
                     }
                 ],
@@ -56,7 +56,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_modules_auth_response.SignIn"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_response.SignIn"
                         }
                     },
                     "400": {
@@ -94,7 +94,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_modules_auth_request.SignIn"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.SignIn"
                         }
                     }
                 ],
@@ -102,7 +102,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_modules_auth_response.SignIn"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_response.SignIn"
                         }
                     },
                     "400": {
@@ -171,7 +171,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_modules_auth_request.SignUp"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.SignUp"
                         }
                     }
                 ],
@@ -234,7 +234,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_modules_auth_request.ForgotPassword"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.ForgotPassword"
                         }
                     }
                 ],
@@ -271,7 +271,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_modules_auth_request.ResetPassword"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.ResetPassword"
                         }
                     }
                 ],
@@ -947,7 +947,7 @@ const docTemplate = `{
                 }
             }
         },
-        "gfly_internal_modules_auth_request.ForgotPassword": {
+        "gfly_pkg_modules_auth_request.ForgotPassword": {
             "type": "object",
             "required": [
                 "username"
@@ -960,7 +960,7 @@ const docTemplate = `{
                 }
             }
         },
-        "gfly_internal_modules_auth_request.RefreshToken": {
+        "gfly_pkg_modules_auth_request.RefreshToken": {
             "type": "object",
             "required": [
                 "token"
@@ -973,7 +973,7 @@ const docTemplate = `{
                 }
             }
         },
-        "gfly_internal_modules_auth_request.ResetPassword": {
+        "gfly_pkg_modules_auth_request.ResetPassword": {
             "type": "object",
             "required": [
                 "password",
@@ -992,7 +992,7 @@ const docTemplate = `{
                 }
             }
         },
-        "gfly_internal_modules_auth_request.SignIn": {
+        "gfly_pkg_modules_auth_request.SignIn": {
             "type": "object",
             "required": [
                 "password",
@@ -1011,7 +1011,7 @@ const docTemplate = `{
                 }
             }
         },
-        "gfly_internal_modules_auth_request.SignUp": {
+        "gfly_pkg_modules_auth_request.SignUp": {
             "type": "object",
             "required": [
                 "email",
@@ -1051,7 +1051,7 @@ const docTemplate = `{
                 }
             }
         },
-        "gfly_internal_modules_auth_response.SignIn": {
+        "gfly_pkg_modules_auth_response.SignIn": {
             "type": "object",
             "properties": {
                 "access": {

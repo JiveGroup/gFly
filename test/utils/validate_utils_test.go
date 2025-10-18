@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"gfly/internal/utils"
+	"gfly/pkg/utils"
 	"testing"
 )
 

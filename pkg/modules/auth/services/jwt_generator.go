@@ -2,7 +2,7 @@ package services
 
 import (
 	"fmt"
-	"gfly/internal/modules/auth"
+	"gfly/pkg/modules/auth"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
 	"github.com/gflydev/core/utils"

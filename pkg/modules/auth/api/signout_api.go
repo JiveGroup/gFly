@@ -2,8 +2,8 @@ package api
 
 import (
 	"gfly/internal/http/response"
-	"gfly/internal/modules/auth"
-	"gfly/internal/modules/auth/services"
+	"gfly/pkg/modules/auth"
+	"gfly/pkg/modules/auth/services"
 	"github.com/gflydev/core"
 )
 

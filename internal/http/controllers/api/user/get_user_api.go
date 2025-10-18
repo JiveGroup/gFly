@@ -3,9 +3,9 @@ package user
 import (
 	"gfly/internal/constants"
 	"gfly/internal/domain/models"
-	"gfly/internal/http"
 	"gfly/internal/http/response"
 	"gfly/internal/http/transformers"
+	"gfly/pkg/http"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
 	mb "github.com/gflydev/db"

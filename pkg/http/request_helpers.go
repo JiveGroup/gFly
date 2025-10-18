@@ -2,6 +2,7 @@ package http
 
 import (
 	"gfly/internal/constants"
+	"gfly/pkg/security"
 	"github.com/gflydev/core"
 )
 
@@ -68,39 +69,29 @@ func ProcessFilter(c *core.Ctx) error {
 // ======================= Update Request Helpers =====================
 // ====================================================================
 
-// UpdateRequest is an interface for types that can convert to a DTO
-// It defines the contract for request types that need ID setting and DTO conversion capabilities
-type UpdateRequest[D any] interface {
+// UpdateData is an interface for types that can be updated.
+// IMPORTANT: SetID must be implemented with a pointer receiver (e.g., func (r *RequestType) SetID(id int))
+// to ensure the ID is properly set on the original struct, not a copy
+type UpdateData interface {
 	// SetID sets the ID field of the request structure
+	// Must be implemented with a pointer receiver to modify the struct in place
 	// Parameters:
 	//   - id: Integer ID value to set
 	SetID(int)
-
-	// Request converts the request to its corresponding DTO type
-	// Returns:
-	//   - D: The converted DTO object of generic type D
-	Request[D]
 }
 
-// ProcessUpdateRequest validates and processes update requests that require a path ID parameter
-// It handles parsing the request body, setting the ID, converting to DTO, and validation and put to Ctx's Data
+// ProcessUpdateData validates and processes update requests.
+// It handles parsing the request body, setting the ID, converting to DTO, and validation and put to Ctx's Data.
 //
 // Type Parameters:
-//   - T: Request type that implements UpdateRequest interface
-//   - D: Target DTO type that the request converts to
+//   - T: The type that implements the UpdateData interface.
 //
 // Parameters:
-//   - c: The context object containing the HTTP request/response data
+//   - c: The context object containing the HTTP request/response data.
 //
 // Returns:
-//   - error: Returns nil if successful, otherwise returns an error response
-//
-// Example Usage:
-//
-//	func (h UpdateUserApi) Validate(c *core.Ctx) error {
-//		return http.ProcessUpdateRequest[request.UpdateUser, dto.UpdateUser](c)
-//	}
-func ProcessUpdateRequest[T UpdateRequest[D], D any](c *core.Ctx) error {
+//   - error: Returns nil if successful, otherwise returns an error response.
+func ProcessUpdateData[T UpdateData](c *core.Ctx) error {
 	// Receive path parameter ID
 	itemID, errData := PathID(c)
 	if errData != nil {
@@ -108,24 +99,24 @@ func ProcessUpdateRequest[T UpdateRequest[D], D any](c *core.Ctx) error {
 	}
 
 	// Receive request data
-	var requestBody T
-	if errData := Parse(c, &requestBody); errData != nil {
+	var requestData T
+	if errData := Parse(c, &requestData); errData != nil {
 		return c.Error(errData)
 	}
 
-	// Set ID on request body
-	requestBody.SetID(itemID)
+	// Sanitize request data
+	security.SanitizeStruct(&requestData)
 
-	// Convert to DTO
-	requestDto := requestBody.ToDto()
+	// Set ID on the request body
+	requestData.SetID(itemID)
 
 	// Validate DTO
-	if errData := Validate(requestDto); errData != nil {
+	if errData := Validate(requestData); errData != nil {
 		return c.Error(errData)
 	}
 
 	// Store data into context
-	c.SetData(constants.Request, requestDto)
+	c.SetData(constants.Request, requestData)
 
 	return nil
 }
@@ -134,50 +125,38 @@ func ProcessUpdateRequest[T UpdateRequest[D], D any](c *core.Ctx) error {
 // ======================== Add Request Helpers =======================
 // ====================================================================
 
-// Request is an interface for types that can convert to a DTO
-// It defines the contract for request types that need DTO conversion capabilities
-type Request[D any] interface {
-	// ToDto converts the request to its corresponding DTO type
-	// Returns:
-	//   - D: The converted DTO object of generic type D
-	ToDto() D
+// AddData is an interface for types that can be added.
+type AddData interface {
 }
 
-// ProcessRequest validates and processes create/add requests
-// It handles parsing the request body, converting to DTO, and validation and put to Ctx's Data
+// ProcessData validates and processes create/add requests.
+// It handles parsing the request body, converting to DTO, and validation and put to Ctx's Data.
 //
 // Type Parameters:
-//   - T: Request type that implements Request interface
-//   - D: Target DTO type that the request converts to
+//   - T: The type that implements the AddData interface.
 //
 // Parameters:
-//   - c: The context object containing the HTTP request/response data
+//   - c: The context object containing the HTTP request/response data.
 //
 // Returns:
-//   - error: Returns nil if successful, otherwise returns an error response
-//
-// Example Usage:
-//
-//	func (h CreateUserApi) Validate(c *core.Ctx) error {
-//		return http.ProcessRequest[request.CreateUser, dto.CreateUser](c)
-//	}
-func ProcessRequest[T Request[D], D any](c *core.Ctx) error {
+//   - error: Returns nil if successful, otherwise returns an error response.
+func ProcessData[T AddData](c *core.Ctx) error {
 	// Receive request data
-	var requestBody T
-	if errData := Parse(c, &requestBody); errData != nil {
+	var requestData T
+	if errData := Parse(c, &requestData); errData != nil {
 		return c.Error(errData)
 	}
 
-	// Convert to DTO
-	requestDto := requestBody.ToDto()
+	// Sanitize request data
+	security.SanitizeStruct(&requestData)
 
 	// Validate DTO
-	if errData := Validate(requestDto); errData != nil {
+	if errData := Validate(requestData); errData != nil {
 		return c.Error(errData)
 	}
 
 	// Store data into context
-	c.SetData(constants.Request, requestDto)
+	c.SetData(constants.Request, requestData)
 
 	return nil
 }

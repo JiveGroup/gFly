@@ -1,6 +1,6 @@
 package request
 
-import "gfly/internal/modules/auth/dto"
+import "gfly/pkg/modules/auth/dto"
 
 // ResetPassword struct to describe reset password.
 type ResetPassword struct {
