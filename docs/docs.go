@@ -48,7 +48,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.RefreshToken"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.RefreshToken"
                         }
                     }
                 ],
@@ -56,19 +56,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.SignIn"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_response.SignIn"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
                         }
                     }
                 }
@@ -94,7 +94,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.SignIn"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.SignIn"
                         }
                     }
                 ],
@@ -102,13 +102,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.SignIn"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_response.SignIn"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -139,13 +139,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
                         }
                     }
                 }
@@ -171,7 +171,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.SignUp"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.SignUp"
                         }
                     }
                 ],
@@ -179,13 +179,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.User"
+                            "$ref": "#/definitions/gfly_internal_http_response.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -208,7 +208,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.ServerInfo"
+                            "$ref": "#/definitions/gfly_internal_http_response.ServerInfo"
                         }
                     }
                 }
@@ -234,7 +234,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.ForgotPassword"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.ForgotPassword"
                         }
                     }
                 ],
@@ -245,7 +245,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -271,7 +271,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.ResetPassword"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_request.ResetPassword"
                         }
                     }
                 ],
@@ -282,7 +282,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -336,19 +336,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.ListUser"
+                            "$ref": "#/definitions/gfly_internal_http_response.ListUser"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
                         }
                     }
                 }
@@ -377,7 +377,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.CreateUser"
+                            "$ref": "#/definitions/gfly_internal_http_request.CreateUser"
                         }
                     }
                 ],
@@ -385,19 +385,19 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/response.User"
+                            "$ref": "#/definitions/gfly_internal_http_response.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
                         }
                     }
                 }
@@ -425,13 +425,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.User"
+                            "$ref": "#/definitions/gfly_internal_http_response.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -468,19 +468,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.User"
+                            "$ref": "#/definitions/gfly_internal_http_response.User"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -516,7 +516,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.UpdateUser"
+                            "$ref": "#/definitions/gfly_internal_http_request.UpdateUser"
                         }
                     }
                 ],
@@ -524,19 +524,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.User"
+                            "$ref": "#/definitions/gfly_internal_http_response.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
                         }
                     }
                 }
@@ -571,19 +571,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.User"
+                            "$ref": "#/definitions/gfly_internal_http_response.User"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -621,7 +621,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.UpdateUserStatus"
+                            "$ref": "#/definitions/gfly_internal_http_request.UpdateUserStatus"
                         }
                     }
                 ],
@@ -629,19 +629,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/response.User"
+                            "$ref": "#/definitions/gfly_internal_http_response.User"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/response.Error"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
                         }
                     }
                 }
@@ -653,7 +653,37 @@ const docTemplate = `{
             "type": "object",
             "additionalProperties": {}
         },
-        "request.CreateUser": {
+        "gfly_internal_domain_models_types.Role": {
+            "type": "string",
+            "enum": [
+                "na",
+                "admin",
+                "moderator",
+                "member",
+                "guest"
+            ],
+            "x-enum-varnames": [
+                "RoleNA",
+                "RoleAdmin",
+                "RoleModerator",
+                "RoleMember",
+                "RoleGuest"
+            ]
+        },
+        "gfly_internal_domain_models_types.UserStatus": {
+            "type": "string",
+            "enum": [
+                "active",
+                "pending",
+                "blocked"
+            ],
+            "x-enum-varnames": [
+                "UserStatusActive",
+                "UserStatusPending",
+                "UserStatusBlocked"
+            ]
+        },
+        "gfly_internal_http_request.CreateUser": {
             "type": "object",
             "required": [
                 "email",
@@ -690,7 +720,7 @@ const docTemplate = `{
                 "roles": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/types.Role"
+                        "$ref": "#/definitions/gfly_internal_domain_models_types.Role"
                     },
                     "example": [
                         "admin",
@@ -703,111 +733,7 @@ const docTemplate = `{
                 }
             }
         },
-        "request.ForgotPassword": {
-            "type": "object",
-            "required": [
-                "username"
-            ],
-            "properties": {
-                "username": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "john@jivecode.com"
-                }
-            }
-        },
-        "request.RefreshToken": {
-            "type": "object",
-            "required": [
-                "token"
-            ],
-            "properties": {
-                "token": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "d1a4216a226cbf75eaefc9107c2c64b6b2c0f18cd8634e3a6f495146c38e1324.1747914602"
-                }
-            }
-        },
-        "request.ResetPassword": {
-            "type": "object",
-            "required": [
-                "password",
-                "token"
-            ],
-            "properties": {
-                "password": {
-                    "type": "string",
-                    "minLength": 6,
-                    "example": "M1PassW@s"
-                },
-                "token": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "293r823or832eioj2eo9282o423"
-                }
-            }
-        },
-        "request.SignIn": {
-            "type": "object",
-            "required": [
-                "password",
-                "username"
-            ],
-            "properties": {
-                "password": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "P@seWor9"
-                },
-                "username": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "admin@gfly.dev"
-                }
-            }
-        },
-        "request.SignUp": {
-            "type": "object",
-            "required": [
-                "email",
-                "fullname",
-                "password",
-                "phone"
-            ],
-            "properties": {
-                "avatar": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "https://i.pravatar.cc/32"
-                },
-                "email": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "john@jivecode.com"
-                },
-                "fullname": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "John Doe"
-                },
-                "password": {
-                    "type": "string",
-                    "maxLength": 255,
-                    "example": "M1PassW@s"
-                },
-                "phone": {
-                    "type": "string",
-                    "maxLength": 20,
-                    "example": "0989831911"
-                },
-                "status": {
-                    "type": "string",
-                    "example": "pending"
-                }
-            }
-        },
-        "request.UpdateUser": {
+        "gfly_internal_http_request.UpdateUser": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -833,7 +759,7 @@ const docTemplate = `{
                 "roles": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/types.Role"
+                        "$ref": "#/definitions/gfly_internal_domain_models_types.Role"
                     },
                     "example": [
                         "admin",
@@ -842,7 +768,7 @@ const docTemplate = `{
                 }
             }
         },
-        "request.UpdateUserStatus": {
+        "gfly_internal_http_request.UpdateUserStatus": {
             "type": "object",
             "required": [
                 "status"
@@ -856,14 +782,14 @@ const docTemplate = `{
                     ],
                     "allOf": [
                         {
-                            "$ref": "#/definitions/types.UserStatus"
+                            "$ref": "#/definitions/gfly_internal_domain_models_types.UserStatus"
                         }
                     ],
                     "example": "active"
                 }
             }
         },
-        "response.Error": {
+        "gfly_internal_http_response.Error": {
             "description": "Generic error response structure",
             "type": "object",
             "properties": {
@@ -887,21 +813,21 @@ const docTemplate = `{
                 }
             }
         },
-        "response.ListUser": {
+        "gfly_internal_http_response.ListUser": {
             "type": "object",
             "properties": {
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/response.User"
+                        "$ref": "#/definitions/gfly_internal_http_response.User"
                     }
                 },
                 "meta": {
-                    "$ref": "#/definitions/response.Meta"
+                    "$ref": "#/definitions/gfly_internal_http_response.Meta"
                 }
             }
         },
-        "response.Meta": {
+        "gfly_internal_http_response.Meta": {
             "description": "Contains pagination metadata including current page, items per page, and total count",
             "type": "object",
             "properties": {
@@ -919,7 +845,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.Role": {
+        "gfly_internal_http_response.Role": {
             "type": "object",
             "properties": {
                 "id": {
@@ -929,11 +855,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "slug": {
-                    "$ref": "#/definitions/types.Role"
+                    "$ref": "#/definitions/gfly_internal_domain_models_types.Role"
                 }
             }
         },
-        "response.ServerInfo": {
+        "gfly_internal_http_response.ServerInfo": {
             "description": "contains system metadata including name, server prefix, and server name.",
             "type": "object",
             "properties": {
@@ -951,18 +877,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.SignIn": {
-            "type": "object",
-            "properties": {
-                "access": {
-                    "type": "string"
-                },
-                "refresh": {
-                    "type": "string"
-                }
-            }
-        },
-        "response.Unauthorized": {
+        "gfly_internal_http_response.Unauthorized": {
             "description": "Unauthorized error response structure",
             "type": "object",
             "properties": {
@@ -978,7 +893,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.User": {
+        "gfly_internal_http_response.User": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -1014,11 +929,11 @@ const docTemplate = `{
                 "roles": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/response.Role"
+                        "$ref": "#/definitions/gfly_internal_http_response.Role"
                     }
                 },
                 "status": {
-                    "$ref": "#/definitions/types.UserStatus"
+                    "$ref": "#/definitions/gfly_internal_domain_models_types.UserStatus"
                 },
                 "token": {
                     "type": "string"
@@ -1032,35 +947,120 @@ const docTemplate = `{
                 }
             }
         },
-        "types.Role": {
-            "type": "string",
-            "enum": [
-                "na",
-                "admin",
-                "moderator",
-                "member",
-                "guest"
+        "gfly_pkg_modules_auth_request.ForgotPassword": {
+            "type": "object",
+            "required": [
+                "username"
             ],
-            "x-enum-varnames": [
-                "RoleNA",
-                "RoleAdmin",
-                "RoleModerator",
-                "RoleMember",
-                "RoleGuest"
-            ]
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "john@jivecode.com"
+                }
+            }
         },
-        "types.UserStatus": {
-            "type": "string",
-            "enum": [
-                "active",
-                "pending",
-                "blocked"
+        "gfly_pkg_modules_auth_request.RefreshToken": {
+            "type": "object",
+            "required": [
+                "token"
             ],
-            "x-enum-varnames": [
-                "UserStatusActive",
-                "UserStatusPending",
-                "UserStatusBlocked"
-            ]
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "d1a4216a226cbf75eaefc9107c2c64b6b2c0f18cd8634e3a6f495146c38e1324.1747914602"
+                }
+            }
+        },
+        "gfly_pkg_modules_auth_request.ResetPassword": {
+            "type": "object",
+            "required": [
+                "password",
+                "token"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "minLength": 6,
+                    "example": "M1PassW@s"
+                },
+                "token": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "293r823or832eioj2eo9282o423"
+                }
+            }
+        },
+        "gfly_pkg_modules_auth_request.SignIn": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "P@seWor9"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "admin@gfly.dev"
+                }
+            }
+        },
+        "gfly_pkg_modules_auth_request.SignUp": {
+            "type": "object",
+            "required": [
+                "email",
+                "fullname",
+                "password",
+                "phone"
+            ],
+            "properties": {
+                "avatar": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "https://i.pravatar.cc/32"
+                },
+                "email": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "john@jivecode.com"
+                },
+                "fullname": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "John Doe"
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "M1PassW@s"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "example": "0989831911"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "pending"
+                }
+            }
+        },
+        "gfly_pkg_modules_auth_response.SignIn": {
+            "type": "object",
+            "properties": {
+                "access": {
+                    "type": "string"
+                },
+                "refresh": {
+                    "type": "string"
+                }
+            }
         }
     },
     "securityDefinitions": {

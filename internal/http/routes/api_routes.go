@@ -23,7 +23,7 @@ func ApiRoutes(r core.IFly) {
 	// API Routers
 	r.Group(prefixAPI, func(apiRouter *core.Group) {
 		// curl -v -X GET http://localhost:7789/api/v1/info | jq
-		apiRouter.GET("/info", api.NewDefaultApi())
+		apiRouter.GET("/info", api.NewInfoApi())
 
 		/* ============================ Auth Group ============================ */
 		authRoute.RegisterApi(apiRouter)

@@ -11,13 +11,13 @@ import (
 // ======================== Controller Creation =======================
 // ====================================================================
 
-// NewDefaultApi As a constructor to create new API.
-func NewDefaultApi() *DefaultApi {
-	return &DefaultApi{}
+// NewInfoApi As a constructor to create new API.
+func NewInfoApi() *InfoApi {
+	return &InfoApi{}
 }
 
-// DefaultApi API struct.
-type DefaultApi struct {
+// InfoApi API struct.
+type InfoApi struct {
 	core.Api
 }
 
@@ -33,7 +33,7 @@ type DefaultApi struct {
 // @Produce json
 // @Success 200 {object} response.ServerInfo
 // @Router /info [get]
-func (h *DefaultApi) Handle(c *core.Ctx) error {
+func (h *InfoApi) Handle(c *core.Ctx) error {
 	obj := response.ServerInfo{
 		Name: utils.Getenv("API_NAME", "gfly"),
 		Prefix: fmt.Sprintf(

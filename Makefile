@@ -42,7 +42,6 @@ test.coverage: ## - Open HTML coverage report in browser
 build: lint test ## - Build the application and CLI tool
 	CGO_ENABLED=0 go build -ldflags="-w -s" -o $(BUILD_DIR)/$(APP_NAME) cmd/web/main.go
 	CGO_ENABLED=0 go build -ldflags="-w -s" -o $(BUILD_DIR)/$(CLI_NAME) cmd/console/main.go
-	cp .env build/
 
 run: lint test doc build ## - Run the application after building
 	$(BUILD_DIR)/$(APP_NAME)
@@ -73,8 +72,8 @@ clean: ## - Clean up Go modules, cache, and test cache
 	go clean -testcache
 
 doc: ## - Generate API documentation using Swag
-	swag init --parseDependency --parseDepth 1 --exclude build,database,deployments,docs,node_modules,public,resources,storage,tmp,vendor -g cmd/web/main.go
-	cp ./docs/swagger.json ./public/docs/
+	@swag init --parseDependency --parseDepth 1 --exclude build,database,deployments,docs,node_modules,public,resources,storage,tmp,vendor,test,scripts,.git,.github,.idea,.local,.junie,.claude -g cmd/web/main.go 2>&1 | grep -v "warning: failed to get package name in dir: ./" || true
+	@cp ./docs/swagger.json ./public/docs/
 
 container.run: ## - Start required Docker containers (PostgreSQL, Mail, Redis)
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d db
