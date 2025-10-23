@@ -7,14 +7,17 @@ import (
 	"github.com/gflydev/cache"
 	cacheRedis "github.com/gflydev/cache/redis"
 	"github.com/gflydev/console"
+	"github.com/gflydev/core"
 	mb "github.com/gflydev/db"
 	dbPSQL "github.com/gflydev/db/psql"
 	notificationMail "github.com/gflydev/notification/mail"
-	_ "github.com/joho/godotenv/autoload" // load .env file automatically
 	"os"
 )
 
 func main() {
+	// Bootstrap
+	core.Bootstrap()
+
 	// Register mail notification
 	notificationMail.AutoRegister()
 

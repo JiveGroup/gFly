@@ -14,7 +14,6 @@ import (
 	"github.com/gflydev/storage"
 	storageLocal "github.com/gflydev/storage/local"
 	"github.com/gflydev/view/pongo"
-	_ "github.com/joho/godotenv/autoload"
 )
 
 // Main function
@@ -31,6 +30,9 @@ import (
 // @in header
 // @name Authorization
 func main() {
+	// Bootstrap
+	core.Bootstrap()
+
 	// Swagger info
 	docs.SwaggerInfo.Title = "Swagger Example API"
 	docs.SwaggerInfo.Description = "This is a sample server gFly."

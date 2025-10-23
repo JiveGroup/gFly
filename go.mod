@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/gflydev/cache v1.0.5
 	github.com/gflydev/console v1.1.0
-	github.com/gflydev/core v1.17.9
+	github.com/gflydev/core v1.17.11
 	github.com/gflydev/db v1.12.4
 	github.com/gflydev/db/psql v1.4.9
 	github.com/gflydev/notification v1.1.1
@@ -18,7 +18,6 @@ require (
 	github.com/gflydev/validation v1.2.1
 	github.com/gflydev/view/pongo v1.0.3
 	github.com/golang-jwt/jwt/v5 v5.3.0
-	github.com/joho/godotenv v1.5.1
 	github.com/swaggo/swag v1.16.6
 )
 
@@ -52,6 +51,7 @@ require (
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/jivegroup/fluentsql v1.5.4 // indirect
 	github.com/jmoiron/sqlx v1.4.0 // indirect
+	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/klauspost/compress v1.18.1 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
