@@ -3,14 +3,13 @@ package middleware
 import (
 	"fmt"
 	"gfly/internal/domain/repository"
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"gfly/pkg/modules/auth"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
 	"github.com/gflydev/core/try"
 	"github.com/gflydev/core/utils"
+	"github.com/gflydev/http"
 	"github.com/gflydev/utils/str"
 	"slices"
 )
@@ -27,7 +26,7 @@ func processSession(c *core.Ctx) (err error) {
 
 		// Put logged-in user to request data pool.
 		user := repository.Pool.GetUserByEmail(username.(string))
-		c.SetData(constants.User, *user)
+		c.SetData(http.UserKey, *user)
 	}).Catch(func(e try.E) {
 		err = errors.New("%v", e)
 	})
@@ -94,7 +93,7 @@ func SessionAuth(excludes ...string) core.MiddlewareHandler {
 //
 //	groupUsers.GET("/profile", f.Apply(middleware.SessionAuthPage)(user.NewAccountPage()))
 func SessionAuthPage(c *core.Ctx) (err error) {
-	if c.GetData(constants.User) == nil {
+	if c.GetData(http.UserKey) == nil {
 		_ = c.Redirect(loginUrl(c))
 	}
 

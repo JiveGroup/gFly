@@ -62,13 +62,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -108,7 +108,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -139,13 +139,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -185,7 +185,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -245,7 +245,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -282,7 +282,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -342,13 +342,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -391,13 +391,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -431,7 +431,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -474,13 +474,13 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -530,13 +530,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -577,13 +577,13 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -635,13 +635,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_pkg_http.Error"
+                            "$ref": "#/definitions/http.Error"
                         }
                     }
                 }
@@ -799,7 +799,7 @@ const docTemplate = `{
                     }
                 },
                 "meta": {
-                    "$ref": "#/definitions/gfly_pkg_http.Meta"
+                    "$ref": "#/definitions/http.Meta"
                 }
             }
         },
@@ -886,48 +886,6 @@ const docTemplate = `{
                 "verified_at": {
                     "type": "string",
                     "example": "2023-01-01T10:30:00Z"
-                }
-            }
-        },
-        "gfly_pkg_http.Error": {
-            "description": "Generic error response structure",
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "Error code",
-                    "type": "string",
-                    "example": "BAD_REQUEST"
-                },
-                "data": {
-                    "description": "Useful for validation's errors",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/core.Data"
-                        }
-                    ]
-                },
-                "message": {
-                    "description": "Error message description",
-                    "type": "string",
-                    "example": "Bad request"
-                }
-            }
-        },
-        "gfly_pkg_http.Meta": {
-            "description": "Contains pagination metadata including current page, items per page, and total count",
-            "type": "object",
-            "properties": {
-                "page": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "per_page": {
-                    "type": "integer",
-                    "example": 10
-                },
-                "total": {
-                    "type": "integer",
-                    "example": 1354
                 }
             }
         },
@@ -1072,6 +1030,48 @@ const docTemplate = `{
                 },
                 "updated_at": {
                     "type": "string"
+                }
+            }
+        },
+        "http.Error": {
+            "description": "Generic error response structure",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error code",
+                    "type": "string",
+                    "example": "BAD_REQUEST"
+                },
+                "data": {
+                    "description": "Useful for validation's errors",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/core.Data"
+                        }
+                    ]
+                },
+                "message": {
+                    "description": "Error message description",
+                    "type": "string",
+                    "example": "Bad request"
+                }
+            }
+        },
+        "http.Meta": {
+            "description": "Contains pagination metadata including current page, items per page, and total count",
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "total": {
+                    "type": "integer",
+                    "example": 1354
                 }
             }
         }

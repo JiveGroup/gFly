@@ -5,9 +5,8 @@ import (
 	_ "gfly/internal/http/response" // Used for Swagger documentation
 	"gfly/internal/http/transformers"
 	"gfly/internal/services"
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"github.com/gflydev/core"
+	"github.com/gflydev/http"
 )
 
 // ====================================================================
@@ -48,7 +47,7 @@ func (h UpdateUserStatusApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /users/{id}/status [put]
 func (h UpdateUserStatusApi) Handle(c *core.Ctx) error {
-	requestData := c.GetData(constants.Request).(request.UpdateUserStatus)
+	requestData := c.GetData(http.RequestKey).(request.UpdateUserStatus)
 
 	// Bind data to service
 	user, err := services.UpdateUserStatus(requestData.ToDto())

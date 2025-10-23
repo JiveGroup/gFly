@@ -1,13 +1,12 @@
 package api
 
 import (
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"gfly/pkg/modules/auth/request"
 	_ "gfly/pkg/modules/auth/response" // Used for Swagger documentation
 	"gfly/pkg/modules/auth/services"
 	"gfly/pkg/modules/auth/transformers"
 	"github.com/gflydev/core"
+	"github.com/gflydev/http"
 )
 
 // ====================================================================
@@ -49,7 +48,7 @@ func (h *RefreshTokenApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /auth/refresh [put]
 func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
-	requestData := c.GetData(constants.Request).(request.RefreshToken)
+	requestData := c.GetData(http.RequestKey).(request.RefreshToken)
 
 	// Check valid refresh token
 	if !services.IsValidRefreshToken(requestData.ToDto().Token) {

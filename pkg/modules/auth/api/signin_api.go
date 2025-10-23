@@ -1,14 +1,13 @@
 package api
 
 import (
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"gfly/pkg/modules/auth"
 	"gfly/pkg/modules/auth/request"
 	_ "gfly/pkg/modules/auth/response" // Used for Swagger documentation
 	"gfly/pkg/modules/auth/services"
 	"gfly/pkg/modules/auth/transformers"
 	"github.com/gflydev/core"
+	"github.com/gflydev/http"
 )
 
 // ====================================================================
@@ -52,7 +51,7 @@ func (h *SignInApi) Validate(c *core.Ctx) error {
 // @Router /auth/signin [post]
 func (h *SignInApi) Handle(c *core.Ctx) error {
 	// Get valid data from context
-	requestData := c.GetData(constants.Request).(request.SignIn)
+	requestData := c.GetData(http.RequestKey).(request.SignIn)
 
 	tokens, err := services.SignIn(requestData.ToDto())
 	if err != nil {

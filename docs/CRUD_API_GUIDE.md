@@ -41,12 +41,12 @@ HTTP Response ← Transformer ← Domain Model ← Service ← Repository ← Da
 
 ## HTTP Helper Functions
 
-gFly provides a set of helper functions in `/pkg/http/` for common request processing tasks.
+gFly provides a set of helper functions in `github.com/gflydev/http` package for common request processing tasks.
 
 ### Request Processing Helpers
 
 ```go
-// File: pkg/http/request_helpers.go
+// From: github.com/gflydev/http
 
 // ProcessData validates and processes CREATE requests (POST)
 // Type parameter T must implement AddData interface
@@ -82,17 +82,17 @@ type UpdateData[D any] interface {
 ### Core Helpers
 
 ```go
-// File: pkg/http/http_helpers.go
+// From: github.com/gflydev/http
 
 // Parse parses JSON request body into a struct
-func Parse(c *core.Ctx, requestData any) *response.Error
+func Parse(c *core.Ctx, requestData any) *http.Error
 
 // Validate performs validation using struct tags
-func Validate(structData any, msgForTagFunc ...validation.MsgForTagFunc) *response.Error
+func Validate(structData any, msgForTagFunc ...validation.MsgForTagFunc) *http.Error
 
 // PathID extracts and validates ID from URL path parameter
 // NOTE: For controllers, prefer using ProcessPathID() instead
-func PathID(c *core.Ctx) (int, *response.Error)
+func PathID(c *core.Ctx) (int, *http.Error)
 
 // FilterData retrieves filter parameters: page, per_page, keyword, order_by
 func FilterData(c *core.Ctx) dto.Filter
@@ -262,12 +262,11 @@ func ToUserResponse(user models.User) response.User {
 package user
 
 import (
-    "gfly/pkg/constants"
     "gfly/internal/http/request"
     "gfly/internal/http/response"
     "gfly/internal/http/transformers"
     "gfly/internal/services"
-    "gfly/pkg/http"
+    "github.com/gflydev/http"
     "github.com/gflydev/core"
 )
 
@@ -425,11 +424,10 @@ Response: 200 OK
 package user
 
 import (
-    "gfly/pkg/constants"
     "gfly/internal/http/response"
     "gfly/internal/http/transformers"
     "gfly/internal/services"
-    "gfly/pkg/http"
+    "github.com/gflydev/http"
     "github.com/gflydev/core"
 )
 
@@ -594,12 +592,11 @@ func (r *UpdateUser) SetID(id int) {
 package user
 
 import (
-    "gfly/pkg/constants"
     "gfly/internal/http/request"
     "gfly/internal/http/response"
     "gfly/internal/http/transformers"
     "gfly/internal/services"
-    "gfly/pkg/http"
+    "github.com/gflydev/http"
     "github.com/gflydev/core"
 )
 
@@ -747,10 +744,9 @@ Response: 204 No Content
 package user
 
 import (
-    "gfly/pkg/constants"
     "gfly/internal/http/response"
     "gfly/internal/services"
-    "gfly/pkg/http"
+    "github.com/gflydev/http"
     "github.com/gflydev/core"
 )
 
@@ -950,7 +946,6 @@ type Meta struct {
 package user
 
 import (
-    "gfly/pkg/constants"
     "gfly/internal/dto"
     "gfly/internal/http/controllers/api"
     "gfly/internal/http/response"
@@ -1024,7 +1019,7 @@ func (h *ListUsersApi) Handle(c *core.Ctx) error {
 package api
 
 import (
-    "gfly/pkg/http"
+    "github.com/gflydev/http"
     "github.com/gflydev/core"
 )
 
@@ -1184,7 +1179,7 @@ package request
 
 import (
     "gfly/internal/dto"
-    "gfly/pkg/http"
+    "github.com/gflydev/http"
     "github.com/gflydev/core"
 )
 
@@ -1247,7 +1242,6 @@ Use the custom filter extraction function in the controller's `Validate()` metho
 package product
 
 import (
-    "gfly/pkg/constants"
     "gfly/internal/dto"
     "gfly/internal/http/controllers/api"
     "gfly/internal/http/request"
@@ -2187,12 +2181,11 @@ func FindProducts(filterDto dto.Filter) ([]models.Product, int, error) {
 package product
 
 import (
-    "gfly/pkg/constants"
     "gfly/internal/http/request"
     "gfly/internal/http/response"
     "gfly/internal/http/transformers"
     "gfly/internal/services"
-    "gfly/pkg/http"
+    "github.com/gflydev/http"
     "github.com/gflydev/core"
 )
 

@@ -2,7 +2,7 @@ package response
 
 import (
 	"gfly/internal/domain/models/types"
-	"gfly/pkg/http"
+	"github.com/gflydev/http"
 	"time"
 )
 

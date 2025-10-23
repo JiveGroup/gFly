@@ -2,12 +2,11 @@ package middleware
 
 import (
 	"gfly/internal/domain/models"
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"gfly/pkg/modules/auth/services"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
 	mb "github.com/gflydev/db"
+	"github.com/gflydev/http"
 	"slices"
 	"time"
 )
@@ -78,7 +77,7 @@ func JWTAuth(excludes ...string) core.MiddlewareHandler {
 		}
 
 		c.Status(core.StatusOK)
-		c.SetData(constants.User, *user)
+		c.SetData(http.UserKey, *user)
 
 		return nil
 	}

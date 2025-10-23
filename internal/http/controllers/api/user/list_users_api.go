@@ -5,9 +5,8 @@ import (
 	"gfly/internal/http/response"
 	"gfly/internal/http/transformers"
 	"gfly/internal/services"
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"github.com/gflydev/core"
+	"github.com/gflydev/http"
 )
 
 // ====================================================================
@@ -44,7 +43,7 @@ func NewListUsersApi() *ListUsersApi {
 // @Security ApiKeyAuth
 // @Router /users [get]
 func (h *ListUsersApi) Handle(c *core.Ctx) error {
-	filterDto := c.GetData(constants.Filter).(dto.Filter)
+	filterDto := c.GetData(http.FilterKey).(dto.Filter)
 	users, total, err := services.FindUsers(filterDto)
 	if err != nil {
 		return err

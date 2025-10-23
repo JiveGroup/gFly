@@ -2,9 +2,8 @@ package middleware
 
 import (
 	"gfly/internal/domain/models"
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"github.com/gflydev/core"
+	"github.com/gflydev/http"
 	"strconv"
 )
 
@@ -23,14 +22,14 @@ func PreventUpdateYourSelf(c *core.Ctx) error {
 		return err
 	}
 
-	if c.GetData(constants.User) == nil {
+	if c.GetData(http.UserKey) == nil {
 		return c.Error(http.Error{
 			Message: "Unauthorized",
 		}, core.StatusUnauthorized)
 	}
 
 	// Get user data
-	user := c.GetData(constants.User).(models.User)
+	user := c.GetData(http.UserKey).(models.User)
 
 	// In-case the user updates itself
 	if userId == user.ID {

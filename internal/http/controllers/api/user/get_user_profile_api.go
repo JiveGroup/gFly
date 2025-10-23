@@ -4,9 +4,8 @@ import (
 	"gfly/internal/domain/models"
 	_ "gfly/internal/http/response" // Used for Swagger documentation
 	"gfly/internal/http/transformers"
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"github.com/gflydev/core"
+	"github.com/gflydev/http"
 )
 
 // ====================================================================
@@ -38,13 +37,13 @@ type GetUserProfileApi struct {
 // @Security ApiKeyAuth
 // @Router /users/profile [get]
 func (h *GetUserProfileApi) Handle(c *core.Ctx) error {
-	if c.GetData(constants.User) == nil {
+	if c.GetData(http.UserKey) == nil {
 		return c.Error(http.Error{
 			Message: "Unauthorized",
 		}, core.StatusUnauthorized)
 	}
 
-	user := c.GetData(constants.User).(models.User)
+	user := c.GetData(http.UserKey).(models.User)
 
 	// Transform to response data
 	var userRes = transformers.ToUserResponse(user)

@@ -1,10 +1,10 @@
 package api
 
 import (
-	"gfly/pkg/http"
 	"gfly/pkg/modules/auth"
 	"gfly/pkg/modules/auth/services"
 	"github.com/gflydev/core"
+	"github.com/gflydev/http"
 )
 
 // ====================================================================

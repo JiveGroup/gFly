@@ -8,6 +8,7 @@ require (
 	github.com/gflydev/core v1.17.11
 	github.com/gflydev/db v1.12.4
 	github.com/gflydev/db/psql v1.4.9
+	github.com/gflydev/http v1.0.1
 	github.com/gflydev/notification v1.1.1
 	github.com/gflydev/notification/mail v1.0.3
 	github.com/gflydev/session v1.0.3
@@ -15,7 +16,6 @@ require (
 	github.com/gflydev/storage v1.1.6
 	github.com/gflydev/storage/local v1.1.6
 	github.com/gflydev/utils v1.1.0
-	github.com/gflydev/validation v1.2.1
 	github.com/gflydev/view/pongo v1.0.3
 	github.com/golang-jwt/jwt/v5 v5.3.0
 	github.com/swaggo/swag v1.16.6
@@ -30,6 +30,7 @@ require (
 	github.com/flosch/pongo2/v6 v6.0.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.10 // indirect
 	github.com/gflydev/mail v1.0.3 // indirect
+	github.com/gflydev/validation v1.2.1 // indirect
 	github.com/go-openapi/jsonpointer v0.22.1 // indirect
 	github.com/go-openapi/jsonreference v0.21.2 // indirect
 	github.com/go-openapi/spec v0.22.0 // indirect

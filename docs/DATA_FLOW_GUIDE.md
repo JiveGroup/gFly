@@ -1164,7 +1164,7 @@ func ToSignInResponse(tokens *auth.Token) response.SignIn {
 ### Validation Implementation
 
 ```go
-// File: pkg/http/http_helpers.go
+// From: github.com/gflydev/http
 
 // Validate performs input validation using gflydev/validation.
 //
@@ -1192,7 +1192,7 @@ func Validate(structData any, msgForTagFunc ...validation.MsgForTagFunc) *respon
 ### Request Processing Helpers
 
 ```go
-// File: pkg/http/request_helpers.go
+// From: github.com/gflydev/http
 
 // ProcessData validates and processes create/add requests.
 //
@@ -1455,12 +1455,11 @@ func CreateUser(createUserDto dto.CreateUser) (*models.User, error) {
 package user
 
 import (
-    "gfly/pkg/constants"
     "gfly/internal/http/request"
     "gfly/internal/http/response"
     "gfly/internal/http/transformers"
     "gfly/internal/services"
-    "gfly/pkg/http"
+    "github.com/gflydev/http"
     "github.com/gflydev/core"
 )
 

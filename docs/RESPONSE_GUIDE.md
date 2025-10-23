@@ -25,20 +25,20 @@ All HTTP responses in the application follow a consistent structure. The respons
 - **Separation of Concerns**: Domain models are never returned directly; they are transformed to response DTOs
 
 **Locations**:
-- **Generic/Reusable Responses**: `pkg/http/` (package `http`) - Contains `Meta`, `List[T]`, `Success`, `Error`
+- **Generic/Reusable Responses**: `github.com/gflydev/http` (package `http`) - Contains `Meta`, `List[T]`, `Success`, `Error`
 - **Application-Specific Responses**: `internal/http/response/` (package `response`) - Contains domain-specific response types like `User`, `ServerInfo`
 
 ---
 
 ## Generic Response Types
 
-Generic response types are defined in `pkg/http/generic_response.go` (package `http`).
+Generic response types are defined in `github.com/gflydev/http` package.
 
 ### 1. List Response (`http.List[T]`)
 
 Used for paginated list endpoints. Contains metadata and a generic data array.
 
-**Structure** (from `pkg/http/generic_response.go:26-29`):
+**Structure**:
 ```go
 type List[T any] struct {
     Meta Meta `json:"meta"`
@@ -46,7 +46,7 @@ type List[T any] struct {
 }
 ```
 
-**Metadata Structure** (`pkg/http/generic_response.go:15-19`):
+**Metadata Structure**:
 ```go
 type Meta struct {
     Page    int `json:"page,omitempty"`     // Current page number (starts from 1)
@@ -81,7 +81,7 @@ type Meta struct {
 
 Used for operations that succeed with an optional data payload and message.
 
-**Structure** (`pkg/http/generic_response.go:36-39`):
+**Structure**:
 ```go
 type Success struct {
     Message string    `json:"message"`
@@ -111,7 +111,7 @@ type Success struct {
 
 Used for all error responses across the application.
 
-**Structure** (`pkg/http/generic_response.go:51-55`):
+**Structure**:
 ```go
 type Error struct {
     Code    string    `json:"code"`    // Error code (e.g., "BAD_REQUEST")
@@ -215,7 +215,7 @@ When creating new custom response types:
 
 2. **Add list variant if needed**:
    ```go
-   import "gfly/pkg/http"
+   import "github.com/gflydev/http"
 
    type ListProduct struct {
        Meta http.Meta `json:"meta" doc:"Pagination metadata"`
@@ -232,23 +232,23 @@ When creating new custom response types:
 Transformers convert domain models to response DTOs. This ensures separation between database entities and API responses.
 
 **Locations**:
-- **Generic Transformer**: `pkg/http/generic_transformer.go` (package `http`)
+- **Generic Transformer**: `github.com/gflydev/http` package
 - **Application-Specific Transformers**: `internal/http/transformers/` (package `transformers`)
 
 ### Generic Transformer
 
-**ToListResponse** - Transform a list of models to response DTOs (`pkg/http/generic_transformer.go:9-11`):
+**ToListResponse** - Transform a list of models to response DTOs:
 
 ```go
 func ToListResponse[T any, R any](records []T, transformerFn func(T) R) []R
 ```
 
-**Usage Example** (`list_users_api.go:61`):
+**Usage Example** (`list_users_api.go:60`):
 ```go
-import httpPkg "gfly/pkg/http"
+import "github.com/gflydev/http"
 
 // Transform list using generic function
-data := httpPkg.ToListResponse(users, transformers.ToUserResponse)
+data := http.ToListResponse(users, transformers.ToUserResponse)
 ```
 
 ### User Transformers (`user_transformer.go`)
@@ -328,11 +328,11 @@ func ToProductResponse(product models.Product) response.Product {
 
 ## Helper Functions
 
-Located in `pkg/http/http_helpers.go`, these utilities simplify common controller tasks.
+Located in `github.com/gflydev/http` package, these utilities simplify common controller tasks.
 
 ### 1. PathID - Extract ID from URL Path
 
-**Signature** (`pkg/http/http_helpers.go:15-31`):
+**Signature**:
 ```go
 func PathID(c *core.Ctx, idName ...string) (int, *http.Error)
 ```
@@ -358,7 +358,7 @@ categoryID, errResp := http.PathID(c, "category_id")
 
 ### 2. Parse - Parse Request Body
 
-**Signature** (`pkg/http/http_helpers.go:36-46`):
+**Signature**:
 ```go
 func Parse[T any](c *core.Ctx, structData *T) *http.Error
 ```
@@ -379,7 +379,7 @@ if errResp := http.Parse(c, &req); errResp != nil {
 
 ### 3. FilterData - Extract Pagination & Filter Parameters
 
-**Signature** (`pkg/http/http_helpers.go:50-72`):
+**Signature**:
 ```go
 func FilterData(c *core.Ctx) dto.Filter
 ```
@@ -410,7 +410,7 @@ type Filter struct {
 
 ### 4. Validate - Perform Input Validation
 
-**Signature** (`pkg/http/http_helpers.go:77-89`):
+**Signature**:
 ```go
 func Validate(structData any, msgForTagFunc ...validation.MsgForTagFunc) *http.Error
 ```
@@ -442,9 +442,9 @@ The `core.Ctx` object provides several methods for sending responses.
 
 **Usage**:
 ```go
-import httpPkg "gfly/pkg/http"
+import "github.com/gflydev/http"
 
-return c.Success(httpPkg.Success{
+return c.Success(http.Success{
     Message: "User deleted successfully",
     Data: core.Data{"deleted_id": userID},
 })
@@ -484,9 +484,9 @@ return c.
 
 **Usage**:
 ```go
-import httpPkg "gfly/pkg/http"
+import "github.com/gflydev/http"
 
-return c.Error(httpPkg.Error{
+return c.Error(http.Error{
     Code:    "NOT_FOUND",
     Message: "User not found",
 })
@@ -496,11 +496,11 @@ return c.Error(httpPkg.Error{
 
 **With Custom Status**:
 ```go
-import httpPkg "gfly/pkg/http"
+import "github.com/gflydev/http"
 
 return c.
     Status(core.StatusNotFound).
-    Error(httpPkg.Error{
+    Error(http.Error{
         Code:    "NOT_FOUND",
         Message: "User not found",
     })
@@ -597,11 +597,11 @@ func (h *CreateUserApi) Handle(c *core.Ctx) error {
 
 **Always check and handle errors**:
 ```go
-import httpPkg "gfly/pkg/http"
+import "github.com/gflydev/http"
 
 user, err := services.GetUser(id)
 if err != nil {
-    return c.Error(httpPkg.Error{
+    return c.Error(http.Error{
         Message: err.Error(),
     })
 }
@@ -609,13 +609,13 @@ if err != nil {
 
 **With custom status codes**:
 ```go
-import httpPkg "gfly/pkg/http"
+import "github.com/gflydev/http"
 
 user, err := services.GetUser(id)
 if err != nil {
     return c.
         Status(core.StatusNotFound).
-        Error(httpPkg.Error{
+        Error(http.Error{
             Code:    "USER_NOT_FOUND",
             Message: "User not found",
         })
@@ -629,17 +629,17 @@ if err != nil {
 For any list endpoint, use `http.List[T]` pattern:
 
 ```go
-import httpPkg "gfly/pkg/http"
+import "github.com/gflydev/http"
 
-metadata := httpPkg.Meta{
+metadata := http.Meta{
     Page:    filterDto.Page,
     PerPage: filterDto.PerPage,
     Total:   total,
 }
 
-data := httpPkg.ToListResponse(products, transformers.ToProductResponse)
+data := http.ToListResponse(products, transformers.ToProductResponse)
 
-return c.Success(httpPkg.List[response.Product]{
+return c.Success(http.List[response.Product]{
     Meta: metadata,
     Data: data,
 })
@@ -647,11 +647,11 @@ return c.Success(httpPkg.List[response.Product]{
 
 Or define a custom list type like `response.ListUser`:
 ```go
-import httpPkg "gfly/pkg/http"
+import "github.com/gflydev/http"
 
 type ListProduct struct {
-    Meta httpPkg.Meta `json:"meta"`
-    Data []Product    `json:"data"`
+    Meta http.Meta `json:"meta"`
+    Data []Product `json:"data"`
 }
 ```
 
@@ -764,11 +764,11 @@ func (h *CreateUserApi) Handle(c *core.Ctx) error {
 
 **Controller**:
 ```go
-import httpPkg "gfly/pkg/http"
+import "github.com/gflydev/http"
 
 func (h *DeleteUserApi) Handle(c *core.Ctx) error {
     // Extract ID from path
-    id, errResp := httpPkg.PathID(c)
+    id, errResp := http.PathID(c)
     if errResp != nil {
         return c.Error(*errResp)
     }
@@ -776,13 +776,13 @@ func (h *DeleteUserApi) Handle(c *core.Ctx) error {
     // Delete via service
     err := services.DeleteUser(id)
     if err != nil {
-        return c.Error(httpPkg.Error{
+        return c.Error(http.Error{
             Message: err.Error(),
         })
     }
 
     // Return success message
-    return c.Success(httpPkg.Success{
+    return c.Success(http.Success{
         Message: "User deleted successfully",
         Data:    core.Data{"deleted_id": id},
     })
@@ -880,7 +880,7 @@ func (h *SignInApi) Handle(c *core.Ctx) error {
 
 ### Key Takeaways
 
-1. **Use generic response types** (`http.List[T]`, `http.Success`, `http.Error` from `pkg/http`) for consistency
+1. **Use generic response types** (`http.List[T]`, `http.Success`, `http.Error` from `github.com/gflydev/http`) for consistency
 2. **Always transform domain models** using transformers before returning
 3. **Include complete Swagger annotations** on all controller handlers
 4. **Use helper functions** (`http.PathID`, `http.Validate`, `http.FilterData`) for common tasks
@@ -921,9 +921,7 @@ HTTP Response (JSON)
 ---
 
 For additional information, see:
-- `pkg/http/generic_response.go` - Generic response types (Meta, List, Success, Error)
-- `pkg/http/generic_transformer.go` - Generic transformer function (ToListResponse)
-- `pkg/http/http_helpers.go` - Helper function implementations (PathID, Parse, Validate, FilterData)
+- `github.com/gflydev/http` - Generic response types (Meta, List, Success, Error), transformers (ToListResponse), and helper functions (PathID, Parse, Validate, FilterData)
 - `internal/http/response/` - Application-specific response type definitions (User, ServerInfo, etc.)
 - `internal/http/transformers/` - Application-specific transformer implementations (ToUserResponse, etc.)
 - `CLAUDE.md` - Project overview and development workflow

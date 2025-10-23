@@ -4,11 +4,10 @@ import (
 	"gfly/internal/domain/models"
 	_ "gfly/internal/http/response" // Used for Swagger documentation
 	"gfly/internal/http/transformers"
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
 	mb "github.com/gflydev/db"
+	"github.com/gflydev/http"
 )
 
 // ====================================================================
@@ -48,7 +47,7 @@ func (h *GetUserByIdApi) Validate(c *core.Ctx) error {
 // @Security ApiKeyAuth
 // @Router /users/{id} [get]
 func (h *GetUserByIdApi) Handle(c *core.Ctx) error {
-	userID := c.GetData(constants.PathID).(int)
+	userID := c.GetData(http.PathIDKey).(int)
 
 	user, err := mb.GetModelByID[models.User](userID)
 	if err != nil {

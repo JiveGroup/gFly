@@ -4,10 +4,9 @@ import (
 	"gfly/internal/domain/models"
 	"gfly/internal/domain/models/types"
 	"gfly/internal/services"
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
+	"github.com/gflydev/http"
 	"slices"
 )
 
@@ -34,14 +33,14 @@ func CheckRolesMiddleware(roles []types.Role, excludes ...string) core.Middlewar
 			return nil
 		}
 
-		if c.GetData(constants.User) == nil {
+		if c.GetData(http.UserKey) == nil {
 			return c.Error(http.Error{
 				Message: "Unauthorized",
 			}, core.StatusUnauthorized)
 		}
 
 		// Retrieve user data from the context
-		user := c.GetData(constants.User).(models.User)
+		user := c.GetData(http.UserKey).(models.User)
 
 		// Check if user has any of the required roles
 		if !services.UserHasRole(user.ID, roles) {

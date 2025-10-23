@@ -111,7 +111,7 @@ definitions:
           $ref: '#/definitions/gfly_internal_http_response.User'
         type: array
       meta:
-        $ref: '#/definitions/gfly_pkg_http.Meta'
+        $ref: '#/definitions/http.Meta'
     type: object
   gfly_internal_http_response.Role:
     properties:
@@ -172,36 +172,6 @@ definitions:
       verified_at:
         example: "2023-01-01T10:30:00Z"
         type: string
-    type: object
-  gfly_pkg_http.Error:
-    description: Generic error response structure
-    properties:
-      code:
-        description: Error code
-        example: BAD_REQUEST
-        type: string
-      data:
-        allOf:
-        - $ref: '#/definitions/core.Data'
-        description: Useful for validation's errors
-      message:
-        description: Error message description
-        example: Bad request
-        type: string
-    type: object
-  gfly_pkg_http.Meta:
-    description: Contains pagination metadata including current page, items per page,
-      and total count
-    properties:
-      page:
-        example: 1
-        type: integer
-      per_page:
-        example: 10
-        type: integer
-      total:
-        example: 1354
-        type: integer
     type: object
   gfly_pkg_modules_auth_request.ForgotPassword:
     properties:
@@ -306,6 +276,36 @@ definitions:
       updated_at:
         type: string
     type: object
+  http.Error:
+    description: Generic error response structure
+    properties:
+      code:
+        description: Error code
+        example: BAD_REQUEST
+        type: string
+      data:
+        allOf:
+        - $ref: '#/definitions/core.Data'
+        description: Useful for validation's errors
+      message:
+        description: Error message description
+        example: Bad request
+        type: string
+    type: object
+  http.Meta:
+    description: Contains pagination metadata including current page, items per page,
+      and total count
+    properties:
+      page:
+        example: 1
+        type: integer
+      per_page:
+        example: 10
+        type: integer
+      total:
+        example: 1354
+        type: integer
+    type: object
 info:
   contact:
     email: admin@jivecode.com
@@ -340,11 +340,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       security:
       - ApiKeyAuth: []
       summary: refresh user token
@@ -373,7 +373,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       summary: authenticating user's credentials
       tags:
       - Auth
@@ -390,11 +390,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       security:
       - ApiKeyAuth: []
       summary: de-authorize user and delete refresh token from Redis
@@ -423,7 +423,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       summary: Sign up a new user
       tags:
       - Auth
@@ -462,7 +462,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       summary: Forgot password
       tags:
       - Password
@@ -486,7 +486,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       summary: Reset password
       tags:
       - Password
@@ -525,11 +525,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       security:
       - ApiKeyAuth: []
       summary: Function list all users data
@@ -556,11 +556,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       security:
       - ApiKeyAuth: []
       summary: Create a new user for Administrator
@@ -587,11 +587,11 @@ paths:
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       security:
       - ApiKeyAuth: []
       summary: Delete user by given userID
@@ -618,11 +618,11 @@ paths:
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       security:
       - ApiKeyAuth: []
       summary: Get user by given id
@@ -655,11 +655,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       security:
       - ApiKeyAuth: []
       summary: Function allows Administrator update an existing user
@@ -692,11 +692,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       security:
       - ApiKeyAuth: []
       summary: Update user's status by ID
@@ -717,7 +717,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/gfly_pkg_http.Error'
+            $ref: '#/definitions/http.Error'
       security:
       - ApiKeyAuth: []
       summary: Get user profile

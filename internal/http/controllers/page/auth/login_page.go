@@ -2,8 +2,8 @@ package auth
 
 import (
 	"gfly/internal/http/controllers/page"
-	"gfly/pkg/constants"
 	"github.com/gflydev/core"
+	"github.com/gflydev/http"
 )
 
 // ====================================================================
@@ -24,7 +24,7 @@ type LoginPage struct {
 // ====================================================================
 
 func (m *LoginPage) Handle(c *core.Ctx) error {
-	if c.GetData(constants.User) != nil {
+	if c.GetData(http.UserKey) != nil {
 		return c.Redirect("/profile")
 	}
 

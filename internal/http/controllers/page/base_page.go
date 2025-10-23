@@ -3,10 +3,10 @@ package page
 import (
 	"database/sql"
 	"gfly/internal/domain/models"
-	"gfly/pkg/constants"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/utils"
 	dbNull "github.com/gflydev/db/null"
+	"github.com/gflydev/http"
 	"time"
 )
 
@@ -29,7 +29,7 @@ func (m *BasePage) View(c *core.Ctx, template string, data core.Data) error {
 	}
 
 	// Auto-load login user session
-	user := c.GetData(constants.User)
+	user := c.GetData(http.UserKey)
 	if user != nil {
 		data["account"] = user.(models.User)
 	}

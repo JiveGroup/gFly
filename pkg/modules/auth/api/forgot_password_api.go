@@ -1,11 +1,10 @@
 package api
 
 import (
-	"gfly/pkg/constants"
-	"gfly/pkg/http"
 	"gfly/pkg/modules/auth/request"
 	"gfly/pkg/modules/auth/services"
 	"github.com/gflydev/core"
+	"github.com/gflydev/http"
 )
 
 // ====================================================================
@@ -47,7 +46,7 @@ func (h *ForgotPWApi) Validate(c *core.Ctx) error {
 // @Failure 400 {object} http.Error
 // @Router /password/forgot [post]
 func (h *ForgotPWApi) Handle(c *core.Ctx) error {
-	requestData := c.GetData(constants.Request).(request.ForgotPassword)
+	requestData := c.GetData(http.RequestKey).(request.ForgotPassword)
 
 	err := services.ForgotPassword(requestData.ToDto())
 	if err != nil {
