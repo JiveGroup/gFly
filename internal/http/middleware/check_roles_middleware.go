@@ -36,7 +36,6 @@ func CheckRolesMiddleware(roles []types.Role, excludes ...string) core.Middlewar
 
 		if c.GetData(constants.User) == nil {
 			return c.Error(response.Error{
-				Code:    core.StatusUnauthorized,
 				Message: "Unauthorized",
 			}, core.StatusUnauthorized)
 		}
@@ -48,7 +47,6 @@ func CheckRolesMiddleware(roles []types.Role, excludes ...string) core.Middlewar
 		if !services.UserHasRole(user.ID, roles) {
 			// Return error response
 			return c.Error(response.Error{
-				Code:    core.StatusForbidden,
 				Message: "Permission denied",
 			}, core.StatusForbidden)
 		}

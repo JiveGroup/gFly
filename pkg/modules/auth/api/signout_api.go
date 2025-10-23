@@ -35,7 +35,7 @@ type SignOutApi struct {
 // @Accept json
 // @Produce json
 // @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Unauthorized
+// @Failure 401 {object} response.Error
 // @Success 204
 // @Security ApiKeyAuth
 // @Router /auth/signout [delete]
@@ -45,7 +45,6 @@ func (h *SignOutApi) Handle(c *core.Ctx) error {
 
 		if err := services.SignOut(jwtToken); err != nil {
 			return c.Error(response.Error{
-				Code:    core.StatusBadRequest,
 				Message: err.Error(),
 			})
 		}

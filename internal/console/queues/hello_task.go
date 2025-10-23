@@ -1,12 +1,9 @@
 package queues
 
 import (
-	"context"
-	"encoding/json"
 	"github.com/gflydev/console"
 	"github.com/gflydev/core/errors"
 	"github.com/gflydev/core/log"
-	"github.com/hibiken/asynq"
 )
 
 // ---------------------------------------------------------------
@@ -40,11 +37,11 @@ type HelloTask struct {
 }
 
 // Dequeue Handle a task in queue.
-func (t HelloTask) Dequeue(ctx context.Context, task *asynq.Task) error {
+func (t HelloTask) Dequeue(task *console.TaskPayload) error {
 	// Decode task payload
 	var payload HelloTaskPayload
-	if err := json.Unmarshal(task.Payload(), &payload); err != nil {
-		return errors.New("json.Unmarshal failed: %v: %w", err, asynq.SkipRetry)
+	if err := task.BindPayload(&payload); err != nil {
+		return errors.New("json.Unmarshal failed: %v: %s", err, task.GetType())
 	}
 
 	// Process payload

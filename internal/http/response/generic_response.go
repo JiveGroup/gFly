@@ -38,18 +38,6 @@ type Success struct {
 	Data    core.Data `json:"data" doc:"Additional data related to the operation"` // Optional data related to the success operation
 }
 
-// ServerInfo struct to describe system information.
-// @Description contains system metadata including name, server prefix, and server name.
-// @Name Name is the name of the API.
-// @Prefix Prefix is the API prefix including version.
-// @Server Server is the name of the server application.
-// @Tags Success Responses
-type ServerInfo struct {
-	Name   string `json:"name" example:"ThietNgon API" doc:"API name"`
-	Prefix string `json:"prefix" example:"/api/v1" doc:"API prefix including version"`
-	Server string `json:"server" example:"ThietNgon-Go Server" doc:"Server application name"`
-}
-
 // ====================================================================
 // ========================= Error Responses ==========================
 // ====================================================================
@@ -61,37 +49,7 @@ type ServerInfo struct {
 // @Message Message is a description of the error that occurred.
 // @Tags Error Responses
 type Error struct {
-	Code    int       `json:"code" example:"400"`            // HTTP status code
+	Code    string    `json:"code" example:"BAD_REQUEST"`    // Error code
 	Message string    `json:"message" example:"Bad request"` // Error message description
 	Data    core.Data `json:"data"`                          // Useful for validation's errors
-}
-
-// Unauthorized clone from app.core.errors.Unauthorized
-// @Description Unauthorized error response structure
-// @Code Code is the HTTP status code for the error.
-// @Message Message is a description of the error that occurred.
-// @Tags Error Responses
-type Unauthorized struct {
-	Code    int    `json:"code" example:"401"`                  // HTTP status code
-	Message string `json:"error" example:"Unauthorized access"` // Error message description
-}
-
-// NotFound handle not found any record
-// @Description Not found error response structure
-// @Code Code is the HTTP status code for the error.
-// @Message Message is a description of the error that occurred.
-// @Tags Error Responses
-type NotFound struct {
-	Code    int    `json:"code" example:"404"`                 // HTTP status code
-	Message string `json:"error" example:"Resource not found"` // Error message description
-}
-
-// Conflict describes a conflict error
-// @Description Conflict error response structure
-// @Code Code is the HTTP status code for the error.
-// @Message Message is a description of the error that occurred.
-// @Tags Error Responses
-type Conflict struct {
-	Code    int    `json:"code" example:"409"`                // HTTP status code
-	Message string `json:"error" example:"Resource conflict"` // Error message description
 }

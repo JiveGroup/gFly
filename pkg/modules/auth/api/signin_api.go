@@ -58,7 +58,6 @@ func (h *SignInApi) Handle(c *core.Ctx) error {
 	tokens, err := services.SignIn(requestData.ToDto())
 	if err != nil {
 		return c.Error(httpResponse.Error{
-			Code:    core.StatusBadRequest,
 			Message: err.Error(),
 		})
 	}

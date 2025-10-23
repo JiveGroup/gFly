@@ -43,7 +43,7 @@ func (h UpdateUserStatusApi) Validate(c *core.Ctx) error {
 // @Param id path int true "User ID"
 // @Param request body request.UpdateUserStatus true "Update user status data"
 // @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Unauthorized
+// @Failure 401 {object} response.Error
 // @Success 200 {object} response.User
 // @Security ApiKeyAuth
 // @Router /users/{id}/status [put]

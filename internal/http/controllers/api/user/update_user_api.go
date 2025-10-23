@@ -44,7 +44,7 @@ func (h *UpdateUserApi) Validate(c *core.Ctx) error {
 // @Param data body request.UpdateUser true "UpdateUser payload"
 // @Success 200 {object} response.User
 // @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Unauthorized
+// @Failure 401 {object} response.Error
 // @Security ApiKeyAuth
 // @Router /users/{id} [put]
 func (h *UpdateUserApi) Handle(c *core.Ctx) error {
@@ -53,7 +53,6 @@ func (h *UpdateUserApi) Handle(c *core.Ctx) error {
 	user, err := services.UpdateUser(requestData.ToDto())
 	if err != nil {
 		return c.Error(response.Error{
-			Code:    core.StatusBadRequest,
 			Message: err.Error(),
 		})
 	}

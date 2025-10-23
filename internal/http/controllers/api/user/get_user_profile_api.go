@@ -39,7 +39,6 @@ type GetUserProfileApi struct {
 func (h *GetUserProfileApi) Handle(c *core.Ctx) error {
 	if c.GetData(constants.User) == nil {
 		return c.Error(response.Error{
-			Code:    core.StatusUnauthorized,
 			Message: "Unauthorized",
 		}, core.StatusUnauthorized)
 	}

@@ -43,7 +43,7 @@ func (h *GetUserByIdApi) Validate(c *core.Ctx) error {
 // @Produce json
 // @Param id path int true "User ID"
 // @Success 200 {object} response.User
-// @Failure 401 {object} response.Unauthorized
+// @Failure 401 {object} response.Error
 // @Failure 404 {object} response.Error
 // @Security ApiKeyAuth
 // @Router /users/{id} [get]
@@ -55,7 +55,6 @@ func (h *GetUserByIdApi) Handle(c *core.Ctx) error {
 		log.Error(err)
 
 		return c.Error(response.Error{
-			Code:    core.StatusNotFound,
 			Message: "User not found",
 		}, core.StatusNotFound)
 	}

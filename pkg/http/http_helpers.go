@@ -23,7 +23,6 @@ func PathID(c *core.Ctx, idName ...string) (int, *response.Error) {
 	id, err := strconv.Atoi(c.PathVal(name))
 	if err != nil || id < 1 {
 		return id, &response.Error{
-			Code:    core.StatusBadRequest,
 			Message: fmt.Sprintf("%s must be positive integer", name),
 		}
 	}
@@ -39,7 +38,6 @@ func Parse[T any](c *core.Ctx, structData *T) *response.Error {
 	err := c.ParseBody(structData)
 	if err != nil {
 		return &response.Error{
-			Code:    core.StatusBadRequest,
 			Message: err.Error(),
 		}
 	}
@@ -82,7 +80,6 @@ func Validate(structData any, msgForTagFunc ...validation.MsgForTagFunc) *respon
 	if err != nil {
 		// Response validation error
 		return &response.Error{
-			Code:    core.StatusBadRequest,
 			Message: "Invalid input",
 			Data:    errorData,
 		}

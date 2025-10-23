@@ -4,8 +4,8 @@ go 1.24.0
 
 require (
 	github.com/gflydev/cache v1.0.5
-	github.com/gflydev/console v1.0.2
-	github.com/gflydev/core v1.17.8
+	github.com/gflydev/console v1.1.0
+	github.com/gflydev/core v1.17.9
 	github.com/gflydev/db v1.12.4
 	github.com/gflydev/db/psql v1.4.9
 	github.com/gflydev/notification v1.1.1
@@ -18,7 +18,6 @@ require (
 	github.com/gflydev/validation v1.2.1
 	github.com/gflydev/view/pongo v1.0.3
 	github.com/golang-jwt/jwt/v5 v5.3.0
-	github.com/hibiken/asynq v0.25.1
 	github.com/joho/godotenv v1.5.1
 	github.com/swaggo/swag v1.16.6
 )
@@ -46,18 +45,19 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.28.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
+	github.com/hibiken/asynq v0.25.1 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/jackc/pgx/v5 v5.7.6 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/jivegroup/fluentsql v1.5.4 // indirect
 	github.com/jmoiron/sqlx v1.4.0 // indirect
-	github.com/klauspost/compress v1.18.0 // indirect
+	github.com/klauspost/compress v1.18.1 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
-	github.com/redis/go-redis/v9 v9.14.0 // indirect
+	github.com/redis/go-redis/v9 v9.14.1 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/spf13/cast v1.10.0 // indirect

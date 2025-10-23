@@ -71,7 +71,6 @@ func SessionAuth(excludes ...string) core.MiddlewareHandler {
 		if err != nil && str.StartsWith(path, prefixAPI) {
 			return c.Error(response.Error{
 				Message: err.Error(),
-				Code:    core.StatusUnauthorized,
 			}, core.StatusUnauthorized)
 		}
 

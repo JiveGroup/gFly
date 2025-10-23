@@ -40,7 +40,7 @@ func (h *DeleteUserApi) Validate(c *core.Ctx) error {
 // @Produce json
 // @Param id path int true "User ID"
 // @Success 200 {object} response.User
-// @Failure 401 {object} response.Unauthorized
+// @Failure 401 {object} response.Error
 // @Failure 404 {object} response.Error
 // @Security ApiKeyAuth
 // @Router /users/{id} [delete]
@@ -50,7 +50,6 @@ func (h *DeleteUserApi) Handle(c *core.Ctx) error {
 	err := services.DeleteUserByID(userId)
 	if err != nil {
 		return c.Error(response.Error{
-			Code:    core.StatusNotFound,
 			Message: err.Error(),
 		}, core.StatusNotFound)
 	}

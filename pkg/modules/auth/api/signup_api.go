@@ -50,7 +50,6 @@ func (h *SignUp) Handle(c *core.Ctx) error {
 	user, err := services.SignUp(requestData.ToDto())
 	if err != nil {
 		return c.Error(response.Error{
-			Code:    core.StatusBadRequest,
 			Message: err.Error(),
 		})
 	}

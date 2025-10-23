@@ -39,7 +39,7 @@ func NewListUsersApi() *ListUsersApi {
 // @Param page query int false "Page"
 // @Param per_page query int false "Items Per Page"
 // @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Unauthorized
+// @Failure 401 {object} response.Error
 // @Success 200 {object} response.ListUser
 // @Security ApiKeyAuth
 // @Router /users [get]

@@ -25,7 +25,6 @@ func PreventUpdateYourSelf(c *core.Ctx) error {
 
 	if c.GetData(constants.User) == nil {
 		return c.Error(response.Error{
-			Code:    core.StatusUnauthorized,
 			Message: "Unauthorized",
 		}, core.StatusUnauthorized)
 	}
@@ -39,7 +38,6 @@ func PreventUpdateYourSelf(c *core.Ctx) error {
 		c.Root().Request.Header.SetContentType(core.MIMEApplicationJSONCharsetUTF8)
 
 		return c.Error(response.Error{
-			Code:    core.StatusForbidden,
 			Message: "Don't allow update yourself",
 		}, core.StatusForbidden)
 	}

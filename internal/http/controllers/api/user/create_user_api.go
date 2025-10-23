@@ -43,7 +43,7 @@ func (h *CreateUserApi) Validate(c *core.Ctx) error {
 // @Param data body request.CreateUser true "CreateUser payload"
 // @Success 201 {object} response.User
 // @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Unauthorized
+// @Failure 401 {object} response.Error
 // @Security ApiKeyAuth
 // @Router /users [post]
 func (h *CreateUserApi) Handle(c *core.Ctx) error {
@@ -52,7 +52,6 @@ func (h *CreateUserApi) Handle(c *core.Ctx) error {
 	user, err := services.CreateUser(requestData.ToDto())
 	if err != nil {
 		return c.Error(response.Error{
-			Code:    core.StatusBadRequest,
 			Message: err.Error(),
 		})
 	}

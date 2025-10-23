@@ -68,7 +68,7 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -145,7 +145,7 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -348,7 +348,7 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -397,7 +397,7 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -474,7 +474,7 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     },
                     "404": {
@@ -536,7 +536,7 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -577,7 +577,7 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     },
                     "404": {
@@ -641,7 +641,7 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Unauthorized"
+                            "$ref": "#/definitions/gfly_internal_http_response.Error"
                         }
                     }
                 }
@@ -794,9 +794,9 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "code": {
-                    "description": "HTTP status code",
-                    "type": "integer",
-                    "example": 400
+                    "description": "Error code",
+                    "type": "string",
+                    "example": "ACCOUNT_BLOCKED"
                 },
                 "data": {
                     "description": "Useful for validation's errors",
@@ -874,22 +874,6 @@ const docTemplate = `{
                 "server": {
                     "type": "string",
                     "example": "ThietNgon-Go Server"
-                }
-            }
-        },
-        "gfly_internal_http_response.Unauthorized": {
-            "description": "Unauthorized error response structure",
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP status code",
-                    "type": "integer",
-                    "example": 401
-                },
-                "error": {
-                    "description": "Error message description",
-                    "type": "string",
-                    "example": "Unauthorized access"
                 }
             }
         },

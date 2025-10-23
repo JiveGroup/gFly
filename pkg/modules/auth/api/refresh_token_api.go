@@ -45,7 +45,7 @@ func (h *RefreshTokenApi) Validate(c *core.Ctx) error {
 // @Produce json
 // @Param data body request.RefreshToken true "RefreshToken payload"
 // @Failure 400 {object} httpResponse.Error
-// @Failure 401 {object} httpResponse.Unauthorized
+// @Failure 401 {object} httpResponse.Error
 // @Success 200 {object} response.SignIn
 // @Security ApiKeyAuth
 // @Router /auth/refresh [put]
@@ -55,7 +55,6 @@ func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
 	// Check valid refresh token
 	if !services.IsValidRefreshToken(requestData.ToDto().Token) {
 		return c.Error(httpResponse.Error{
-			Code:    core.StatusUnauthorized,
 			Message: "Invalid JWT token",
 		}, core.StatusUnauthorized)
 	}
@@ -65,7 +64,6 @@ func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
 	tokens, err := services.RefreshToken(jwtToken, requestData.ToDto().Token)
 	if err != nil {
 		return c.Error(httpResponse.Error{
-			Code:    core.StatusUnauthorized,
 			Message: err.Error(),
 		}, core.StatusUnauthorized)
 	}

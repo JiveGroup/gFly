@@ -54,7 +54,6 @@ func (h *ForgotPWApi) Handle(c *core.Ctx) error {
 	if err != nil {
 		return c.Error(response.Error{
 			Message: err.Error(),
-			Code:    core.StatusBadRequest,
 		})
 	}
 
