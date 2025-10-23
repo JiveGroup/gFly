@@ -1,7 +1,7 @@
 package http
 
 import (
-	"gfly/internal/constants"
+	"gfly/pkg/constants"
 	"gfly/pkg/security"
 	"github.com/gflydev/core"
 )

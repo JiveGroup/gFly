@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"gfly/internal/constants"
 	"gfly/internal/domain/models"
-	"gfly/internal/http/response"
+	"gfly/pkg/constants"
+	"gfly/pkg/http"
 	"github.com/gflydev/core"
 	"strconv"
 )
@@ -14,8 +14,8 @@ import (
 //
 // @Param id path string true "User ID to update"
 // @Success 200 {object} nil "Success"
-// @Failure 403 {object} response.Error "Forbidden: User cannot update their own record"
-// @Failure 400 {object} response.Error "Bad Request: Invalid User ID"
+// @Failure 403 {object} http.Error "Forbidden: User cannot update their own record"
+// @Failure 400 {object} http.Error "Bad Request: Invalid User ID"
 func PreventUpdateYourSelf(c *core.Ctx) error {
 	// Parse request parameter
 	userId, err := strconv.Atoi(c.PathVal("id"))
@@ -24,7 +24,7 @@ func PreventUpdateYourSelf(c *core.Ctx) error {
 	}
 
 	if c.GetData(constants.User) == nil {
-		return c.Error(response.Error{
+		return c.Error(http.Error{
 			Message: "Unauthorized",
 		}, core.StatusUnauthorized)
 	}
@@ -37,7 +37,7 @@ func PreventUpdateYourSelf(c *core.Ctx) error {
 		// Force update request header
 		c.Root().Request.Header.SetContentType(core.MIMEApplicationJSONCharsetUTF8)
 
-		return c.Error(response.Error{
+		return c.Error(http.Error{
 			Message: "Don't allow update yourself",
 		}, core.StatusForbidden)
 	}

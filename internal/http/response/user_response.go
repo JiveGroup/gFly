@@ -2,6 +2,7 @@ package response
 
 import (
 	"gfly/internal/domain/models/types"
+	"gfly/pkg/http"
 	"time"
 )
 
@@ -32,6 +33,6 @@ type Role struct {
 }
 
 type ListUser struct {
-	Meta Meta   `json:"meta" doc:"Pagination metadata for a list of users."`
-	Data []User `json:"data" doc:"A list of users matching the query criteria."`
+	Meta http.Meta `json:"meta" doc:"Pagination metadata for a list of users."`
+	Data []User    `json:"data" doc:"A list of users matching the query criteria."`
 }

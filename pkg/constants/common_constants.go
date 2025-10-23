@@ -22,11 +22,4 @@ const (
 	Data string = "__data__"
 	// Filter key in Context's Data for filtering parameters
 	Filter string = "__filter__"
-
-	// ====================================================================
-	// ========================= Auth Constants ===========================
-	// ====================================================================
-
-	AuthResetPasswordUri string = "AUTH_RESET_PASSWORD_URI"
-	AuthLoginUri         string = "AUTH_LOGIN_URI"
 )

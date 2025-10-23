@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"gfly/internal/constants"
 	"gfly/internal/domain/models"
-	"gfly/internal/http/response"
+	"gfly/pkg/constants"
+	"gfly/pkg/http"
 	"gfly/pkg/modules/auth/services"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
@@ -38,13 +38,13 @@ func JWTAuth(excludes ...string) core.MiddlewareHandler {
 		if err != nil {
 			log.Errorf("Check JWT error '%v'", err)
 
-			return c.Error(response.Error{
+			return c.Error(http.Error{
 				Message: "Invalid JWT token",
 			}, core.StatusUnauthorized)
 		}
 
 		if isBlocked {
-			return c.Error(response.Error{
+			return c.Error(http.Error{
 				Message: "JWT token was blocked",
 			}, core.StatusUnauthorized)
 		}
@@ -54,7 +54,7 @@ func JWTAuth(excludes ...string) core.MiddlewareHandler {
 		if err != nil {
 			log.Errorf("Parse JWT error '%v'", err)
 
-			return c.Error(response.Error{
+			return c.Error(http.Error{
 				Message: "Parse JWT error",
 			}, core.StatusUnauthorized)
 		}
@@ -62,7 +62,7 @@ func JWTAuth(excludes ...string) core.MiddlewareHandler {
 		if claims.Expires < time.Now().Unix() {
 			log.Errorf("JWT token expired '%v'", jwtToken)
 
-			return c.Error(response.Error{
+			return c.Error(http.Error{
 				Message: "JWT token expired",
 			}, core.StatusUnauthorized)
 		}
@@ -72,7 +72,7 @@ func JWTAuth(excludes ...string) core.MiddlewareHandler {
 		if err != nil || user == nil {
 			log.Errorf("User not found '%v'", err)
 
-			return c.Error(response.Error{
+			return c.Error(http.Error{
 				Message: "User not found",
 			}, core.StatusUnauthorized)
 		}

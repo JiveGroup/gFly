@@ -1,9 +1,9 @@
 package user
 
 import (
-	"gfly/internal/constants"
-	"gfly/internal/http/response"
+	_ "gfly/internal/http/response" // Used for Swagger documentation
 	"gfly/internal/services"
+	"gfly/pkg/constants"
 	"gfly/pkg/http"
 	"github.com/gflydev/core"
 )
@@ -40,8 +40,8 @@ func (h *DeleteUserApi) Validate(c *core.Ctx) error {
 // @Produce json
 // @Param id path int true "User ID"
 // @Success 200 {object} response.User
-// @Failure 401 {object} response.Error
-// @Failure 404 {object} response.Error
+// @Failure 401 {object} http.Error
+// @Failure 404 {object} http.Error
 // @Security ApiKeyAuth
 // @Router /users/{id} [delete]
 func (h *DeleteUserApi) Handle(c *core.Ctx) error {
@@ -49,7 +49,7 @@ func (h *DeleteUserApi) Handle(c *core.Ctx) error {
 
 	err := services.DeleteUserByID(userId)
 	if err != nil {
-		return c.Error(response.Error{
+		return c.Error(http.Error{
 			Message: err.Error(),
 		}, core.StatusNotFound)
 	}

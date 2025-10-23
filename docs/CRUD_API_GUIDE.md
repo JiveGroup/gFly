@@ -262,7 +262,7 @@ func ToUserResponse(user models.User) response.User {
 package user
 
 import (
-    "gfly/internal/constants"
+    "gfly/pkg/constants"
     "gfly/internal/http/request"
     "gfly/internal/http/response"
     "gfly/internal/http/transformers"
@@ -425,7 +425,7 @@ Response: 200 OK
 package user
 
 import (
-    "gfly/internal/constants"
+    "gfly/pkg/constants"
     "gfly/internal/http/response"
     "gfly/internal/http/transformers"
     "gfly/internal/services"
@@ -594,7 +594,7 @@ func (r *UpdateUser) SetID(id int) {
 package user
 
 import (
-    "gfly/internal/constants"
+    "gfly/pkg/constants"
     "gfly/internal/http/request"
     "gfly/internal/http/response"
     "gfly/internal/http/transformers"
@@ -747,7 +747,7 @@ Response: 204 No Content
 package user
 
 import (
-    "gfly/internal/constants"
+    "gfly/pkg/constants"
     "gfly/internal/http/response"
     "gfly/internal/services"
     "gfly/pkg/http"
@@ -950,7 +950,7 @@ type Meta struct {
 package user
 
 import (
-    "gfly/internal/constants"
+    "gfly/pkg/constants"
     "gfly/internal/dto"
     "gfly/internal/http/controllers/api"
     "gfly/internal/http/response"
@@ -1247,7 +1247,7 @@ Use the custom filter extraction function in the controller's `Validate()` metho
 package product
 
 import (
-    "gfly/internal/constants"
+    "gfly/pkg/constants"
     "gfly/internal/dto"
     "gfly/internal/http/controllers/api"
     "gfly/internal/http/request"
@@ -2187,7 +2187,7 @@ func FindProducts(filterDto dto.Filter) ([]models.Product, int, error) {
 package product
 
 import (
-    "gfly/internal/constants"
+    "gfly/pkg/constants"
     "gfly/internal/http/request"
     "gfly/internal/http/response"
     "gfly/internal/http/transformers"

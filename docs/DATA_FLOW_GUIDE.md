@@ -1455,7 +1455,7 @@ func CreateUser(createUserDto dto.CreateUser) (*models.User, error) {
 package user
 
 import (
-    "gfly/internal/constants"
+    "gfly/pkg/constants"
     "gfly/internal/http/request"
     "gfly/internal/http/response"
     "gfly/internal/http/transformers"

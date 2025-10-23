@@ -62,13 +62,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -108,7 +108,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -139,13 +139,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -179,13 +179,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.User"
+                            "$ref": "#/definitions/gfly_pkg_modules_auth_response.SignUp"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -245,7 +245,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -282,7 +282,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -342,13 +342,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -391,13 +391,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -431,7 +431,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -474,13 +474,13 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -530,13 +530,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -577,13 +577,13 @@ const docTemplate = `{
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -635,13 +635,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/gfly_internal_http_response.Error"
+                            "$ref": "#/definitions/gfly_pkg_http.Error"
                         }
                     }
                 }
@@ -789,30 +789,6 @@ const docTemplate = `{
                 }
             }
         },
-        "gfly_internal_http_response.Error": {
-            "description": "Generic error response structure",
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "Error code",
-                    "type": "string",
-                    "example": "ACCOUNT_BLOCKED"
-                },
-                "data": {
-                    "description": "Useful for validation's errors",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/core.Data"
-                        }
-                    ]
-                },
-                "message": {
-                    "description": "Error message description",
-                    "type": "string",
-                    "example": "Bad request"
-                }
-            }
-        },
         "gfly_internal_http_response.ListUser": {
             "type": "object",
             "properties": {
@@ -823,25 +799,7 @@ const docTemplate = `{
                     }
                 },
                 "meta": {
-                    "$ref": "#/definitions/gfly_internal_http_response.Meta"
-                }
-            }
-        },
-        "gfly_internal_http_response.Meta": {
-            "description": "Contains pagination metadata including current page, items per page, and total count",
-            "type": "object",
-            "properties": {
-                "page": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "per_page": {
-                    "type": "integer",
-                    "example": 10
-                },
-                "total": {
-                    "type": "integer",
-                    "example": 1354
+                    "$ref": "#/definitions/gfly_pkg_http.Meta"
                 }
             }
         },
@@ -928,6 +886,48 @@ const docTemplate = `{
                 "verified_at": {
                     "type": "string",
                     "example": "2023-01-01T10:30:00Z"
+                }
+            }
+        },
+        "gfly_pkg_http.Error": {
+            "description": "Generic error response structure",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Error code",
+                    "type": "string",
+                    "example": "BAD_REQUEST"
+                },
+                "data": {
+                    "description": "Useful for validation's errors",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/core.Data"
+                        }
+                    ]
+                },
+                "message": {
+                    "description": "Error message description",
+                    "type": "string",
+                    "example": "Bad request"
+                }
+            }
+        },
+        "gfly_pkg_http.Meta": {
+            "description": "Contains pagination metadata including current page, items per page, and total count",
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "per_page": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "total": {
+                    "type": "integer",
+                    "example": 1354
                 }
             }
         },
@@ -1042,6 +1042,35 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "refresh": {
+                    "type": "string"
+                }
+            }
+        },
+        "gfly_pkg_modules_auth_response.SignUp": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/gfly_internal_domain_models_types.UserStatus"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "updated_at": {
                     "type": "string"
                 }
             }

@@ -654,7 +654,7 @@ func SignUp(signUp dto.SignUp) (*models.User, error) {
 package notifications
 
 import (
-    "gfly/internal/constants"
+    "gfly/pkg/constants"
     "github.com/gflydev/core"
     "github.com/gflydev/core/utils"
     notifyMail "github.com/gflydev/notification/mail"

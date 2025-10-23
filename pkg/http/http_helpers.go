@@ -3,7 +3,6 @@ package http
 import (
 	"fmt"
 	"gfly/internal/dto"
-	"gfly/internal/http/response"
 	"github.com/gflydev/core"
 	"github.com/gflydev/validation"
 	"strconv"
@@ -12,7 +11,7 @@ import (
 // ---------------------- Path data ------------------------
 
 // PathID get ID from path request
-func PathID(c *core.Ctx, idName ...string) (int, *response.Error) {
+func PathID(c *core.Ctx, idName ...string) (int, *Error) {
 	// Path name
 	name := "id"
 	if len(idName) > 0 {
@@ -22,7 +21,7 @@ func PathID(c *core.Ctx, idName ...string) (int, *response.Error) {
 	// Parse path parameter
 	id, err := strconv.Atoi(c.PathVal(name))
 	if err != nil || id < 1 {
-		return id, &response.Error{
+		return id, &Error{
 			Message: fmt.Sprintf("%s must be positive integer", name),
 		}
 	}
@@ -33,11 +32,11 @@ func PathID(c *core.Ctx, idName ...string) (int, *response.Error) {
 // ---------------------- Parse data ------------------------
 
 // Parse get body data from request
-func Parse[T any](c *core.Ctx, structData *T) *response.Error {
+func Parse[T any](c *core.Ctx, structData *T) *Error {
 	// Parse request body
 	err := c.ParseBody(structData)
 	if err != nil {
-		return &response.Error{
+		return &Error{
 			Message: err.Error(),
 		}
 	}
@@ -74,12 +73,12 @@ func FilterData(c *core.Ctx) dto.Filter {
 // ---------------------- Validations ------------------------
 
 // Validate perform data input checking.
-func Validate(structData any, msgForTagFunc ...validation.MsgForTagFunc) *response.Error {
+func Validate(structData any, msgForTagFunc ...validation.MsgForTagFunc) *Error {
 	errorData, err := validation.Check(structData, msgForTagFunc...)
 
 	if err != nil {
 		// Response validation error
-		return &response.Error{
+		return &Error{
 			Message: "Invalid input",
 			Data:    errorData,
 		}

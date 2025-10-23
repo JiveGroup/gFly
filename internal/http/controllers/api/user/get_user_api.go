@@ -1,10 +1,10 @@
 package user
 
 import (
-	"gfly/internal/constants"
 	"gfly/internal/domain/models"
-	"gfly/internal/http/response"
+	_ "gfly/internal/http/response" // Used for Swagger documentation
 	"gfly/internal/http/transformers"
+	"gfly/pkg/constants"
 	"gfly/pkg/http"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
@@ -43,8 +43,8 @@ func (h *GetUserByIdApi) Validate(c *core.Ctx) error {
 // @Produce json
 // @Param id path int true "User ID"
 // @Success 200 {object} response.User
-// @Failure 401 {object} response.Error
-// @Failure 404 {object} response.Error
+// @Failure 401 {object} http.Error
+// @Failure 404 {object} http.Error
 // @Security ApiKeyAuth
 // @Router /users/{id} [get]
 func (h *GetUserByIdApi) Handle(c *core.Ctx) error {
@@ -54,13 +54,13 @@ func (h *GetUserByIdApi) Handle(c *core.Ctx) error {
 	if err != nil {
 		log.Error(err)
 
-		return c.Error(response.Error{
+		return c.Error(http.Error{
 			Message: "User not found",
 		}, core.StatusNotFound)
 	}
 
 	// Transform to response data
-	userTransformer := transformers.ToSignUpResponse(*user)
+	userTransformer := transformers.ToUserResponse(*user)
 
 	return c.Success(userTransformer)
 }

@@ -1,7 +1,7 @@
 package api
 
 import (
-	"gfly/internal/http/response"
+	"gfly/pkg/http"
 	"gfly/pkg/modules/auth"
 	"gfly/pkg/modules/auth/services"
 	"github.com/gflydev/core"
@@ -34,8 +34,8 @@ type SignOutApi struct {
 // @Tags Auth
 // @Accept json
 // @Produce json
-// @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Error
+// @Failure 400 {object} http.Error
+// @Failure 401 {object} http.Error
 // @Success 204
 // @Security ApiKeyAuth
 // @Router /auth/signout [delete]
@@ -44,7 +44,7 @@ func (h *SignOutApi) Handle(c *core.Ctx) error {
 		jwtToken := services.ExtractToken(c)
 
 		if err := services.SignOut(jwtToken); err != nil {
-			return c.Error(response.Error{
+			return c.Error(http.Error{
 				Message: err.Error(),
 			})
 		}

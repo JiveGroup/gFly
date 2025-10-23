@@ -1,12 +1,12 @@
 package user
 
 import (
-	"gfly/internal/constants"
 	"gfly/internal/dto"
-	"gfly/internal/http/controllers/api"
 	"gfly/internal/http/response"
 	"gfly/internal/http/transformers"
 	"gfly/internal/services"
+	"gfly/pkg/constants"
+	"gfly/pkg/http"
 	"github.com/gflydev/core"
 )
 
@@ -15,7 +15,7 @@ import (
 // ====================================================================
 
 type ListUsersApi struct {
-	api.ListApi
+	http.ListApi
 }
 
 func NewListUsersApi() *ListUsersApi {
@@ -38,8 +38,8 @@ func NewListUsersApi() *ListUsersApi {
 // @Param order_by query string false "Order By"
 // @Param page query int false "Page"
 // @Param per_page query int false "Items Per Page"
-// @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Error
+// @Failure 400 {object} http.Error
+// @Failure 401 {object} http.Error
 // @Success 200 {object} response.ListUser
 // @Security ApiKeyAuth
 // @Router /users [get]
@@ -51,14 +51,14 @@ func (h *ListUsersApi) Handle(c *core.Ctx) error {
 	}
 
 	// Pagination metadata
-	metadata := response.Meta{
+	metadata := http.Meta{
 		Page:    filterDto.Page,
 		PerPage: filterDto.PerPage,
 		Total:   total,
 	}
 
 	// Transform to response data
-	data := transformers.ToListResponse(users, transformers.ToUserResponse)
+	data := http.ToListResponse(users, transformers.ToUserResponse)
 
 	return c.Success(response.ListUser{
 		Meta: metadata,

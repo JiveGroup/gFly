@@ -1,7 +1,6 @@
-package api
+package http
 
 import (
-	"gfly/pkg/http"
 	"github.com/gflydev/core"
 )
 
@@ -19,7 +18,7 @@ type ListApi struct {
 // ====================================================================
 
 func (h *ListApi) Validate(c *core.Ctx) error {
-	return http.ProcessFilter(c)
+	return ProcessFilter(c)
 }
 
 // ====================================================================

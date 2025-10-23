@@ -64,33 +64,6 @@ func roles(userID int) []response.Role {
 	return roles
 }
 
-// ToSignUpResponse converts a User model to a User response object
-// with all fields populated for signup response
-//
-// Parameters:
-//   - user: models.User - The user model to convert
-//
-// Returns:
-//   - response.User: The converted user response object
-func ToSignUpResponse(user models.User) response.User {
-	return response.User{
-		ID:           user.ID,
-		Email:        user.Email,
-		Fullname:     user.Fullname,
-		Phone:        user.Phone,
-		Token:        dbNull.StringNil(user.Token),
-		Status:       user.Status,
-		Avatar:       PublicAvatar(user.Avatar.String),
-		CreatedAt:    user.CreatedAt,
-		UpdatedAt:    user.UpdatedAt,
-		VerifiedAt:   dbNull.TimeNil(user.VerifiedAt),
-		BlockedAt:    dbNull.TimeNil(user.BlockedAt),
-		DeletedAt:    dbNull.TimeNil(user.DeletedAt),
-		LastAccessAt: dbNull.TimeNil(user.LastAccessAt),
-		Roles:        roles(user.ID),
-	}
-}
-
 // ToUserResponse converts a User model to a User response object
 // with all fields populated for general purpose response
 //

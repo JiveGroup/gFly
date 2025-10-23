@@ -2,9 +2,9 @@ package middleware
 
 import (
 	"fmt"
-	"gfly/internal/constants"
 	"gfly/internal/domain/repository"
-	"gfly/internal/http/response"
+	"gfly/pkg/constants"
+	"gfly/pkg/http"
 	"gfly/pkg/modules/auth"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/errors"
@@ -37,7 +37,7 @@ func processSession(c *core.Ctx) (err error) {
 
 func loginUrl(c *core.Ctx) string {
 	// Check from `internal/http/routes/web_routes.go` to update .env file
-	authLoginUrl := utils.Getenv(constants.AuthLoginUri, "/login")
+	authLoginUrl := utils.Getenv("AUTH_LOGIN_URI", "/login")
 
 	return authLoginUrl + "?redirect_url=" + c.OriginalURL()
 }
@@ -69,7 +69,7 @@ func SessionAuth(excludes ...string) core.MiddlewareHandler {
 			utils.Getenv("API_VERSION", "v1"),
 		)
 		if err != nil && str.StartsWith(path, prefixAPI) {
-			return c.Error(response.Error{
+			return c.Error(http.Error{
 				Message: err.Error(),
 			}, core.StatusUnauthorized)
 		}

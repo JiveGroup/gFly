@@ -1,11 +1,11 @@
 package user
 
 import (
-	"gfly/internal/constants"
 	"gfly/internal/http/request"
 	_ "gfly/internal/http/response" // Used for Swagger documentation
 	"gfly/internal/http/transformers"
 	"gfly/internal/services"
+	"gfly/pkg/constants"
 	"gfly/pkg/http"
 	"github.com/gflydev/core"
 )
@@ -42,8 +42,8 @@ func (h UpdateUserStatusApi) Validate(c *core.Ctx) error {
 // @Produce json
 // @Param id path int true "User ID"
 // @Param request body request.UpdateUserStatus true "Update user status data"
-// @Failure 400 {object} response.Error
-// @Failure 401 {object} response.Error
+// @Failure 400 {object} http.Error
+// @Failure 401 {object} http.Error
 // @Success 200 {object} response.User
 // @Security ApiKeyAuth
 // @Router /users/{id}/status [put]

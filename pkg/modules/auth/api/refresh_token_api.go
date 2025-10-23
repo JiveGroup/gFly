@@ -1,8 +1,7 @@
 package api
 
 import (
-	"gfly/internal/constants"
-	httpResponse "gfly/internal/http/response"
+	"gfly/pkg/constants"
 	"gfly/pkg/http"
 	"gfly/pkg/modules/auth/request"
 	_ "gfly/pkg/modules/auth/response" // Used for Swagger documentation
@@ -44,8 +43,8 @@ func (h *RefreshTokenApi) Validate(c *core.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param data body request.RefreshToken true "RefreshToken payload"
-// @Failure 400 {object} httpResponse.Error
-// @Failure 401 {object} httpResponse.Error
+// @Failure 400 {object} http.Error
+// @Failure 401 {object} http.Error
 // @Success 200 {object} response.SignIn
 // @Security ApiKeyAuth
 // @Router /auth/refresh [put]
@@ -54,7 +53,7 @@ func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
 
 	// Check valid refresh token
 	if !services.IsValidRefreshToken(requestData.ToDto().Token) {
-		return c.Error(httpResponse.Error{
+		return c.Error(http.Error{
 			Message: "Invalid JWT token",
 		}, core.StatusUnauthorized)
 	}
@@ -63,7 +62,7 @@ func (h *RefreshTokenApi) Handle(c *core.Ctx) error {
 	// Refresh new pairs of access token & refresh token
 	tokens, err := services.RefreshToken(jwtToken, requestData.ToDto().Token)
 	if err != nil {
-		return c.Error(httpResponse.Error{
+		return c.Error(http.Error{
 			Message: err.Error(),
 		}, core.StatusUnauthorized)
 	}

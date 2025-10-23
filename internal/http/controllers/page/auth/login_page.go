@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"gfly/internal/constants"
 	"gfly/internal/http/controllers/page"
+	"gfly/pkg/constants"
 	"github.com/gflydev/core"
 )
 

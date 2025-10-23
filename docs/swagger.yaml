@@ -1,0 +1,731 @@
+basePath: /api/v1
+definitions:
+  core.Data:
+    additionalProperties: {}
+    type: object
+  gfly_internal_domain_models_types.Role:
+    enum:
+    - na
+    - admin
+    - moderator
+    - member
+    - guest
+    type: string
+    x-enum-varnames:
+    - RoleNA
+    - RoleAdmin
+    - RoleModerator
+    - RoleMember
+    - RoleGuest
+  gfly_internal_domain_models_types.UserStatus:
+    enum:
+    - active
+    - pending
+    - blocked
+    type: string
+    x-enum-varnames:
+    - UserStatusActive
+    - UserStatusPending
+    - UserStatusBlocked
+  gfly_internal_http_request.CreateUser:
+    properties:
+      avatar:
+        example: https://i.pravatar.cc/32
+        maxLength: 255
+        type: string
+      email:
+        example: john@jivecode.com
+        maxLength: 255
+        type: string
+      fullname:
+        example: John Doe
+        maxLength: 255
+        type: string
+      password:
+        example: M1PassW@s
+        maxLength: 255
+        type: string
+      phone:
+        example: "0989831911"
+        maxLength: 20
+        type: string
+      roles:
+        example:
+        - admin
+        - user
+        items:
+          $ref: '#/definitions/gfly_internal_domain_models_types.Role'
+        type: array
+      status:
+        example: pending
+        type: string
+    required:
+    - email
+    - fullname
+    - password
+    - phone
+    type: object
+  gfly_internal_http_request.UpdateUser:
+    properties:
+      avatar:
+        example: https://i.pravatar.cc/32
+        maxLength: 255
+        type: string
+      fullname:
+        example: John Doe
+        maxLength: 255
+        type: string
+      password:
+        example: M1PassW@s
+        maxLength: 255
+        type: string
+      phone:
+        example: "0989831911"
+        maxLength: 20
+        type: string
+      roles:
+        example:
+        - admin
+        - user
+        items:
+          $ref: '#/definitions/gfly_internal_domain_models_types.Role'
+        type: array
+    type: object
+  gfly_internal_http_request.UpdateUserStatus:
+    properties:
+      status:
+        allOf:
+        - $ref: '#/definitions/gfly_internal_domain_models_types.UserStatus'
+        enum:
+        - active
+        - pending
+        - blocked
+        example: active
+    required:
+    - status
+    type: object
+  gfly_internal_http_response.ListUser:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/gfly_internal_http_response.User'
+        type: array
+      meta:
+        $ref: '#/definitions/gfly_pkg_http.Meta'
+    type: object
+  gfly_internal_http_response.Role:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      slug:
+        $ref: '#/definitions/gfly_internal_domain_models_types.Role'
+    type: object
+  gfly_internal_http_response.ServerInfo:
+    description: contains system metadata including name, server prefix, and server
+      name.
+    properties:
+      name:
+        example: ThietNgon API
+        type: string
+      prefix:
+        example: /api/v1
+        type: string
+      server:
+        example: ThietNgon-Go Server
+        type: string
+    type: object
+  gfly_internal_http_response.User:
+    properties:
+      avatar:
+        type: string
+      blocked_at:
+        example: "null"
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        example: "null"
+        type: string
+      email:
+        type: string
+      fullname:
+        type: string
+      id:
+        type: integer
+      last_access_at:
+        example: "2023-01-01T12:00:00Z"
+        type: string
+      phone:
+        type: string
+      roles:
+        items:
+          $ref: '#/definitions/gfly_internal_http_response.Role'
+        type: array
+      status:
+        $ref: '#/definitions/gfly_internal_domain_models_types.UserStatus'
+      token:
+        type: string
+      updated_at:
+        type: string
+      verified_at:
+        example: "2023-01-01T10:30:00Z"
+        type: string
+    type: object
+  gfly_pkg_http.Error:
+    description: Generic error response structure
+    properties:
+      code:
+        description: Error code
+        example: BAD_REQUEST
+        type: string
+      data:
+        allOf:
+        - $ref: '#/definitions/core.Data'
+        description: Useful for validation's errors
+      message:
+        description: Error message description
+        example: Bad request
+        type: string
+    type: object
+  gfly_pkg_http.Meta:
+    description: Contains pagination metadata including current page, items per page,
+      and total count
+    properties:
+      page:
+        example: 1
+        type: integer
+      per_page:
+        example: 10
+        type: integer
+      total:
+        example: 1354
+        type: integer
+    type: object
+  gfly_pkg_modules_auth_request.ForgotPassword:
+    properties:
+      username:
+        example: john@jivecode.com
+        maxLength: 255
+        type: string
+    required:
+    - username
+    type: object
+  gfly_pkg_modules_auth_request.RefreshToken:
+    properties:
+      token:
+        example: d1a4216a226cbf75eaefc9107c2c64b6b2c0f18cd8634e3a6f495146c38e1324.1747914602
+        maxLength: 255
+        type: string
+    required:
+    - token
+    type: object
+  gfly_pkg_modules_auth_request.ResetPassword:
+    properties:
+      password:
+        example: M1PassW@s
+        minLength: 6
+        type: string
+      token:
+        example: 293r823or832eioj2eo9282o423
+        maxLength: 255
+        type: string
+    required:
+    - password
+    - token
+    type: object
+  gfly_pkg_modules_auth_request.SignIn:
+    properties:
+      password:
+        example: P@seWor9
+        maxLength: 255
+        type: string
+      username:
+        example: admin@gfly.dev
+        maxLength: 255
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  gfly_pkg_modules_auth_request.SignUp:
+    properties:
+      avatar:
+        example: https://i.pravatar.cc/32
+        maxLength: 255
+        type: string
+      email:
+        example: john@jivecode.com
+        maxLength: 255
+        type: string
+      fullname:
+        example: John Doe
+        maxLength: 255
+        type: string
+      password:
+        example: M1PassW@s
+        maxLength: 255
+        type: string
+      phone:
+        example: "0989831911"
+        maxLength: 20
+        type: string
+      status:
+        example: pending
+        type: string
+    required:
+    - email
+    - fullname
+    - password
+    - phone
+    type: object
+  gfly_pkg_modules_auth_response.SignIn:
+    properties:
+      access:
+        type: string
+      refresh:
+        type: string
+    type: object
+  gfly_pkg_modules_auth_response.SignUp:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      fullname:
+        type: string
+      id:
+        type: integer
+      phone:
+        type: string
+      status:
+        $ref: '#/definitions/gfly_internal_domain_models_types.UserStatus'
+      token:
+        type: string
+      updated_at:
+        type: string
+    type: object
+info:
+  contact:
+    email: admin@jivecode.com
+    name: API Support
+  description: 'gFly API. <b>Note: Authorize value `Bearer <ACCESS_TOKEN>`</b>.'
+  license:
+    name: Apache 2.0
+    url: https://mit-license.org/
+  termsOfService: https://swagger.io/terms/
+  title: API
+  version: "1.0"
+paths:
+  /auth/refresh:
+    put:
+      consumes:
+      - application/json
+      description: Refresh user token
+      parameters:
+      - description: RefreshToken payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/gfly_pkg_modules_auth_request.RefreshToken'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gfly_pkg_modules_auth_response.SignIn'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: refresh user token
+      tags:
+      - Auth
+  /auth/signin:
+    post:
+      consumes:
+      - application/json
+      description: Authenticating user's credentials then return access and refresh
+        token if valid. Otherwise, return an error message.
+      parameters:
+      - description: Signin payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/gfly_pkg_modules_auth_request.SignIn'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gfly_pkg_modules_auth_response.SignIn'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      summary: authenticating user's credentials
+      tags:
+      - Auth
+  /auth/signout:
+    delete:
+      consumes:
+      - application/json
+      description: De-authorize user and delete refresh token from Redis.
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: de-authorize user and delete refresh token from Redis
+      tags:
+      - Auth
+  /auth/signup:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user with `request.SignUp` body then add `role id`
+        to table `user_roles` with current `user id`
+      parameters:
+      - description: Signup payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/gfly_pkg_modules_auth_request.SignUp'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gfly_pkg_modules_auth_response.SignUp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      summary: Sign up a new user
+      tags:
+      - Auth
+  /info:
+    get:
+      consumes:
+      - application/json
+      description: Get API server information
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gfly_internal_http_response.ServerInfo'
+      summary: Get API info
+      tags:
+      - Misc
+  /password/forgot:
+    post:
+      consumes:
+      - application/json
+      description: Forgot password.
+      parameters:
+      - description: Forgot password payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/gfly_pkg_modules_auth_request.ForgotPassword'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      summary: Forgot password
+      tags:
+      - Password
+  /password/reset:
+    post:
+      consumes:
+      - application/json
+      description: Reset password.
+      parameters:
+      - description: Reset password payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/gfly_pkg_modules_auth_request.ResetPassword'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      summary: Reset password
+      tags:
+      - Password
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: |-
+        Function list all users data
+        <b>Keyword fields:</b> roles.name, roles.slug, users.email, users.fullname, users.phone, user.status
+        <b>Order_by fields:</b> users.email, users.fullname, users.phone, users.status, users.last_access_at
+      parameters:
+      - description: Keyword
+        in: query
+        name: keyword
+        type: string
+      - description: Order By
+        in: query
+        name: order_by
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Items Per Page
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gfly_internal_http_response.ListUser'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Function list all users data
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: Function allows Administrator create a new user with specific roles
+      parameters:
+      - description: CreateUser payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/gfly_internal_http_request.CreateUser'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/gfly_internal_http_response.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Create a new user for Administrator
+      tags:
+      - Users
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Function hard-delete user with its roles by given userID.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gfly_internal_http_response.User'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete user by given userID
+      tags:
+      - Users
+    get:
+      consumes:
+      - application/json
+      description: Function get user by given id. If user not exists, return not found
+        status.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gfly_internal_http_response.User'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Get user by given id
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Function allows Administrator update users table or authorize user
+        roles.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: UpdateUser payload
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/gfly_internal_http_request.UpdateUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gfly_internal_http_response.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Function allows Administrator update an existing user
+      tags:
+      - Users
+  /users/{id}/status:
+    put:
+      consumes:
+      - application/json
+      description: Update user's status by ID. <b>Administrator privilege required</b>
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update user status data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/gfly_internal_http_request.UpdateUserStatus'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gfly_internal_http_response.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Update user's status by ID
+      tags:
+      - Users
+  /users/profile:
+    get:
+      consumes:
+      - application/json
+      description: Get user profile
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gfly_internal_http_response.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gfly_pkg_http.Error'
+      security:
+      - ApiKeyAuth: []
+      summary: Get user profile
+      tags:
+      - Users
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

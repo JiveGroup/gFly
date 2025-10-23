@@ -1,11 +1,11 @@
 package middleware
 
 import (
-	"gfly/internal/constants"
 	"gfly/internal/domain/models"
 	"gfly/internal/domain/models/types"
-	"gfly/internal/http/response"
 	"gfly/internal/services"
+	"gfly/pkg/constants"
+	"gfly/pkg/http"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/log"
 	"slices"
@@ -35,7 +35,7 @@ func CheckRolesMiddleware(roles []types.Role, excludes ...string) core.Middlewar
 		}
 
 		if c.GetData(constants.User) == nil {
-			return c.Error(response.Error{
+			return c.Error(http.Error{
 				Message: "Unauthorized",
 			}, core.StatusUnauthorized)
 		}
@@ -46,7 +46,7 @@ func CheckRolesMiddleware(roles []types.Role, excludes ...string) core.Middlewar
 		// Check if user has any of the required roles
 		if !services.UserHasRole(user.ID, roles) {
 			// Return error response
-			return c.Error(response.Error{
+			return c.Error(http.Error{
 				Message: "Permission denied",
 			}, core.StatusForbidden)
 		}

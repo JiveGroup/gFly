@@ -3,3 +3,5 @@
 !*.md
 !.gitignore
 !Prompt - gFly.md
+!swagger.json
+!swagger.yaml

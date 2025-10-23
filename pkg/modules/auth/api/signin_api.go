@@ -1,8 +1,7 @@
 package api
 
 import (
-	"gfly/internal/constants"
-	httpResponse "gfly/internal/http/response"
+	"gfly/pkg/constants"
 	"gfly/pkg/http"
 	"gfly/pkg/modules/auth"
 	"gfly/pkg/modules/auth/request"
@@ -49,7 +48,7 @@ func (h *SignInApi) Validate(c *core.Ctx) error {
 // @Produce json
 // @Param data body request.SignIn true "Signin payload"
 // @Success 200 {object} response.SignIn
-// @Failure 400 {object} httpResponse.Error
+// @Failure 400 {object} http.Error
 // @Router /auth/signin [post]
 func (h *SignInApi) Handle(c *core.Ctx) error {
 	// Get valid data from context
@@ -57,7 +56,7 @@ func (h *SignInApi) Handle(c *core.Ctx) error {
 
 	tokens, err := services.SignIn(requestData.ToDto())
 	if err != nil {
-		return c.Error(httpResponse.Error{
+		return c.Error(http.Error{
 			Message: err.Error(),
 		})
 	}

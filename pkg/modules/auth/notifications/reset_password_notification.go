@@ -1,7 +1,6 @@
 package notifications
 
 import (
-	"gfly/internal/constants"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/utils"
 	notifyMail "github.com/gflydev/notification/mail"
@@ -16,7 +15,7 @@ type ResetPassword struct {
 }
 
 func (n ResetPassword) ToEmail() notifyMail.Data {
-	resetPasswordURI := utils.Getenv(constants.AuthResetPasswordUri, "/reset-password")
+	resetPasswordURI := utils.Getenv("AUTH_RESET_PASSWORD_URI", "/reset-password")
 
 	body := view.New().Parse("mails/forgot_password", core.Data{
 		// For primary template
