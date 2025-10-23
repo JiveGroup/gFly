@@ -72,7 +72,7 @@ clean: ## - Clean up Go modules, cache, and test cache
 	go clean -testcache
 
 doc: ## - Generate API documentation using Swag
-	@swag init --parseDependency --parseDepth 1 --exclude build,database,deployments,docs,node_modules,public,resources,storage,tmp,vendor,test,scripts,.git,.github,.idea,.local,.junie,.claude -g cmd/web/main.go 2>&1 | grep -v "warning: failed to get package name in dir: ./" || true
+	@swag init --parseDependency --parseDependencyLevel 3 --parseDepth 1 --exclude build,database,deployments,docs,node_modules,public,resources,storage,tmp,vendor,test,scripts,.git,.github,.idea,.local,.junie,.claude -g cmd/web/main.go 2>&1 | grep -v "warning: failed to get package name in dir: ./" || true
 	@cp ./docs/swagger.json ./public/docs/
 
 container.run: ## - Start required Docker containers (PostgreSQL, Mail, Redis)
