@@ -35,24 +35,24 @@ gFly provides a unified notification system through the `github.com/gflydev/noti
 ┌─────────────────────────────────────────────────────────────┐
 │                     Application Layer                       │
 │              (Services, Controllers, Jobs)                  │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       │ notification.Send(notificationStruct)
-                       ▼
+└───────────────────────────────┬─────────────────────────────┘
+                                │
+                                │ notification.Send(notificationStruct)
+                                ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                 Notification Struct                         │
 │          (Implements ToEmail() method)                      │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       │ Returns notifyMail.Data
-                       ▼
+└───────────────────────────────┬─────────────────────────────┘
+                                │
+                                │ Returns notifyMail.Data
+                                ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                  gFly Mail Notifier                         │
 │            (github.com/gflydev/notification/mail)           │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       │ Sends via SMTP
-                       ▼
+└───────────────────────────────┬─────────────────────────────┘
+                                │
+                                │ Sends via SMTP
+                                ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                    Email Provider                           │
 │              (SMTP Server / MailHog)                        │

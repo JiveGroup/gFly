@@ -18,61 +18,61 @@ The gFly framework follows a **layered architecture** with clear separation of c
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     HTTP Request (JSON)                     │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       ▼
+│                 HTTP Request (JSON/FORM)                    │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+                             ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  REQUEST LAYER (internal/http/request/)                     │
 │  • Parses HTTP request                                      │
 │  • Embeds DTO for validation                                │
 │  • Implements ToDto() conversion                            │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       ▼
+└────────────────────────────┬────────────────────────────────┘
+                             │
+                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  DTO LAYER (internal/dto/)                                  │
+│  DTO / Data (internal/dto/)                                 │
 │  • Core data structure                                      │
 │  • Validation rules via tags                                │
 │  • Documentation via tags                                   │
 │  • Single source of truth                                   │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       ▼
+└────────────────────────────┬────────────────────────────────┘
+                             │
+                             ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  SERVICE LAYER (internal/services/)                         │
 │  • Receives DTO from controller                             │
 │  • Executes business logic                                  │
 │  • Uses repository for data access                          │
 │  • Returns Domain Model / DTO                               │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       ▼
+└────────────────────────────┬────────────────────────────────┘
+                             │
+                             ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  DOMAIN MODEL (internal/domain/models/)                     │
 │  • Database entity representation                           │
 │  • Pure data structure                                      │
 │  • Uses db tags for ORM mapping                             │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       ▼
+└────────────────────────────┬────────────────────────────────┘
+                             │
+                             ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  TRANSFORMER LAYER (internal/http/transformers/)            │
 │  • Converts Domain Model / DTO → Response                   │
 │  • Handles null values                                      │
 │  • Formats URLs, dates, etc.                                │
 │  • Enriches with related data                               │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       ▼
+└────────────────────────────┬────────────────────────────────┘
+                             │
+                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  RESPONSE LAYER (internal/http/response/)                   │
+│  RESPONSE DATA (internal/http/response/)                    │
 │  • Final JSON structure                                     │
 │  • Documentation via tags                                   │
 │  • Used in Swagger/OpenAPI                                  │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       ▼
+└────────────────────────────┬────────────────────────────────┘
+                             │
+                             ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                     HTTP Response (JSON)                    │
 └─────────────────────────────────────────────────────────────┘
