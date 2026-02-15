@@ -708,6 +708,7 @@ const docTemplate = `{
                     "example": "John Doe"
                 },
                 "password": {
+                    "description": "#nosec G117 -- Legitimate password input field for creating users",
                     "type": "string",
                     "maxLength": 255,
                     "example": "M1PassW@s"
@@ -747,6 +748,7 @@ const docTemplate = `{
                     "example": "John Doe"
                 },
                 "password": {
+                    "description": "#nosec G117 -- Legitimate password input field for updating user passwords",
                     "type": "string",
                     "maxLength": 255,
                     "example": "M1PassW@s"
@@ -923,6 +925,7 @@ const docTemplate = `{
             ],
             "properties": {
                 "password": {
+                    "description": "#nosec G117 -- Legitimate password input field for password reset",
                     "type": "string",
                     "minLength": 6,
                     "example": "M1PassW@s"
@@ -942,6 +945,7 @@ const docTemplate = `{
             ],
             "properties": {
                 "password": {
+                    "description": "#nosec G117 -- Legitimate password input field for user authentication",
                     "type": "string",
                     "maxLength": 255,
                     "example": "P@seWor9"
@@ -978,6 +982,7 @@ const docTemplate = `{
                     "example": "John Doe"
                 },
                 "password": {
+                    "description": "#nosec G117 -- Legitimate password input field for user registration",
                     "type": "string",
                     "maxLength": 255,
                     "example": "M1PassW@s"

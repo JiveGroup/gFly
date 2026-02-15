@@ -42,6 +42,8 @@ definitions:
         maxLength: 255
         type: string
       password:
+        description: '#nosec G117 -- Legitimate password input field for creating
+          users'
         example: M1PassW@s
         maxLength: 255
         type: string
@@ -76,6 +78,8 @@ definitions:
         maxLength: 255
         type: string
       password:
+        description: '#nosec G117 -- Legitimate password input field for updating
+          user passwords'
         example: M1PassW@s
         maxLength: 255
         type: string
@@ -194,6 +198,8 @@ definitions:
   gfly_pkg_modules_auth_request.ResetPassword:
     properties:
       password:
+        description: '#nosec G117 -- Legitimate password input field for password
+          reset'
         example: M1PassW@s
         minLength: 6
         type: string
@@ -208,6 +214,7 @@ definitions:
   gfly_pkg_modules_auth_request.SignIn:
     properties:
       password:
+        description: '#nosec G117 -- Legitimate password input field for user authentication'
         example: P@seWor9
         maxLength: 255
         type: string
@@ -234,6 +241,7 @@ definitions:
         maxLength: 255
         type: string
       password:
+        description: '#nosec G117 -- Legitimate password input field for user registration'
         example: M1PassW@s
         maxLength: 255
         type: string

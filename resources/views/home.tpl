@@ -11,7 +11,7 @@
                     <div class="mb-8">
                         <h1 class="text-4xl lg:text-5xl leading-normal mb-3 font-bold">{{ hero_text }}</h1>
                         <p class="600 leading-relaxed font-light text-xl mx-auto pb-2">
-                            Built on top of <a href="https://github.com/valyala/fasthttp" target="_blank" class="font-bold" style="color: var(--white)">FastHttp - the fastest HTTP engine</a> and <a href="https://github.com/jivegroup/fluentsql" target="_blank" class="font-bold" style="color: var(--white)">FluentSQL - flexible and powerful SQL builder</a> for Go. Quick development with zero memory allocation and high performance. Very simple and easy to use.
+                            Built on top of <a href="https://github.com/valyala/fasthttp" target="_blank" class="font-bold" style="color: var(--white)">FastHttp - the fastest HTTP engine</a> and <a href="https://github.com/jivegroup/fluentsql" target="_blank" class="font-bold" style="color: var(--white)">FluentSQL - flexible and powerful SQL builder</a> for Go. Quick development with minimum memory allocation and high performance. Very simple and easy to use.
                         </p>
                     </div>
                     <a class="py-2 px-4 inline-block text-center rounded leading-5 text-gray-700 bg-gray-300 border border-gray-300  hover:bg-gray-200 hover:ring-0 hover:border-gray-200 focus:bg-gray-200 focus:border-gray-200 focus:outline-none focus:ring-0 mr-4" target="_blank" href="https://gfly.dev">

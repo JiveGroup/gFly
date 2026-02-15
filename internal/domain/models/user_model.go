@@ -28,7 +28,7 @@ type User struct {
 	// Table fields
 	ID           int              `db:"id" model:"name:id; type:serial,primary"`
 	Email        string           `db:"email" model:"name:email"`
-	Password     string           `db:"password" model:"name:password"`
+	Password     string           `db:"password" model:"name:password"` // #nosec G117 -- Legitimate password field in user model (stored hashed)
 	Fullname     string           `db:"fullname" model:"name:fullname"`
 	Phone        string           `db:"phone" model:"name:phone"`
 	Token        sql.NullString   `db:"token" model:"name:token"`

@@ -1,8 +1,8 @@
-# gFly v1.17.2
+# gFly v1.18.0
 
 **Laravel inspired web framework written in Go**
 
-Built on top of [FastHttp - the fastest HTTP engine](https://github.com/valyala/fasthttp), [FluentSQL - flexible and powerful SQL builder](https://github.com/jivegroup/fluentsql). Quick development with zero memory allocation and high performance. Very simple and easy to use.
+Built on top of [FastHttp - the fastest HTTP engine](https://github.com/valyala/fasthttp), [FluentSQL - flexible and powerful SQL builder](https://github.com/jivegroup/fluentsql). Quick development with minimum memory allocation and high performance. Very simple and easy to use.
 
 Note: You can find [documentation](https://doc.gfly.dev/) about [gFly](https://gfly.dev/)
 
@@ -18,8 +18,8 @@ Note: You can find [documentation](https://doc.gfly.dev/) about [gFly](https://g
 ```bash
 # Install go at folder /home/$USER/Apps
 mkdir -p /home/$USER/Apps
-wget https://go.dev/dl/go1.24.4.linux-amd64.tar.gz
-tar -xvzf go1.24.4.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.26.0.linux-amd64.tar.gz
+tar -xvzf go1.26.0.linux-amd64.tar.gz
 ```
 Add `~/.profile` or `~/.zshrc` to the bottom of the file 
 ```bash
@@ -45,8 +45,8 @@ go version
 ```bash
 # Install go at folder /Users/$USER/Apps
 mkdir -p /Users/$USER/Apps
-wget https://go.dev/dl/go1.24.4.darwin-arm64.tar.gz
-tar -xvzf go1.24.4.darwin-arm64.tar.gz
+wget https://go.dev/dl/go1.26.0.darwin-arm64.tar.gz
+tar -xvzf go1.26.0.darwin-arm64.tar.gz
 ```
 Add `~/.profile` or `~/.zshrc` to the bottom of the file 
 ```bash

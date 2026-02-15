@@ -7,6 +7,6 @@ type ForgotPassword struct {
 
 // ResetPassword struct to describe reset password.
 type ResetPassword struct {
-	Password string `json:"password" example:"M1PassW@s" validate:"required,gte=6"`
+	Password string `json:"password" example:"M1PassW@s" validate:"required,gte=6"` // #nosec G117 -- Legitimate password input field for password reset
 	Token    string `json:"token" example:"293r823or832eioj2eo9282o423" validate:"required,lte=255"`
 }

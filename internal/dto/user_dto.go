@@ -8,7 +8,7 @@ import "gfly/internal/domain/models/types"
 // @Tags Users
 type CreateUser struct {
 	Email    string       `json:"email" example:"john@jivecode.com" validate:"required,email,max=255" doc:"User's email address (required, max length 255)"`
-	Password string       `json:"password" example:"M1PassW@s" validate:"required,max=255" doc:"User's password (required, max length 255)"`
+	Password string       `json:"password" example:"M1PassW@s" validate:"required,max=255" doc:"User's password (required, max length 255)"` // #nosec G117 -- Legitimate password input field for creating users
 	Fullname string       `json:"fullname" example:"John Doe" validate:"required,max=255" doc:"User's full name (required, max length 255)"`
 	Phone    string       `json:"phone" example:"0989831911" validate:"required,max=20" doc:"User's phone number (required, max length 20)"`
 	Avatar   string       `json:"avatar" example:"https://i.pravatar.cc/32" validate:"omitempty,max=255" doc:"URL of the user's avatar (optional, max length 255)"`
@@ -21,7 +21,7 @@ type CreateUser struct {
 // @Tags Users
 type UpdateUser struct {
 	ID       int          `json:"-" validate:"omitempty,gte=1" doc:"User ID (greater than or equal to 1)"`
-	Password string       `json:"password" example:"M1PassW@s" validate:"omitempty,max=255" doc:"User's new password (optional, max length 255)"`
+	Password string       `json:"password" example:"M1PassW@s" validate:"omitempty,max=255" doc:"User's new password (optional, max length 255)"` // #nosec G117 -- Legitimate password input field for updating user passwords
 	Fullname string       `json:"fullname" example:"John Doe" validate:"max=255" doc:"User's updated full name (optional, max length 255)"`
 	Phone    string       `json:"phone" example:"0989831911" validate:"max=20" doc:"User's updated phone number (optional, max length 20)"`
 	Avatar   string       `json:"avatar" example:"https://i.pravatar.cc/32" validate:"max=255" doc:"Updated URL of the user's avatar (optional, max length 255)"`
