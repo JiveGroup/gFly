@@ -4,6 +4,7 @@ import (
 	_ "gfly/internal/console/commands"  // Autoload commands into pool.
 	_ "gfly/internal/console/queues"    // Autoload tasks into queue.
 	_ "gfly/internal/console/schedules" // Autoload jobs into schedule.
+	_ "gfly/internal/events"            // Autoload event listeners.
 	"github.com/gflydev/cache"
 	cacheRedis "github.com/gflydev/cache/redis"
 	"github.com/gflydev/console"

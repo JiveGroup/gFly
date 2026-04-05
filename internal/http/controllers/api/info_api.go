@@ -2,9 +2,13 @@ package api
 
 import (
 	"fmt"
+	"gfly/internal/domain/models"
+	userEvents "gfly/internal/events/user"
 	"gfly/internal/http/response"
 	"github.com/gflydev/core"
 	"github.com/gflydev/core/utils"
+	mb "github.com/gflydev/db"
+	"github.com/gflydev/event"
 )
 
 // ====================================================================
@@ -34,6 +38,10 @@ type InfoApi struct {
 // @Success 200 {object} response.ServerInfo
 // @Router /info [get]
 func (h *InfoApi) Handle(c *core.Ctx) error {
+	// Sample Event-Listener
+	user, _ := mb.GetModelBy[models.User]("email", "admin@gfly.dev")
+	_ = event.Dispatch(userEvents.UserRegistered{User: user})
+
 	obj := response.ServerInfo{
 		Name: utils.Getenv("API_NAME", "gfly"),
 		Prefix: fmt.Sprintf(

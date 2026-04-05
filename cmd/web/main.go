@@ -2,6 +2,7 @@ package main
 
 import (
 	"gfly/docs"
+	_ "gfly/internal/events" // Autoload event listeners.
 	"gfly/internal/http/routes"
 	"github.com/gflydev/cache"
 	cacheRedis "github.com/gflydev/cache/redis"
