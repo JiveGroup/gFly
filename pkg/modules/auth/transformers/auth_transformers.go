@@ -30,6 +30,6 @@ func ToSignUpResponse(user models.User) response.SignUp {
 		Phone:     user.Phone,
 		Status:    user.Status,
 		CreatedAt: user.CreatedAt,
-		UpdatedAt: user.UpdatedAt,
+		UpdatedAt: user.UpdatedAt.Time,
 	}
 }

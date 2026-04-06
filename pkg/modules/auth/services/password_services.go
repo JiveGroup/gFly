@@ -52,7 +52,7 @@ func ForgotPassword(forgotPassword dto.ForgotPassword) error {
 	hash := utils.Sha256(user.Email, time.Now().Unix())
 
 	user.Token = dbNull.String(interpolateToken(hash))
-	user.UpdatedAt = time.Now()
+	user.UpdatedAt = dbNull.TimeNow()
 
 	if err := mb.UpdateModel(user); err != nil {
 		return errors.New("service error")
@@ -101,7 +101,7 @@ func ChangePassword(resetPassword dto.ResetPassword) error {
 	}
 
 	user.Token = dbNull.String("")
-	user.UpdatedAt = time.Now()
+	user.UpdatedAt = dbNull.TimeNow()
 	user.Password = utils.GeneratePassword(resetPassword.Password)
 
 	if err := mb.UpdateModel(user); err != nil {

@@ -140,7 +140,7 @@ func CreateUser(createUserDto dto.CreateUser) (*models.User, error) {
 		Phone:        createUserDto.Phone,
 		Token:        dbNull.String(""),
 		CreatedAt:    time.Now(),
-		UpdatedAt:    time.Now(),
+		UpdatedAt:    dbNull.TimeNow(),
 		LastAccessAt: dbNull.TimeNow(),
 		Avatar:       dbNull.String(createUserDto.Avatar),
 	}
@@ -330,7 +330,7 @@ func updateUserFromDto(user *models.User, updateUserDto dto.UpdateUser) *models.
 		user.Avatar = dbNull.String(updateUserDto.Avatar)
 	}
 
-	user.UpdatedAt = time.Now()
+	user.UpdatedAt = dbNull.TimeNow()
 
 	return user
 }

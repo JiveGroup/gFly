@@ -37,6 +37,8 @@ github.com/gflydev/db/psql v1.4.9 h1:Jjsh/v0FHgqeGXaQ8w9+OaSBGup+iBMcnn6to7f/EDc
 github.com/gflydev/db/psql v1.4.9/go.mod h1:+YiEulWHO1wZZr0srGqRAb/xB6EqjzspXBTTxgAY6RA=
 github.com/gflydev/event v1.0.0 h1:Cn/Fj0E+0wUUoJpjAHaTajAhTWJ89Lpar4CDdNlCQ8k=
 github.com/gflydev/event v1.0.0/go.mod h1:024z7pR0Jot/kwoAXT8dBhfiyUbksEWscfTRM/R4eFg=
+github.com/gflydev/event v1.0.1 h1:mli8Tf/LxT8oRHPChNT2lvJz3UWJZ6TZWq042XEljig=
+github.com/gflydev/event v1.0.1/go.mod h1:WSACeqTu35ArGjIHYDhe27dmMNOlUvKuYZXR4aTq+bo=
 github.com/gflydev/http v1.0.2 h1:3BVj065IXZY98QeHhWbD9rjMNp1wm1HUHF+vy+hZPsY=
 github.com/gflydev/http v1.0.2/go.mod h1:qXUuq2tFgjiMTnZWNukJ1GoHXC5nS266nZPBLalOqAU=
 github.com/gflydev/mail v1.0.3 h1:4Oq25ufCNSOdVJo+XA41Opd72FopAQRm08iUItDTtKw=
@@ -49,6 +51,8 @@ github.com/gflydev/notification v1.1.1 h1:eUAx5mbezsA004dcUEXavg+++6fwNSOS/QSexg
 github.com/gflydev/notification v1.1.1/go.mod h1:Ux8sdRXElB0QW4QTqF+Pqcmix8AxHRAXQMWj5S4xt+4=
 github.com/gflydev/notification/mail v1.0.3 h1:aqu1nRsH+dHmtniKugGi25212mbI8/tSlhcrDtwGXvw=
 github.com/gflydev/notification/mail v1.0.3/go.mod h1:ywqhDC10IlMdcioE3ue/xiWhmuTbzTBcEbFffX46a7w=
+github.com/gflydev/search v1.0.0 h1:zowfnNpKiqP0rzFe1uS0QucvvCJGPCaJqsbi0wnpwWE=
+github.com/gflydev/search v1.0.0/go.mod h1:vbL+vM2MiMRv9FyD3EED35MaK7nXQrfBq1K4sxUflp8=
 github.com/gflydev/session v1.0.3 h1:inj/5+jkzEeBi97C0NXEgJPJ4XPAPKjraEuKCWeUnAY=
 github.com/gflydev/session v1.0.3/go.mod h1:Mz8/Qs9LzmnVnUq4LML/GY/5Ro2yHBww1NjXRDYeiZg=
 github.com/gflydev/session/redis v1.0.3 h1:OO3P/QIJmysFKqE18m/4RpDx5RopYj9i6lqf7mvj52M=

@@ -35,7 +35,7 @@ type User struct {
 	Status       types.UserStatus `db:"status" model:"name:status"`
 	CreatedAt    time.Time        `db:"created_at" model:"name:created_at"`
 	Avatar       sql.NullString   `db:"avatar" model:"name:avatar"`
-	UpdatedAt    time.Time        `db:"updated_at" model:"name:updated_at"`
+	UpdatedAt    sql.NullTime     `db:"updated_at" model:"name:updated_at"`
 	VerifiedAt   sql.NullTime     `db:"verified_at" model:"name:verified_at"`
 	BlockedAt    sql.NullTime     `db:"blocked_at" model:"name:blocked_at"`
 	DeletedAt    sql.NullTime     `db:"deleted_at" model:"name:deleted_at"`

@@ -82,7 +82,7 @@ func ToUserResponse(user models.User) response.User {
 		Status:       user.Status,
 		Avatar:       PublicAvatar(user.Avatar.String),
 		CreatedAt:    user.CreatedAt,
-		UpdatedAt:    user.UpdatedAt,
+		UpdatedAt:    user.UpdatedAt.Time,
 		VerifiedAt:   dbNull.TimeNil(user.VerifiedAt),
 		BlockedAt:    dbNull.TimeNil(user.BlockedAt),
 		DeletedAt:    dbNull.TimeNil(user.DeletedAt),

@@ -8,12 +8,13 @@ require (
 	github.com/gflydev/core v1.18.1
 	github.com/gflydev/db v1.14.0
 	github.com/gflydev/db/psql v1.4.9
-	github.com/gflydev/event v1.0.0
+	github.com/gflydev/event v1.0.1
 	github.com/gflydev/http v1.0.2
 	github.com/gflydev/modules/storage v1.0.6
 	github.com/gflydev/modules/storagecs3 v1.1.1
 	github.com/gflydev/notification v1.1.1
 	github.com/gflydev/notification/mail v1.0.3
+	github.com/gflydev/search v1.0.0
 	github.com/gflydev/session v1.0.3
 	github.com/gflydev/session/redis v1.0.3
 	github.com/gflydev/storage v1.1.6

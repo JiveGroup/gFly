@@ -68,3 +68,26 @@ services:
       MINIO_ROOT_USER: root
       MINIO_ROOT_PASSWORD: gfl1secret
     command: server --address ":9000" --console-address ":9001" /data
+
+  es:
+    image: elasticsearch:7.17.28
+    container_name: gfly-es
+    environment:
+      node.name: es
+      cluster.name: es-docker-cluster
+      discovery.type: single-node
+      bootstrap.memory_lock: "true"
+      bootstrap.system_call_filter: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      http.cors.enabled: "true"
+      http.cors.allow-origin: "'*'"
+      http.cors.allow-headers: X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+      http.cors.allow-credentials: "true"
+    ports:
+      - "${CONTAINER_ES_PORT:-9200}:9200"
+      - "${CONTAINER_ES_INTERNAL_PORT:-9300}:9300"
+    labels:
+      SERVICE_NAME: gfly-es
+      SERVICE_9200_NAME: gfly-es
+    volumes:
+      - .local/es_data:/usr/share/elasticsearch/data

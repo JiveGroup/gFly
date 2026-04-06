@@ -143,7 +143,7 @@ func SignUp(signUp dto.SignUp) (*models.User, error) {
 	user.Token = null.String("")
 	user.Status = types.UserStatusActive
 	user.CreatedAt = time.Now()
-	user.UpdatedAt = time.Now()
+	user.UpdatedAt = null.TimeNow()
 	user.LastAccessAt = null.TimeNow()
 
 	// Create a new user with validated data.
