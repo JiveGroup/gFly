@@ -69,6 +69,20 @@ services:
       MINIO_ROOT_PASSWORD: gfl1secret
     command: server --address ":9000" --console-address ":9001" /data
 
+  mes:
+    image: getmeili/meilisearch:v1.41.0
+    hostname: gfly-meilisearch
+    container_name: gfly-meilisearch
+    labels:
+      SERVICE_NAME: gfly-meilisearch
+    ports:
+      - "${CONTAINER_MEILISEARCH_PORT:-7700}:7700"
+    environment:
+      MEILI_MASTER_KEY: "${CONTAINER_MEILI_MASTER_KEY:-secret}"
+      MEILI_ENV: development
+    volumes:
+      - .local/meili_data:/meili_data
+
   es:
     image: elasticsearch:7.17.28
     container_name: gfly-es

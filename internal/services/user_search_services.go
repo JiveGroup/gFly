@@ -14,9 +14,9 @@ import (
 // ========================= Search Engine ============================
 // ====================================================================
 
-// ESSearchEngine is the application-wide Elasticsearch search engine for users.
+// searchEngine is the application-wide Elasticsearch search engine for users.
 // The host is read from the ES_HOST environment variable (default: http://localhost:9200).
-var ESSearchEngine = search.New(search.NewElasticsearchDriver(search.ElasticsearchConfig{
+var searchEngine = search.New(search.NewElasticsearchDriver(search.ElasticsearchConfig{
 	Host: coreUtils.Getenv("ES_HOST", "http://localhost:9200"),
 }))
 
@@ -36,10 +36,10 @@ var ESSearchEngine = search.New(search.NewElasticsearchDriver(search.Elasticsear
 // Returns:
 //   - ([]models.User, int64, error): Matched users, total count, and any error.
 func SearchUsers(keyword, status string, page, perPage int) ([]models.User, int64, error) {
-	builder := ESSearchEngine.For(models.User{}).
+	builder := searchEngine.For(models.User{}).
 		Query(keyword).
 		Page(page).
-		OrderBy("id", "desc").
+		OrderBy("id", "asc").
 		PerPage(perPage)
 
 	if status != "" {
@@ -69,7 +69,7 @@ func SearchUsers(keyword, status string, page, perPage int) ([]models.User, int6
 // Returns:
 //   - error: An error if indexing fails.
 func AddIndexUser(user models.User) error {
-	if err := ESSearchEngine.IndexModel(user); err != nil {
+	if err := searchEngine.IndexModel(user); err != nil {
 		log.Errorf("AddIndexUser: failed to index user %d: %v", user.ID, err)
 		return errors.New("error occurs while indexing user")
 	}
@@ -88,7 +88,7 @@ func AddIndexUser(user models.User) error {
 // Returns:
 //   - error: An error if re-indexing fails.
 func UpdateIndexUser(user models.User) error {
-	if err := ESSearchEngine.IndexModel(user); err != nil {
+	if err := searchEngine.IndexModel(user); err != nil {
 		log.Errorf("UpdateIndexUser: failed to re-index user %d: %v", user.ID, err)
 		return errors.New("error occurs while updating user index")
 	}
@@ -107,7 +107,7 @@ func UpdateIndexUser(user models.User) error {
 // Returns:
 //   - error: An error if removal fails.
 func RemoveIndexUser(user models.User) error {
-	if err := ESSearchEngine.RemoveModel(user); err != nil {
+	if err := searchEngine.RemoveModel(user); err != nil {
 		log.Errorf("RemoveIndexUser: failed to remove user %d from index: %v", user.ID, err)
 		return errors.New("error occurs while removing user from index")
 	}
@@ -131,7 +131,7 @@ func BulkIndexUsers(users []models.User) error {
 		searchableData[idx] = users[idx]
 	}
 
-	if err := ESSearchEngine.BulkIndex(searchableData); err != nil {
+	if err := searchEngine.BulkIndex(searchableData); err != nil {
 		log.Errorf("BulkIndexUsers: bulk index failed: %v", err)
 		return errors.New("error occurs while bulk indexing users")
 	}

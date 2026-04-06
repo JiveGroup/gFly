@@ -87,6 +87,12 @@ container.logs: ## - Show logs from all Docker containers
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly logs -f redis &
 	#docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly logs -f minio &
 
+meili.run: ## - Start Meilisearch Docker container
+	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d mes
+
+meili.stop: ## - Stop Meilisearch Docker container
+	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly stop mes
+
 es.run: ## - Start ElasticSearch Docker container
 	docker compose --env-file deployments/container.env -f deployments/docker/docker-compose.yml -p gfly up -d es
 
