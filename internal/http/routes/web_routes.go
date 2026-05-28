@@ -19,4 +19,7 @@ func WebRoutes(r core.IFly) {
 	r.GET("/login", auth.NewLoginPage())
 	r.GET("/profile", r.Apply(middleware.SessionAuthPage)(user.NewProfilePage()))
 	r.GET("/users", r.Apply(middleware.SessionAuthPage)(user.NewListPage()))
+
+	// Catch-all route for 404 errors (must be last)
+	r.GET("/{any...}", page.NewNotFoundPage())
 }
